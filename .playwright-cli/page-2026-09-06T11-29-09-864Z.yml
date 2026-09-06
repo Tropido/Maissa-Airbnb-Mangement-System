@@ -1,0 +1,13 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - main [ref=e3]:
+      - generic [ref=e4]:
+        - status [aria-hidden] [ref=e5]:
+          - generic [ref=e16]: Loading...
+        - heading "Deployment has failed" [level=1] [ref=e17]
+      - link [ref=e18] [cursor=pointer]:
+        - /url: https://vercel.com/deployments/maissa-airbnb-mangement-system-aps339cqy.vercel.app?redirect=1
+        - paragraph [ref=e22]: View Build
+    - contentinfo [aria-hidden] [ref=e26]:
+      - paragraph [ref=e27]: This page will update once the build completes.
+  - alert [ref=e28]

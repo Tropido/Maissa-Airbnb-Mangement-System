@@ -33,7 +33,7 @@ export async function signInWithMagicLink(
 
   const headerList = await headers();
   const origin =
-    process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.NEXT_PUBLIC_SITE_URL ||
     `https://${headerList.get('host') ?? 'localhost:3000'}`;
 
   const { error } = await db.auth.signInWithOtp({

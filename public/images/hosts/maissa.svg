@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Portrait placeholder for Maissa">
+  <rect width="400" height="400" fill="#66714F"/>
+  <circle cx="200" cy="158" r="66" fill="#FFFFFF" stroke="#1C1A17" stroke-width="9"/>
+  <path d="M 62 400 C 62 292 128 240 200 240 C 272 240 338 292 338 400 Z" fill="#FFFFFF" stroke="#1C1A17" stroke-width="9" stroke-linejoin="round"/>
+  <rect x="0" y="0" width="400" height="400" fill="none" stroke="#1C1A17" stroke-width="16"/>
+  <rect x="300" y="300" width="72" height="72" fill="#9C4F32" stroke="#1C1A17" stroke-width="9"/>
+</svg>

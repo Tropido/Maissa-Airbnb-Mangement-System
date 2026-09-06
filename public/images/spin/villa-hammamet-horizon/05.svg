@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Architectural study of the property">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#66714F"/>
+      <stop offset="78%" stop-color="#F5F1EA"/>
+    </linearGradient>
+    <clipPath id="frame"><rect width="1200" height="800"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="800" fill="url(#sky)"/>
+    <path d="M 514.7 350.7 Q 534.5 211.1 513.2 71.5 L 522 71.5 Q 550.2 211.1 534.3 350.7 Z" fill="#C3C3C3" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 461.2 22.8 423.6 61.2 Q 461.2 47.5 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 468 2.7 435 35.1 Q 468 27.3 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 481.7 -13.6 457.8 14 Q 481.7 11.1 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 500.5 -23.6 489 0.9 Q 500.5 1.1 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 521.6 -26.1 524.2 -2.3 Q 521.6 -1.4 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 542.1 -20.7 558.5 4.7 Q 542.1 4 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 559.2 -8.1 587 21 Q 559.2 16.5 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 570.6 9.8 605.9 44.4 Q 570.6 34.5 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 517.6 71.5 Q 574.5 30.7 612.5 71.5 Q 574.5 55.4 517.6 71.5 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="941,444.9 734,349.1 643.6,370.4 843.1,475.3" fill="#66714F" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M 359.4 407.7 Q 375.9 291.1 346.1 174.6 L 353.5 174.6 Q 389 291.1 375.7 407.7 Z" fill="#C3C3C3" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 302.7 133.9 271.3 166 Q 302.7 154.5 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 308.4 117.1 280.8 144.1 Q 308.4 137.7 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 319.9 103.5 299.9 126.5 Q 319.9 124.1 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 335.5 95.1 326 115.6 Q 335.5 115.7 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 353.1 93 355.3 112.9 Q 353.1 113.6 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 370.3 97.6 383.9 118.8 Q 370.3 118.2 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 384.6 108 407.8 132.4 Q 384.6 128.7 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 394 123.1 423.5 151.9 Q 394 143.7 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 349.8 174.6 Q 397.3 140.5 429.1 174.6 Q 397.3 161.1 349.8 174.6 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="1103,484.2 727.1,319.4 470.9,376 806.2,591.2" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="582.7,380.3 489,402.2 485.7,310.2 582.1,291.4" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="1385.9,548.8 672.6,260.3 100.3,368.4 587.8,925.2" fill="#C3C3C3" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="609,386.4 458.2,422.5 452.1,292.7 609.3,263.6" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="673.1,414.1 620.3,384.9 620.8,286.1 675.5,310.8" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="552.3,403.2 539.9,395.6 534.2,109.7 547.6,113.7" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="601.9,261.7 431,293.1 430.4,283 601.9,252.2" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="539.9,395.6 472.2,411.6 459.8,118.1 534.2,109.7" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="685.6,428.2 657.8,412.7 659.6,314.5 688.3,327.8" fill="#9C4F32" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="483.9,419.6 552.3,403.2 547.6,113.7 472.5,122.4" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="757.6,469.8 609,386.4 609.3,263.6 764.8,331.1" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="472.2,411.6 483.9,419.6 472.5,122.4 459.8,118.1" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="710.6,276.3 675.5,262.1 677.3,184.7 713.3,196.6" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="663.2,274 524.3,301 521.2,174 665.5,153.8" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="769.8,334.8 601.9,261.7 601.9,252.2 770.4,324" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="679.4,147.9 505.8,171.9 505.4,159.9 679.7,136.6" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="745.3,454.1 685,420.7 687.8,316.4 750.5,344.7" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="547.6,113.7 534.2,109.7 459.8,118.1 472.5,122.4" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="786.6,326.1 663.2,274 665.5,153.8 794.4,192.9" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="833.9,456.2 826.7,458.4 834.1,358.4 841.5,356.5" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="840.4,459.5 833.9,456.2 841.5,356.5 848.3,359.4" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="826.7,458.4 833.1,461.7 840.8,361.3 834.1,358.4" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="833.1,461.7 840.4,459.5 848.3,359.4 840.8,361.3" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="938.4,458.2 909.4,467.4 911.4,447.7 940.6,438.8" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="764.8,331.1 609.3,263.6 452.1,292.7 593,370.8" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="830.5,192.3 679.4,147.9 679.7,136.6 831.4,179.5" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="770.4,324 601.9,252.2 430.4,283 581.3,367" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="848.3,359.4 841.5,356.5 834.1,358.4 840.8,361.3" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="916.8,446.1 912,447.5 914.6,422.5 919.3,421.1" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="458.2,422.5 593.4,518.2 593,370.8 452.1,292.7" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="774.8,302.3 720.4,280.3 723.4,199.9 779.3,218.3" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="1017.2,495.6 938.4,458.2 940.6,438.8 1020,475.2" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="841.6,358.8 729.6,387.1 730,377.4 842.3,349.5" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="1020,475.2 940.6,438.8 911.4,447.7 990.4,485.3" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="909.4,467.4 987.7,505.9 990.4,485.3 911.4,447.7" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="742.1,483.7 734.2,486 738.8,382.4 746.9,380.3" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="748.3,487.3 742.1,483.7 746.9,380.3 753.4,383.5" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="995.8,483.4 916.8,446.1 919.3,421.1 999.2,457.2" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="734.2,486 740.4,489.7 745.3,385.6 738.8,382.4" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="740.4,489.7 748.3,487.3 753.4,383.5 745.3,385.6" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="912,447.5 991,485 994.4,458.8 914.6,422.5" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="831.4,179.5 679.7,136.6 505.4,159.9 643.3,210.4" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="794.4,192.9 665.5,153.8 521.2,174 640.1,218.8" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="431,293.1 581.4,378.7 581.3,367 430.4,283" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="999.2,457.2 919.3,421.1 914.6,422.5 994.4,458.8" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="963.8,411.3 841.6,358.8 842.3,349.5 964.9,401.3" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="593.4,518.2 757.6,469.8 764.8,331.1 593,370.8" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="753.4,383.5 746.9,380.3 738.8,382.4 745.3,385.6" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="524.3,301 638.5,360.3 640.1,218.8 521.2,174" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="987.7,505.9 1017.2,495.6 1020,475.2 990.4,485.3" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="991,485 995.8,483.4 999.2,457.2 994.4,458.8" fill="#9C4F32" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="934.9,508.1 927.5,510.7 939.2,403.8 946.8,401.6" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="942.6,512 934.9,508.1 946.8,401.6 954.8,405" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="964.9,401.3 842.3,349.5 730,377.4 848,435.3" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="927.5,510.7 935.1,514.6 947.1,407.2 939.2,403.8" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="935.1,514.6 942.6,512 954.8,405 947.1,407.2" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="505.8,171.9 643.1,224.2 643.3,210.4 505.4,159.9" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="638.5,360.3 786.6,326.1 794.4,192.9 640.1,218.8" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="677.1,330.5 751.7,314 755.4,235.8 679,249.9" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="581.4,378.7 769.8,334.8 770.4,324 581.3,367" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="954.8,405 946.8,401.6 939.2,403.8 947.1,407.2" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="729.6,387.1 847.2,445.8 848,435.3 730,377.4" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="643.1,224.2 830.5,192.3 831.4,179.5 643.3,210.4" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="839.9,540.6 831.7,543.4 840.4,432.3 848.8,429.9" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="847.3,544.9 839.9,540.6 848.8,429.9 856.6,433.6" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="847.2,445.8 963.8,411.3 964.9,401.3 848,435.3" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="831.7,543.4 839.1,547.7 848.1,436.1 840.4,432.3" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="839.1,547.7 847.3,544.9 856.6,433.6 848.1,436.1" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="856.6,433.6 848.8,429.9 840.4,432.3 848.1,436.1" fill="#FFFFFF" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M 831.7 587.2 Q 856.7 411.3 867.9 235.4 L 879 235.4 Q 876.4 411.3 856.4 587.2 Z" fill="#C3C3C3" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 802.4 174 755 222.4 Q 802.4 205.1 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 811 148.6 769.3 189.4 Q 811 179.7 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 828.3 128.2 798.2 162.9 Q 828.3 159.3 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 851.9 115.5 837.5 146.4 Q 851.9 146.6 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 878.4 112.4 881.8 142.3 Q 878.4 143.5 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 904.3 119.2 924.9 151.2 Q 904.3 150.3 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 925.9 135 960.9 171.8 Q 925.9 166.1 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 940.2 157.7 984.7 201.2 Q 940.2 188.8 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 873.4 235.4 Q 945.2 184 993 235.4 Q 945.2 215.1 873.4 235.4 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M 645.8 595.1 Q 665.1 459.2 656 323.3 L 664.6 323.3 Q 680.3 459.2 664.8 595.1 Z" fill="#C3C3C3" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 605.4 275.8 568.8 313.3 Q 605.4 299.9 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 612.1 256.3 579.9 287.8 Q 612.1 280.3 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 625.4 240.5 602.2 267.3 Q 625.4 264.5 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 643.7 230.7 632.5 254.6 Q 643.7 254.7 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 664.2 228.3 666.8 251.4 Q 664.2 252.3 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 684.2 233.5 700.1 258.2 Q 684.2 257.5 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 700.9 245.7 727.9 274.1 Q 700.9 269.8 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 711.9 263.2 746.3 296.9 Q 711.9 287.3 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M 660.3 323.3 Q 715.8 283.6 752.7 323.3 Q 715.8 307.6 660.3 323.3 Z" fill="#E4E4E4" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+</svg>

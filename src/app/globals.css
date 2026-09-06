@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --shell-gutter: clamp(1rem, 4vw, 3.5rem);
+  }
+
+  * {
+    @apply border-ink;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+  }
+
+  /* Lenis is mounted on the marketing shell only. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ink ring-offset-2 ring-offset-bg;
+  }
+
+  /* Respect reduced-motion for every decorative animation in the product. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: theme('maxWidth.shell');
+    margin-inline: auto;
+    padding-inline: var(--shell-gutter);
+  }
+
+  /* Diagonal hatching for blocked / unavailable calendar cells (dashboard only). */
+  .hatch-blocked {
+    background-image: repeating-linear-gradient(
+      45deg,
+      theme('colors.muted.DEFAULT') 0,
+      theme('colors.muted.DEFAULT') 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
+
+  .hatch-dense {
+    background-image: repeating-linear-gradient(
+      45deg,
+      theme('colors.ink.DEFAULT') 0,
+      theme('colors.ink.DEFAULT') 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  }
+
+  /* Hatching for an ink-filled bar, where the dense ink hatch is invisible. */
+  .hatch-light {
+    background-image: repeating-linear-gradient(
+      45deg,
+      theme('colors.bg.DEFAULT') 0,
+      theme('colors.bg.DEFAULT') 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

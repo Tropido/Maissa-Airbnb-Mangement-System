@@ -1,120 +1,99 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
 
 import { MovementsChart } from '@/components/dashboard/movements-chart';
+import { Card, CardLabel } from '@/components/ui/card';
 import { RANGE_OPTIONS, type OverviewMetrics, type RangeKey } from '@/lib/data/metrics';
 import { cn, formatTND } from '@/lib/utils';
 
-export function OverviewPanel({
-  metricsByRange,
-}: {
-  metricsByRange: Record<RangeKey, OverviewMetrics>;
-}) {
-  const [range, setRange] = useState<RangeKey>('next_30');
-  const metrics = metricsByRange[range];
+const SHORT: Record<RangeKey, string> = { next_7: '7d', next_30: '30d', next_90: '90d' };
 
-  const summary = [
-    { label: 'Check-ins', value: metrics.totalCheckIns },
-    { label: 'Check-outs', value: metrics.totalCheckOuts },
-    { label: 'Turnovers', value: metrics.totalTurnovers },
-  ];
+/**
+ * Revenue, occupancy and daily movements for the selected window. Every
+ * figure comes from buildOverviewMetrics on the server; the pills only choose
+ * which precomputed window is shown.
+ */
+export function OverviewPanel({ metricsByRange }: { metricsByRange: Record<RangeKey, OverviewMetrics> }) {
+  const [range, setRange] = useState<RangeKey>('next_7');
+  const m = metricsByRange[range];
+  const occupancy = Math.min(m.occupancyPct, 100);
 
   return (
-    <section
-      aria-labelledby="overview-heading"
-      className="min-w-0 border-2 border-ink bg-bg-raised"
-    >
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-ink p-5">
-        <h2 id="overview-heading" className="text-sm font-bold uppercase tracking-[0.12em]">
-          Overview
-        </h2>
-
-        <div className="relative">
-          <label htmlFor="range" className="sr-only">
-            Date range
-          </label>
-          <select
-            id="range"
-            value={range}
-            onChange={(event) => setRange(event.target.value as RangeKey)}
-            className="h-10 appearance-none border-2 border-ink bg-bg pl-3 pr-9 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
-          >
-            {RANGE_OPTIONS.map((option) => (
-              <option key={option.key} value={option.key}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <ChevronDown
-            className="pointer-events-none absolute right-2.5 top-1/2 size-4 -translate-y-1/2"
-            aria-hidden
-          />
-        </div>
-      </header>
-
-      <div className="grid gap-px bg-ink sm:grid-cols-2">
-        <div className="bg-bg-raised p-5">
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted-fg">
-            Estimated revenue
-          </p>
-          {/* Hero number: the one figure the operator opens this page for. */}
-          <p className="mt-2 font-display text-4xl font-extrabold leading-none tracking-tight">
-            {formatTND(metrics.estimatedRevenue, { suffix: false })}
-            <span className="ml-2 align-baseline text-xs font-semibold uppercase tracking-[0.14em] text-muted-fg">
-              TND
-            </span>
-          </p>
-          <p className="mt-2 text-xs text-muted-fg">
-            Confirmed and pending stays over the {metrics.rangeLabel.toLowerCase()}.
-          </p>
-        </div>
-
-        <div className="bg-bg-raised p-5">
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted-fg">
-            Occupancy
-          </p>
-          <p className="mt-2 font-display text-4xl font-extrabold leading-none tracking-tight">
-            {metrics.occupancyPct}
-            <span className="text-2xl">%</span>
-          </p>
-          <p className="mt-2 text-xs text-muted-fg">
-            {metrics.bookedNights} of {metrics.availableNights} available nights sold.
-          </p>
-          <div
-            aria-hidden
-            className="mt-3 h-3 w-full border-2 border-ink bg-bg"
-            role="presentation"
-          >
-            <div
-              className="h-full bg-accent"
-              style={{ width: `${Math.min(metrics.occupancyPct, 100)}%` }}
-            />
+    <Card data-reveal className="p-[clamp(20px,2.4vw,30px)]">
+      <section aria-labelledby="overview-heading">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <CardLabel id="overview-heading">Next {m.days} days</CardLabel>
+          <div role="group" aria-label="Date range" className="flex gap-0.5 rounded-full bg-ink/5 p-[3px]">
+            {RANGE_OPTIONS.map((option) => {
+              const on = option.key === range;
+              return (
+                <button
+                  key={option.key}
+                  type="button"
+                  aria-pressed={on}
+                  aria-label={option.label}
+                  onClick={() => setRange(option.key)}
+                  className={cn(
+                    'rounded-full px-3.5 py-[7px] text-[12.5px] transition-colors duration-300',
+                    on ? 'bg-ink text-ink-foreground' : 'bg-transparent text-muted-fg hover:text-ink',
+                  )}
+                >
+                  {SHORT[option.key]}
+                </button>
+              );
+            })}
           </div>
         </div>
-      </div>
 
-      <div className="border-t-2 border-ink p-5">
-        <MovementsChart series={metrics.series} />
-      </div>
-
-      <dl className="grid grid-cols-3 gap-px border-t-2 border-ink bg-ink">
-        {summary.map((item) => (
-          <div key={item.label} className="bg-bg-raised p-4 text-center sm:text-left">
-            <dt className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-fg">
-              {item.label}
-            </dt>
-            <dd
-              className={cn(
-                'mt-1 font-display text-2xl font-extrabold leading-none tracking-tight',
-              )}
-            >
-              {item.value}
-            </dd>
+        <div aria-live="polite" className="mt-6 grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-[22px]">
+          <div>
+            <p className="m-0 text-[10.5px] uppercase tracking-[0.18em] text-muted-soft">Estimated revenue</p>
+            <p className="mb-0 mt-3 text-[clamp(26px,3vw,38px)] leading-none tracking-[-0.04em] text-ink">
+              {formatTND(m.estimatedRevenue, { suffix: false })}{' '}
+              <span className="text-[13px] tracking-normal text-muted-soft">TND</span>
+            </p>
+            <p className="mb-0 mt-2.5 text-[11.5px] leading-normal text-muted-fg">
+              Confirmed and pending stays, {m.rangeLabel.toLowerCase()}.
+            </p>
           </div>
-        ))}
-      </dl>
-    </section>
+          <div>
+            <p className="m-0 text-[10.5px] uppercase tracking-[0.18em] text-muted-soft">Occupancy</p>
+            <p className="mb-0 mt-3 text-[clamp(26px,3vw,38px)] leading-none tracking-[-0.04em] text-ink">
+              {m.occupancyPct}
+              <span className="text-[15px] tracking-normal text-muted-soft">%</span>
+            </p>
+            <div aria-hidden className="mt-3 h-[5px] overflow-hidden rounded-full bg-ink/[.08]">
+              <div
+                className="h-full rounded-full bg-chart-checkin transition-[width] duration-700 ease-quiet"
+                style={{ width: `${occupancy}%` }}
+              />
+            </div>
+            <p className="mb-0 mt-2.5 text-[11.5px] leading-normal text-muted-fg">
+              {m.bookedNights} of {m.availableNights} available nights sold.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-7">
+          <p className="m-0 text-[10.5px] uppercase tracking-[0.18em] text-muted-soft">Daily movements</p>
+          <MovementsChart series={m.series} />
+          <ul className="m-0 mt-[22px] flex list-none flex-wrap gap-5 p-0 text-xs text-muted-fg">
+            <li className="flex items-center gap-2">
+              <span aria-hidden className="block size-[9px] rounded-[2px] bg-chart-checkin" />
+              Check-ins {m.totalCheckIns}
+            </li>
+            <li className="flex items-center gap-2">
+              <span aria-hidden className="block size-[9px] rounded-[2px] bg-chart-checkout" />
+              Check-outs {m.totalCheckOuts}
+            </li>
+            <li className="flex items-center gap-2">
+              <span aria-hidden className="block size-[9px] rounded-[2px] bg-chart-turnover" />
+              Turnovers {m.totalTurnovers}
+            </li>
+          </ul>
+        </div>
+      </section>
+    </Card>
   );
 }

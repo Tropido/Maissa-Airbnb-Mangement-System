@@ -5,33 +5,32 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 /**
- * Brutalist button. Hard border, hard offset shadow, no radius; pressing moves
- * the block into its own shadow rather than fading it.
+ * Pill button from the references. Hover changes are CSS-only (0.3–0.35s);
+ * GSAP never touches these.
  *
- * Foregrounds are the AA-clearing pairings from tailwind.config — white on
- * `primary` measures 3.30:1 and is never used.
+ *   primary   ink fill, blush text — the main action on light grounds
+ *   outline   hairline ink border — the secondary action on light grounds
+ *   inverse   blush fill, ink text — the main action on dark grounds
+ *   ghost     hairline blush border — the secondary action on dark grounds
+ *   link      underlined text
  */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold tracking-tight transition-[transform,box-shadow,background-color] duration-150 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
+  'inline-flex shrink-0 items-center justify-center gap-2.5 whitespace-nowrap rounded-full tracking-[-0.01em] transition-[background-color,color,opacity,border-color] duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        primary:
-          'border-2 border-ink bg-primary text-primary-foreground shadow-brutal hover:bg-primary-hover active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
-        outline:
-          'border-2 border-ink bg-transparent text-ink shadow-brutal hover:bg-bg-raised active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
-        solid:
-          'border-2 border-ink bg-ink text-ink-foreground shadow-brutal hover:bg-ink/90 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
-        inverse:
-          'border-2 border-bg bg-bg text-ink shadow-brutal-inverse hover:bg-bg-raised active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
-        ghost: 'border-2 border-transparent text-ink hover:border-ink hover:bg-bg-raised',
-        link: 'text-ink underline decoration-2 underline-offset-4 hover:decoration-primary',
+        primary: 'bg-ink text-ink-foreground hover:bg-ink-raised hover:text-ink-foreground',
+        outline: 'border border-ink/20 bg-transparent text-ink hover:bg-ink/5 hover:text-ink',
+        inverse: 'bg-ink-foreground text-ink hover:text-ink hover:opacity-[.86]',
+        ghost:
+          'border border-ink-foreground/50 bg-transparent text-ink-foreground hover:bg-ink-foreground hover:text-ink',
+        link: 'h-auto rounded-none p-0 text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink',
       },
       size: {
-        sm: 'h-9 px-3 text-xs uppercase tracking-[0.08em]',
-        md: 'h-11 px-5 text-sm',
-        lg: 'h-14 px-7 text-base',
-        icon: 'h-10 w-10 p-0',
+        sm: 'h-[42px] px-5 text-[13px]',
+        md: 'h-[46px] px-6 text-[13.5px]',
+        lg: 'h-[52px] px-[30px] text-sm',
+        icon: 'size-10 p-0',
       },
     },
     defaultVariants: { variant: 'primary', size: 'md' },
@@ -47,9 +46,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
-    return (
-      <Comp className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />
-    );
+    return <Comp className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />;
   },
 );
 Button.displayName = 'Button';

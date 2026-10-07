@@ -1,49 +1,38 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, type PanInfo } from 'framer-motion';
-import { MoveHorizontal, RotateCw } from 'lucide-react';
 
+import { isStudyArt } from '@/components/marketing/listing-image';
+import { BRAND } from '@/lib/tokens';
 import { cn } from '@/lib/utils';
 
 /**
- * Phase 1 of the 360 viewer: a photo-sequence spinner over frames shot in a
- * circle around the property. No 3D runtime, no WebGL — it works with the
- * photography that already exists.
+ * Photo-sequence spinner over frames shot in a circle around the property.
+ * No 3D runtime — it is a flipbook, and labelled as one; it is not a
+ * commissioned 3D walkthrough.
  *
- * Phase 2 swaps this component for a Spline scene once a real .splinecode model
- * has been authored. That is a different asset pipeline, not a different
- * component API, so the props here are deliberately frame-agnostic.
- *
- * Interaction: drag, scrub with the wheel, or use the arrow keys. The element
- * is exposed as a slider so the keyboard path is announced, and an auto-rotate
- * runs until the first interaction to make the affordance obvious.
+ * Input: drag (18px per frame, as in the reference), wheel scrub, or the
+ * arrow keys while the viewer has focus — exposed as a slider so the
+ * keyboard path is announced. An idle rotation advertises the affordance
+ * while it is on screen, stops for good on first interaction and never runs
+ * under reduced motion. The whole sequence preloads before input is enabled.
  */
-export function SpinViewer({
-  frames,
-  alt,
-  className,
-}: {
-  frames: string[];
-  alt: string;
-  className?: string;
-}) {
+export function SpinViewer({ frames, alt, className }: { frames: string[]; alt: string; className?: string }) {
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(0);
   const [interacted, setInteracted] = useState(false);
-  const dragStart = useRef({ x: 0, index: 0 });
-  const wheelAccumulator = useRef(0);
+  const [visible, setVisible] = useState(false);
+  const viewer = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ x: number; index: number; id: number } | null>(null);
+  const wheel = useRef(0);
 
   const total = frames.length;
   const ready = total > 0 && loaded >= total;
 
-  // Preload the whole sequence before enabling the control — a half-loaded
-  // spinner that flashes white on drag is worse than a short wait.
   useEffect(() => {
     if (!total) return;
     let cancelled = false;
     let settled = 0;
-
     frames.forEach((src) => {
       const img = new window.Image();
       const done = () => {
@@ -55,20 +44,25 @@ export function SpinViewer({
       img.onerror = done;
       img.src = src;
     });
-
     return () => {
       cancelled = true;
     };
   }, [frames, total]);
 
-  // Idle auto-rotate, stopped for good on first interaction and never started
-  // for visitors who asked for reduced motion.
   useEffect(() => {
-    if (!ready || interacted) return;
+    const el = viewer.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!ready || interacted || !visible) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % total), 110);
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % total), 140);
     return () => window.clearInterval(id);
-  }, [ready, interacted, total]);
+  }, [ready, interacted, visible, total]);
 
   const step = useCallback(
     (delta: number) => {
@@ -78,99 +72,96 @@ export function SpinViewer({
     [total],
   );
 
-  const onDragStart = (_: unknown, info: PanInfo) => {
-    setInteracted(true);
-    dragStart.current = { x: info.point.x, index };
-  };
+  if (!total) return null;
 
-  const onDrag = (_: unknown, info: PanInfo) => {
-    const dx = info.point.x - dragStart.current.x;
-    // One full revolution per ~440px of travel.
-    const frameDelta = Math.round((dx / 440) * total);
-    const next = (((dragStart.current.index - frameDelta) % total) + total) % total;
-    setIndex(next);
-  };
-
-  const onWheel = (event: React.WheelEvent) => {
-    wheelAccumulator.current += event.deltaY;
-    if (Math.abs(wheelAccumulator.current) < 40) return;
-    step(wheelAccumulator.current > 0 ? 1 : -1);
-    wheelAccumulator.current = 0;
-  };
-
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
-      event.preventDefault();
-      step(1);
-    }
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
-      event.preventDefault();
-      step(-1);
-    }
-  };
-
-  const degrees = Math.round((index / Math.max(total, 1)) * 360);
+  const degrees = Math.round((index / total) * 360);
+  const pct = total > 1 ? (index / (total - 1)) * 100 : 0;
 
   return (
-    <div className={cn('relative select-none bg-bg-sunken', className)}>
-      <motion.div
+    <div className={className}>
+      <div className="flex flex-wrap items-end justify-between gap-5">
+        <h2 className="m-0 text-[11px] font-normal uppercase tracking-[0.22em] text-muted-soft">Walk around it</h2>
+        <p className="m-0 text-[11.5px] text-muted-soft">
+          Drag or use &larr; &rarr; &middot; frame{' '}
+          <span className="text-ink">{String(index + 1).padStart(2, '0')}</span> of {total}
+        </p>
+      </div>
+      <div
+        ref={viewer}
         role="slider"
         tabIndex={0}
-        aria-label={`Rotate the view of ${alt}`}
-        aria-valuemin={0}
-        aria-valuemax={359}
-        aria-valuenow={degrees}
-        aria-valuetext={`${degrees} degrees`}
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0}
-        dragMomentum={false}
-        onDragStart={onDragStart}
-        onDrag={onDrag}
-        onWheel={onWheel}
-        onKeyDown={onKeyDown}
-        className="relative aspect-[3/2] w-full cursor-grab touch-pan-y active:cursor-grabbing focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+        aria-label={`Rotate the photo sequence of ${alt}`}
+        aria-valuemin={1}
+        aria-valuemax={total}
+        aria-valuenow={index + 1}
+        aria-valuetext={`Frame ${index + 1} of ${total}, ${degrees} degrees`}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            step(1);
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            step(-1);
+          }
+        }}
+        onWheel={(e) => {
+          wheel.current += e.deltaX || e.deltaY;
+          if (Math.abs(wheel.current) < 40) return;
+          step(wheel.current > 0 ? 1 : -1);
+          wheel.current = 0;
+        }}
+        onPointerDown={(e) => {
+          if (!ready) return;
+          setInteracted(true);
+          drag.current = { x: e.clientX, index, id: e.pointerId };
+          e.currentTarget.setPointerCapture(e.pointerId);
+        }}
+        onPointerMove={(e) => {
+          const d = drag.current;
+          if (!d || d.id !== e.pointerId) return;
+          const next = d.index + Math.round((e.clientX - d.x) / 18);
+          setIndex(((next % total) + total) % total);
+        }}
+        onPointerUp={() => {
+          drag.current = null;
+        }}
+        onPointerCancel={() => {
+          drag.current = null;
+        }}
+        className={cn(
+          'relative mt-[18px] aspect-video select-none overflow-hidden rounded-[22px] bg-ink touch-pan-y',
+          ready ? 'cursor-grab active:cursor-grabbing' : 'cursor-progress',
+        )}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- frame swapping
-            needs a stable element with a mutable src; the optimizer would fight it. */}
+        {/* eslint-disable-next-line @next/next/no-img-element -- frame swapping needs one stable element with a mutable src. */}
         <img
           src={frames[index]}
-          alt={`${alt}, rotated ${degrees} degrees`}
+          alt=""
           draggable={false}
           className={cn(
-            'pointer-events-none size-full object-cover transition-opacity duration-200',
+            'pointer-events-none size-full object-cover transition-opacity duration-300',
             ready ? 'opacity-100' : 'opacity-0',
           )}
         />
-
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,rgb(26_10_15/.55))]" />
         {!ready ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-            <RotateCw className="size-6 animate-spin text-muted-fg" aria-hidden />
-            <p className="text-xs uppercase tracking-[0.16em] text-muted-fg">
-              Loading view {loaded} of {total}
-            </p>
-          </div>
+          <p className="absolute inset-0 m-0 flex items-center justify-center text-[11px] uppercase tracking-[0.16em] text-ink-foreground/70">
+            Loading frame {loaded} of {total}
+          </p>
         ) : null}
-      </motion.div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-3">
-        <span className="inline-flex items-center gap-2 rounded-full bg-bg/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-ink">
-          <MoveHorizontal className="size-3" aria-hidden />
-          Drag to rotate
-        </span>
-        <span className="rounded-full bg-ink/80 px-2.5 py-1 font-mono text-[10px] text-ink-foreground">
-          {String(degrees).padStart(3, '0')}&deg;
-        </span>
-      </div>
-
-      {/* Frame ticks — a physical read on where you are in the revolution. */}
-      <div aria-hidden className="absolute inset-x-0 top-0 flex gap-px p-2">
-        {frames.map((frame, i) => (
+        {isStudyArt(frames[0]) ? (
+          <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-ink/70 px-2.5 py-1 text-[9.5px] uppercase tracking-[0.14em] text-ink-foreground">
+            Architectural study · photos to come
+          </span>
+        ) : null}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-[18px] flex justify-center">
           <span
-            key={frame}
-            className={cn('h-0.5 flex-1 rounded-full', i === index ? 'bg-primary' : 'bg-ink/15')}
+            className="block h-[3px] w-[140px] rounded-full"
+            style={{
+              background: `linear-gradient(90deg,${BRAND.bg} 0,${BRAND.bg} ${pct}%,rgba(246,230,234,.28) ${pct}%,rgba(246,230,234,.28) 100%)`,
+            }}
           />
-        ))}
+        </div>
       </div>
     </div>
   );

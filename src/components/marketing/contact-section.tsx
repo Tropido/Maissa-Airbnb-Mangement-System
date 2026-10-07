@@ -1,30 +1,49 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { AlertTriangle, Check } from 'lucide-react';
 
 import { submitEnquiry } from '@/app/(marketing)/actions';
 import { initialEnquiryState } from '@/lib/forms/enquiry';
-import { PropertyMap } from '@/components/marketing/property-map';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { Listing } from '@/lib/data/types';
 
 const fieldClass =
-  'w-full border-b border-muted bg-transparent px-1 py-2.5 text-sm text-ink placeholder:text-muted-fg transition-colors focus-visible:outline-none focus-visible:border-ink';
+  'mt-[9px] h-12 w-full rounded-xl border border-ink/[.18] bg-bg-card px-[15px] text-sm text-ink placeholder:text-muted-soft transition-colors duration-300 focus-visible:border-ink/40 aria-[invalid=true]:border-danger';
 
-const labelClass = 'block text-[11px] uppercase tracking-[0.16em] text-muted-fg';
+const labelClass = 'block text-[11px] uppercase tracking-[0.16em] text-muted-soft';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
+    <button
+      type="submit"
+      disabled={pending}
+      className="inline-flex h-[50px] items-center whitespace-nowrap rounded-full bg-ink px-7 text-sm tracking-[-0.01em] text-ink-foreground transition-colors duration-300 hover:bg-ink-raised disabled:opacity-60"
+    >
       {pending ? 'Sending…' : 'Send enquiry'}
-    </Button>
+    </button>
   );
 }
 
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} className="mb-0 mt-1.5 text-xs text-danger">
+      {message}
+    </p>
+  );
+}
+
+/**
+ * Enquiry section from the home reference. The form posts to the existing
+ * `submitEnquiry` server action — validation, Supabase insert and the honest
+ * "nothing was sent" preview message are all unchanged.
+ *
+ * The home is preselected from `defaultListingSlug`, or from `?home=<slug>`
+ * when a listing page sends the visitor here.
+ */
 export function ContactSection({
   listings,
   defaultListingSlug,
@@ -33,165 +52,171 @@ export function ContactSection({
   defaultListingSlug?: string;
 }) {
   const [state, formAction] = useActionState(submitEnquiry, initialEnquiryState);
+  const [home, setHome] = useState(defaultListingSlug ?? '');
+  const errors = state.fieldErrors;
+  const values = state.values ?? {};
+
+  useEffect(() => {
+    if (defaultListingSlug) return;
+    const fromUrl = new URLSearchParams(window.location.search).get('home');
+    if (fromUrl && listings.some((l) => l.slug === fromUrl)) {
+      const id = window.setTimeout(() => setHome(fromUrl), 0);
+      return () => window.clearTimeout(id);
+    }
+  }, [defaultListingSlug, listings]);
+
+  const selected = listings.find((l) => l.slug === home);
+  const maxGuests = selected?.max_guests ?? (listings.length ? Math.max(...listings.map((l) => l.max_guests)) : 12);
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="shell py-section">
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-muted-fg">Enquire</p>
-          <h2 id="contact-heading" className="mt-4 font-display text-display-md font-normal">
-            Ask about
-            <br />
-            a stay.
+    <section id="contact" aria-labelledby="contact-heading" className="bg-bg-sunken">
+      <div className="mx-auto grid max-w-site grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(34px,5vw,80px)] px-gutter py-[clamp(70px,9vw,130px)]">
+        <div data-reveal>
+          <p className="m-0 text-[11px] uppercase tracking-[0.24em] text-muted-soft">Enquire</p>
+          <h2
+            id="contact-heading"
+            className="mb-0 mt-6 max-w-[16ch] text-[clamp(30px,4.2vw,58px)] font-normal leading-[1.02] tracking-[-0.045em] text-ink"
+          >
+            Come and see it before you decide anything from a photo.
           </h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-fg">
-            Bookings are completed on Airbnb, but questions are answered here first. Tell me the
-            dates and the house, and I will confirm availability and anything the listing does not
-            cover.
+          <p className="mb-0 mt-[22px] max-w-[44ch] text-pretty text-sm leading-[1.7] text-muted-fg">
+            Tell me roughly when and how many, and I will come back within the hour with what is free
+            and what it costs.
           </p>
-
-          <PropertyMap
-            listings={listings}
-            activeId={listings.find((l) => l.slug === defaultListingSlug)?.id}
-            interactive={false}
-            className="mt-10 hidden h-72 w-full lg:block"
-          />
         </div>
 
-        <form action={formAction} className="bg-bg-raised p-6 sm:p-8">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="sm:col-span-1">
-              <label htmlFor="name" className={labelClass}>
-                Your name
+        <form
+          data-reveal
+          action={formAction}
+          noValidate
+          className="rounded-3xl bg-bg-raised p-[clamp(24px,3vw,40px)] shadow-form"
+        >
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-[18px]">
+            <div>
+              <label htmlFor="enquiry-name" className={labelClass}>
+                Name
               </label>
               <input
-                id="name"
+                id="enquiry-name"
                 name="name"
+                type="text"
                 required
                 autoComplete="name"
-                placeholder="Maissa T."
-                aria-invalid={Boolean(state.fieldErrors.name)}
-                aria-describedby={state.fieldErrors.name ? 'name-error' : undefined}
-                className={cn(fieldClass, 'mt-2', state.fieldErrors.name && 'border-danger')}
+                defaultValue={values.name}
+                placeholder="Your name"
+                aria-invalid={Boolean(errors.name)}
+                aria-describedby={errors.name ? 'enquiry-name-error' : undefined}
+                className={fieldClass}
               />
-              {state.fieldErrors.name ? (
-                <p id="name-error" className="mt-1.5 text-xs text-danger">
-                  {state.fieldErrors.name}
-                </p>
-              ) : null}
+              <FieldError id="enquiry-name-error" message={errors.name} />
             </div>
-
-            <div className="sm:col-span-1">
-              <label htmlFor="email" className={labelClass}>
+            <div>
+              <label htmlFor="enquiry-email" className={labelClass}>
                 Email
               </label>
               <input
-                id="email"
+                id="enquiry-email"
                 name="email"
                 type="email"
                 required
                 autoComplete="email"
+                defaultValue={values.email}
                 placeholder="you@example.com"
-                aria-invalid={Boolean(state.fieldErrors.email)}
-                aria-describedby={state.fieldErrors.email ? 'email-error' : undefined}
-                className={cn(fieldClass, 'mt-2', state.fieldErrors.email && 'border-danger')}
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? 'enquiry-email-error' : undefined}
+                className={fieldClass}
               />
-              {state.fieldErrors.email ? (
-                <p id="email-error" className="mt-1.5 text-xs text-danger">
-                  {state.fieldErrors.email}
-                </p>
-              ) : null}
+              <FieldError id="enquiry-email-error" message={errors.email} />
             </div>
+          </div>
 
-            <div className="sm:col-span-2">
-              <label htmlFor="listing" className={labelClass}>
+          <div className="mt-[18px] grid grid-cols-[repeat(auto-fit,minmax(min(100%,170px),1fr))] gap-[18px]">
+            <div>
+              <label htmlFor="enquiry-listing" className={labelClass}>
                 Which home
               </label>
               <select
-                id="listing"
+                id="enquiry-listing"
                 name="listing"
-                defaultValue={defaultListingSlug ?? ''}
-                className={cn(fieldClass, 'mt-2')}
+                value={home}
+                onChange={(event) => setHome(event.target.value)}
+                aria-invalid={Boolean(errors.listing)}
+                aria-describedby={errors.listing ? 'enquiry-listing-error' : undefined}
+                className={cn(fieldClass, 'px-3')}
               >
-                <option value="">Not sure yet</option>
+                <option value="">No preference yet</option>
                 {listings.map((listing) => (
                   <option key={listing.id} value={listing.slug}>
-                    {listing.title} — {listing.location}
+                    {listing.title}
                   </option>
                 ))}
               </select>
+              <FieldError id="enquiry-listing-error" message={errors.listing} />
             </div>
-
             <div>
-              <label htmlFor="arriving" className={labelClass}>
-                Arriving
+              <label htmlFor="enquiry-arriving" className={labelClass}>
+                Arrival
               </label>
               <input
-                id="arriving"
+                id="enquiry-arriving"
                 name="arriving"
                 type="date"
-                className={cn(fieldClass, 'mt-2')}
+                defaultValue={values.arriving}
+                className={fieldClass}
               />
             </div>
-
             <div>
-              <label htmlFor="guests" className={labelClass}>
+              <label htmlFor="enquiry-guests" className={labelClass}>
                 Guests
               </label>
               <input
-                id="guests"
+                id="enquiry-guests"
                 name="guests"
                 type="number"
                 min={1}
-                max={12}
-                defaultValue={2}
-                className={cn(fieldClass, 'mt-2')}
+                max={maxGuests}
+                defaultValue={values.guests || 2}
+                className={fieldClass}
               />
-            </div>
-
-            <div className="sm:col-span-2">
-              <label htmlFor="message" className={labelClass}>
-                Your message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="Dates, how many of you, anything you need to know before booking."
-                aria-invalid={Boolean(state.fieldErrors.message)}
-                aria-describedby={state.fieldErrors.message ? 'message-error' : undefined}
-                className={cn(fieldClass, 'mt-2 resize-y', state.fieldErrors.message && 'border-danger')}
-              />
-              {state.fieldErrors.message ? (
-                <p id="message-error" className="mt-1.5 text-xs text-danger">
-                  {state.fieldErrors.message}
-                </p>
-              ) : null}
             </div>
           </div>
 
-          <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-[18px]">
+            <label htmlFor="enquiry-message" className={labelClass}>
+              Message
+            </label>
+            <textarea
+              id="enquiry-message"
+              name="message"
+              rows={4}
+              required
+              defaultValue={values.message}
+              placeholder="Dates, how many of you, anything you need to know."
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'enquiry-message-error' : undefined}
+              className={cn(fieldClass, 'h-auto resize-y py-3.5 leading-[1.6]')}
+            />
+            <FieldError id="enquiry-message-error" message={errors.message} />
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-[18px]">
             <SubmitButton />
-            <p className="text-xs text-muted-fg">Replies within the hour, every day.</p>
-          </div>
-
-          <div aria-live="polite" role="status">
-            {state.status !== 'idle' && state.message ? (
-              <p
-                className={cn(
-                  'mt-5 flex items-start gap-2 text-sm',
-                  state.status === 'success' ? 'text-accent' : 'text-danger',
-                )}
-              >
-                {state.status === 'success' ? (
-                  <Check className="mt-0.5 size-4 shrink-0" aria-hidden />
-                ) : (
-                  <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden />
-                )}
-                {state.message}
-              </p>
-            ) : null}
+            <p
+              role="status"
+              aria-live="polite"
+              className={cn(
+                'm-0 flex flex-1 basis-[220px] items-start gap-2 text-[12.5px] leading-normal',
+                state.status === 'error' ? 'text-danger' : state.status === 'success' ? 'text-ink' : 'text-muted-fg',
+              )}
+            >
+              {state.status === 'success' ? <Check className="mt-0.5 size-3.5 shrink-0" aria-hidden /> : null}
+              {state.status === 'error' ? <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden /> : null}
+              <span>
+                {state.status === 'idle' || !state.message
+                  ? 'Answered within the hour. Bookings are completed on Airbnb.'
+                  : state.message}
+              </span>
+            </p>
           </div>
         </form>
       </div>

@@ -4,29 +4,37 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 /**
- * Status chip. Every variant pairs its block colour with the foreground that
- * clears WCAG AA against it — see the contrast table in tailwind.config.ts.
+ * Small uppercase pill. Every tint/ink pairing here measures at least 5:1 —
+ * see the contrast table in tailwind.config.ts.
  *
- * Status is never carried by colour alone: the chip always renders its label,
- * and callers add an icon where the meaning is urgent.
+ * Meaning is never carried by colour alone: chips always render their label,
+ * and status chips lead with a glyph as well.
  */
 const badgeVariants = cva(
-  'inline-flex items-center gap-1.5 whitespace-nowrap border-2 border-ink px-2 py-0.5 text-[11px] font-bold uppercase leading-tight tracking-[0.08em] [&_svg]:size-3 [&_svg]:shrink-0',
+  'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full uppercase leading-none [&_svg]:size-3 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        neutral: 'bg-bg-raised text-ink',
+        neutral: 'bg-ink/[.07] text-ink-soft',
         ink: 'bg-ink text-ink-foreground',
-        primary: 'bg-primary text-primary-foreground',
-        accent: 'bg-accent text-accent-foreground',
-        success: 'bg-success text-success-foreground',
-        warning: 'bg-warning text-warning-foreground',
-        danger: 'bg-danger text-danger-foreground',
-        featured: 'bg-featured text-featured-foreground',
-        outline: 'bg-transparent text-ink',
+        blush: 'bg-bg text-ink',
+        confirmed: 'bg-status-confirmed-bg text-status-confirmed',
+        awaiting: 'bg-status-awaiting-bg text-status-awaiting',
+        unconfirmed: 'bg-status-unconfirmed-bg text-status-unconfirmed',
+        early: 'bg-status-early-bg text-status-early',
+        blocked: 'bg-status-blocked-bg text-status-blocked',
+        airbnb: 'bg-channel-airbnb-tint text-channel-airbnb-ink',
+        booking: 'bg-channel-booking-tint text-channel-booking-ink',
+        direct: 'bg-channel-direct-tint text-channel-direct-ink',
+        outline: 'border border-ink/20 text-ink',
+      },
+      size: {
+        sm: 'px-[9px] py-1 text-[9.5px] tracking-[0.12em]',
+        md: 'px-2.5 py-[5px] text-[10.5px] tracking-[0.1em]',
+        lg: 'px-3.5 py-[7px] text-[10.5px] tracking-[0.16em]',
       },
     },
-    defaultVariants: { variant: 'neutral' },
+    defaultVariants: { variant: 'neutral', size: 'md' },
   },
 );
 
@@ -34,8 +42,8 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return <span className={cn(badgeVariants({ variant }), className)} {...props} />;
+function Badge({ className, variant, size, ...props }: BadgeProps) {
+  return <span className={cn(badgeVariants({ variant, size }), className)} {...props} />;
 }
 
 export { Badge, badgeVariants };

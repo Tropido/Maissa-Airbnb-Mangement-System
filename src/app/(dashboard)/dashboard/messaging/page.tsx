@@ -1,80 +1,49 @@
 import type { Metadata } from 'next';
-import { Circle } from 'lucide-react';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
+import { Inbox, type InboxThread } from '@/components/dashboard/inbox';
 import { MESSAGE_THREADS } from '@/lib/data/inbox';
 import { getListings } from '@/lib/data/queries';
-import { CHANNEL_LABEL } from '@/lib/data/types';
-import { cn, initials, pluralise } from '@/lib/utils';
+import { inboxFilterOptions } from '@/lib/data/views';
 
 export const metadata: Metadata = { title: 'Messaging' };
 
-function relativeTime(minutes: number) {
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.round(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.round(hours / 24)}d ago`;
-}
-
+/** Read-only guest inbox — `Maissa Redesign/Maissa Messaging.dc.html`. */
 export default async function MessagingPage() {
   const listings = await getListings();
   const byId = new Map(listings.map((l) => [l.id, l]));
-  const unread = MESSAGE_THREADS.filter((m) => m.unread).length;
+  const threads: InboxThread[] = MESSAGE_THREADS.map((thread) => ({
+    ...thread,
+    listing_title: byId.get(thread.listing_id)?.title ?? 'Unknown home',
+  }));
+  const unread = threads.filter((t) => t.unread).length;
+  const eyebrow = `Read-only · ${unread} unread`;
 
   return (
-    <div className="mx-auto w-full max-w-shell px-4 py-8 sm:px-6 lg:py-10">
-      <header>
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-fg">Inbox</p>
-        <h1 className="mt-2 font-display text-display-sm uppercase sm:text-display-md">Messaging</h1>
-        <p className="mt-3 max-w-xl text-sm text-muted-fg">
-          {pluralise(unread, 'thread')} waiting on a reply. Replies still go out on the channel the
-          guest wrote from — this is the read layer.
+    <div className="mx-auto w-full max-w-inbox px-gutter-console pb-[clamp(50px,6vw,90px)] pt-[clamp(22px,3vw,40px)]">
+      <div className="flex flex-wrap items-end justify-between gap-5">
+        <div data-intro>
+          <p className="m-0 text-[11px] uppercase tracking-[0.2em] text-muted-soft">
+            <span className="sr-only">{eyebrow}</span>
+            <span aria-hidden data-scramble>
+              {eyebrow}
+            </span>
+          </p>
+          <h1 className="mb-0 mt-3.5 text-[clamp(26px,3.4vw,42px)] font-normal leading-[1.02] tracking-[-0.045em] text-ink">
+            Guest inbox
+          </h1>
+        </div>
+        <p data-intro className="m-0 max-w-[38ch] text-[12.5px] leading-[1.65] text-muted-fg">
+          Replies still go out on the channel the guest wrote from — Airbnb or Booking.com. This is
+          visibility, not a second inbox to keep.
         </p>
-      </header>
+      </div>
 
-      <ul className="mt-8 border-2 border-ink bg-bg-raised">
-        {MESSAGE_THREADS.map((thread) => {
-          const listing = byId.get(thread.listing_id);
-          return (
-            <li
-              key={thread.id}
-              className={cn(
-                'flex items-start gap-4 border-b-2 border-muted/60 p-5 last:border-b-0',
-                thread.unread && 'bg-bg',
-              )}
-            >
-              <Avatar className="size-11 shrink-0">
-                <AvatarFallback>{initials(thread.guest_name)}</AvatarFallback>
-              </Avatar>
+      <Inbox threads={threads} options={inboxFilterOptions(threads, listings)} />
 
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <p className="font-bold tracking-tight">{thread.guest_name}</p>
-                  <p className="text-xs text-muted-fg">
-                    {listing?.title ?? 'Unknown listing'}
-                    <span aria-hidden className="mx-1.5">
-                      /
-                    </span>
-                    {CHANNEL_LABEL[thread.channel]}
-                  </p>
-                  <p className="ml-auto text-xs text-muted-fg">
-                    {relativeTime(thread.received_minutes_ago)}
-                  </p>
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-muted-fg">{thread.preview}</p>
-              </div>
-
-              {thread.unread ? (
-                <Badge variant="danger" className="shrink-0">
-                  <Circle aria-hidden className="fill-current" />
-                  Unread
-                </Badge>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
+      <p className="mb-0 mt-[22px] text-xs text-muted-soft">
+        Threads are seeded from <span className="text-ink">src/lib/data/inbox.ts</span> — static by design,
+        not Supabase-backed.
+      </p>
     </div>
   );
 }

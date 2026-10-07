@@ -59,7 +59,7 @@ export default function MapboxMap({
       onLoad={() => {
         const map = ref?.getMap();
         if (!map) return;
-        // Desaturate the base map so the orange pins are the only saturated
+        // Desaturate the base map so the rose pins are the only saturated
         // thing on screen, matching the restraint of the rest of the site.
         for (const layer of map.getStyle()?.layers ?? []) {
           if (layer.type === 'symbol') continue;

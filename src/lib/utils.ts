@@ -108,3 +108,27 @@ export function pluralise(count: number, singular: string, plural = `${singular}
 export function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
+
+const NUMBER_WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+
+/** `2` -> `Two`. Counts above ten stay numeric. */
+export function numberWord(count: number) {
+  return NUMBER_WORDS[count] ?? String(count);
+}
+
+/** "Djerba Villa" -> "Djerba". Short place label for map pins and lists. */
+export function placeName(title: string) {
+  return title.split(/\s+/)[0] ?? title;
+}
+
+/** First sentence of a paragraph, for compact captions. */
+export function firstSentence(text: string | undefined) {
+  if (!text) return '';
+  const match = text.match(/^.*?[.!?](\s|$)/);
+  return (match ? match[0] : text).trim();
+}
+
+/** `33.8756` -> `33.876`. Coordinates as the references print them. */
+export function formatCoord(value: number) {
+  return value.toFixed(3);
+}

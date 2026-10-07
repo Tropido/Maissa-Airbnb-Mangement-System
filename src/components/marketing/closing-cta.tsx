@@ -1,47 +1,48 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
-import { AmbientGlow } from '@/components/marketing/ambient-glow';
-import { Reveal } from '@/components/motion/reveal';
-import type { Listing } from '@/lib/data/types';
+import { cn } from '@/lib/utils';
 
-interface ClosingCtaProps {
-  listing: Listing;
+/**
+ * The dark closing band that ends the listings and detail pages: one line,
+ * one pill. Rounded top corners lift it off the blush page above.
+ */
+export function ClosingCta({
+  line,
+  href,
+  cta,
+  variant = 'listings',
+}: {
   line: string;
   href: string;
   cta: string;
-}
-
-/**
- * Full-bleed closing moment — one photo, one line, one understated link.
- * Replaces the old dark aurora-gradient banner entirely; no boxed CTA here.
- */
-export function ClosingCta({ listing, line, href, cta }: ClosingCtaProps) {
+  /** The two references size this band slightly differently. */
+  variant?: 'listings' | 'detail';
+}) {
+  const detail = variant === 'detail';
   return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden">
-      <Image
-        src={listing.hero_photo_url}
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover"
-      />
-      <AmbientGlow onPhoto />
-      <div aria-hidden className="absolute inset-0 bg-ink/35" />
-
-      <Reveal className="relative z-10 mx-auto max-w-2xl px-[var(--shell-gutter)] text-center">
-        <p className="font-display text-2xl font-normal leading-snug text-bg sm:text-3xl">
+    <section className="theme-dark relative rounded-t-[clamp(20px,2.4vw,34px)] bg-ink text-ink-foreground">
+      <div
+        className={cn(
+          'mx-auto flex max-w-site flex-wrap items-end justify-between gap-8 px-gutter',
+          detail ? 'py-[clamp(56px,7vw,110px)]' : 'py-[clamp(60px,8vw,120px)]',
+        )}
+      >
+        <h2
+          data-split-lines
+          className={cn(
+            'm-0 font-normal leading-[1.03] tracking-[-0.045em]',
+            detail ? 'max-w-[22ch] text-[clamp(26px,4vw,52px)]' : 'max-w-[20ch] text-[clamp(26px,4vw,54px)]',
+          )}
+        >
           {line}
-        </p>
+        </h2>
         <Link
           href={href}
-          className="mt-8 inline-flex items-center gap-2 text-sm text-bg underline decoration-bg/40 underline-offset-4 transition-colors hover:decoration-bg"
+          className="inline-flex h-[52px] items-center whitespace-nowrap rounded-full bg-ink-foreground px-[30px] text-sm text-ink transition-opacity duration-300 hover:text-ink hover:opacity-[.86]"
         >
           {cta}
-          <ArrowRight className="size-3.5" aria-hidden />
         </Link>
-      </Reveal>
+      </div>
     </section>
   );
 }

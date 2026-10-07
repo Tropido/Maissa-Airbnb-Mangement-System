@@ -9,13 +9,13 @@
  * actually rotates. So this renders the scene properly: a perspective
  * projection of each house, swept through 24 azimuths.
  *
- * Each listing gets its own massing — a Djerba courtyard house, a cubic
- * poolside villa, a Sidi Bou Said terrace loft, a Tabarka forest cabin — so the
- * four homes do not read as one building recoloured four times.
+ * Each listing gets its own massing — the Djerba courtyard house and the
+ * Ezzahra terrace loft — so the two homes do not read as one building
+ * recoloured twice. They are plainly architectural studies, not photographs,
+ * and the site labels them as such until the real shoots land.
  *
- * Everything is drawn strictly in the marketing palette (ink, bg, muted,
- * accent, primary) so it reads as deliberate art direction rather than stock
- * filler, and the five-colour rule in the brief holds before the photos arrive.
+ * Everything is drawn in the burgundy / blush palette of the redesign so it
+ * reads as deliberate art direction rather than stock filler.
  *
  * REPLACING THESE
  * ---------------
@@ -41,18 +41,18 @@ const PUBLIC = join(ROOT, 'public', 'images');
 /* Palette                                                             */
 /* ------------------------------------------------------------------ */
 
-const INK = '#1C1A17';
-const BG = '#F5F1EA';
-const MUTED = '#8C8577';
-const ACCENT = '#66714F';
-const PRIMARY = '#9C4F32';
-const WHITE = '#FFFFFF';
+// Mirrors src/lib/tokens.ts (ink, bg, accent, primary, bg-raised).
+const INK = '#1A0A0F';
+const BG = '#F6E6EA';
+const ACCENT = '#C98FA0';
+const PRIMARY = '#8E4257';
+const WHITE = '#FFFBFC';
 
 /**
  * Face shading ramp, sunlit to shadow. The steps are spread wide on purpose —
  * a narrow ramp turned the whole building into one flat grey mass.
  */
-const SHADES = [WHITE, '#E4E4E4', '#C3C3C3', '#A3A3A3'];
+const SHADES = [WHITE, '#EFDCE1', '#DCC3CA', '#C4A7B0'];
 
 /* ------------------------------------------------------------------ */
 /* Maths                                                               */
@@ -245,44 +245,8 @@ const SCENES = {
     ],
   },
 
-  /** Hammamet: cubic villa, cantilevered upper floor, twelve-metre pool. */
-  villa: {
-    horizonFill: BG,
-    volumes: [
-      () => volume([0, 0, 0, 5.0, 2.7, 3.6], {
-        front: [[0.08, 0.06, 0.46, 0.86], [0.54, 0.06, 0.92, 0.86]],
-        right: [[0.18, 0.1, 0.8, 0.82]],
-      }),
-      () => volume([-0.6, 2.7, 0.7, 3.8, 2.4, 3.2], {
-        front: [[0.1, 0.14, 0.52, 0.78], [0.6, 0.14, 0.9, 0.78]],
-        left: [[0.24, 0.16, 0.74, 0.74]],
-      }),
-      // Blade wall / chimney, the vertical that stops it reading as two slabs.
-      () => volume([2.6, 0, -0.5, 0.5, 5.9, 1.6]),
-      // Deep roof overhang.
-      () => volume([-0.6, 5.1, 0.9, 4.4, 0.22, 3.9]),
-      () => volume([0, 2.7, -0.2, 5.4, 0.2, 3.9]),
-      // Pergola over the outdoor table.
-      () => volume([-4.2, 1.9, 2.2, 3.0, 0.18, 2.6]),
-      () => volume([-5.5, 0, 1.1, 0.18, 2.0, 0.18]),
-      () => volume([-2.9, 0, 1.1, 0.18, 2.0, 0.18]),
-      () => volume([-5.5, 0, 3.3, 0.18, 2.0, 0.18]),
-      () => volume([-2.9, 0, 3.3, 0.18, 2.0, 0.18]),
-    ],
-    plot: ground(-10.5, -7.0, 9.5, 8.5, 0.0),
-    terrace: ground(-6.4, -0.4, 4.6, 6.6),
-    pool: ground(-3.6, 2.9, 2.8, 5.4, 0.04),
-    door: { at: [0.25, 0, 1.82], height: 2.1, width: 0.95 },
-    props: [[-4.9, 0, 4.6, 1.9, 0.4, 0.75], [-4.9, 0.4, 4.3, 1.9, 0.5, 0.12]],
-    trees: [
-      { kind: 'palm', at: [-6.6, 0, 0.2], h: 5.6 },
-      { kind: 'palm', at: [5.4, 0, 1.4], h: 6.2 },
-      { kind: 'palm', at: [4.2, 0, -3.0], h: 4.8 },
-      { kind: 'palm', at: [-5.2, 0, -2.4], h: 4.4 },
-    ],
-  },
 
-  /** Sidi Bou Said: village base with a set-back loft and a big terrace. */
+  /** Ezzahra: top-floor loft set back over the floor below, terrace on the gulf. */
   loft: {
     horizonFill: ACCENT,
     volumes: [
@@ -315,41 +279,6 @@ const SCENES = {
     ],
   },
 
-  /** Tabarka: stone base, timber upper floor, deep pine cover. */
-  cabin: {
-    horizonFill: BG,
-    volumes: [
-      () => volume([0, 0, 0, 4.6, 2.2, 3.6], {
-        front: [[0.12, 0.18, 0.36, 0.68], [0.62, 0.18, 0.86, 0.68]],
-      }),
-      () => volume([0, 2.2, 0.2, 4.0, 2.0, 3.0], {
-        front: [[0.16, 0.16, 0.44, 0.74], [0.56, 0.16, 0.84, 0.74]],
-        right: [[0.26, 0.18, 0.7, 0.7]],
-      }),
-      // Stepped roof, standing in for the pitch.
-      () => volume([0, 4.2, 0.2, 3.2, 0.5, 2.4]),
-      () => volume([0, 4.7, 0.2, 2.0, 0.5, 1.6]),
-      // Chimney for the wood-burning stove.
-      () => volume([1.5, 4.2, -0.7, 0.55, 1.9, 0.55]),
-      // Veranda posts and roof.
-      () => volume([0, 2.15, 2.6, 4.8, 0.16, 1.6]),
-      () => volume([-2.1, 0, 3.2, 0.2, 2.15, 0.2]),
-      () => volume([2.1, 0, 3.2, 0.2, 2.15, 0.2]),
-    ],
-    plot: ground(-9.5, -6.5, 9.5, 7.0, 0.0),
-    terrace: ground(-3.4, 1.5, 3.4, 4.4),
-    pool: null,
-    door: { at: [0, 0, 1.82], height: 1.9, width: 0.9 },
-    props: [[0.2, 0, -2.9, 1.8, 0.42, 0.5], [0.2, 0.42, -3.12, 1.8, 0.55, 0.12]],
-    trees: [
-      { kind: 'pine', at: [-5.4, 0, -1.2], h: 6.4 },
-      { kind: 'pine', at: [5.6, 0, -0.8], h: 7.2 },
-      { kind: 'pine', at: [6.8, 0, -3.6], h: 5.6 },
-      { kind: 'pine', at: [-6.8, 0, -3.4], h: 6.0 },
-      { kind: 'pine', at: [-7.2, 0, 1.8], h: 5.0 },
-      { kind: 'pine', at: [7.4, 0, 2.2], h: 5.8 },
-    ],
-  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -564,7 +493,7 @@ function renderScene({ scene, width, height, azimuthDeg, pitchDeg, fit, distance
 
   items.sort((a, b) => b.depth - a.depth);
 
-  // Sidi Bou Said looks over the gulf, so its backdrop is the sea rather than sky.
+  // Ezzahra looks over the gulf, so its backdrop is the sea rather than sky.
   const seaView = seaViewScene(scene);
 
   // At these pitches the camera looks down on the house, so the ground's
@@ -609,10 +538,8 @@ const write = (relPath, contents) => {
 };
 
 const LISTINGS = [
-  { slug: 'dar-djerba-blue', scene: 'courtyard', azimuth: 34, pitch: 22 },
-  { slug: 'villa-hammamet-horizon', scene: 'villa', azimuth: 48, pitch: 24 },
-  { slug: 'sidi-bou-said-terrace-loft', scene: 'loft', azimuth: 316, pitch: 20 },
-  { slug: 'tabarka-pine-retreat', scene: 'cabin', azimuth: 208, pitch: 21 },
+  { slug: 'djerba-villa', scene: 'courtyard', azimuth: 34, pitch: 22 },
+  { slug: 'ezzahra-apartment-loft', scene: 'loft', azimuth: 316, pitch: 20 },
 ];
 
 let count = 0;
@@ -685,15 +612,13 @@ for (const { slug, scene: sceneKey, azimuth, pitch } of LISTINGS) {
   });
 }
 
-/* Host avatar. */
+/* Host avatar — a plain placeholder silhouette, cropped to a circle on the site. */
 write(
   'hosts/maissa.svg',
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Portrait placeholder for Maissa">
   <rect width="400" height="400" fill="${ACCENT}"/>
-  <circle cx="200" cy="158" r="66" fill="${WHITE}" stroke="${INK}" stroke-width="9"/>
-  <path d="M 62 400 C 62 292 128 240 200 240 C 272 240 338 292 338 400 Z" fill="${WHITE}" stroke="${INK}" stroke-width="9" stroke-linejoin="round"/>
-  <rect x="0" y="0" width="400" height="400" fill="none" stroke="${INK}" stroke-width="16"/>
-  <rect x="300" y="300" width="72" height="72" fill="${PRIMARY}" stroke="${INK}" stroke-width="9"/>
+  <circle cx="200" cy="164" r="62" fill="${WHITE}" stroke="${INK}" stroke-width="5"/>
+  <path d="M 72 400 C 72 300 132 252 200 252 C 268 252 328 300 328 400 Z" fill="${WHITE}" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
 </svg>
 `,
 );

@@ -2,49 +2,28 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
+/** The dashboard's white surface: hairline border, 20px radius. */
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('border-2 border-ink bg-bg-raised', className)} {...props} />
-  ),
-);
-Card.displayName = 'Card';
-
-const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex flex-col gap-1 p-5', className)} {...props} />
-  ),
-);
-CardHeader.displayName = 'CardHeader';
-
-const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
-    <h3
+    <div
       ref={ref}
-      className={cn('text-sm font-bold uppercase tracking-[0.12em]', className)}
+      className={cn('min-w-0 rounded-[20px] border border-ink/[.08] bg-bg-card', className)}
       {...props}
     />
   ),
 );
-CardTitle.displayName = 'CardTitle';
+Card.displayName = 'Card';
 
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-sm text-muted-fg', className)} {...props} />
-));
-CardDescription.displayName = 'CardDescription';
-
-const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => <div ref={ref} className={cn('p-5 pt-0', className)} {...props} />,
-);
-CardContent.displayName = 'CardContent';
-
-const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+/** Small uppercase section label used across the console. */
+const CardLabel = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex items-center p-5 pt-0', className)} {...props} />
+    <h2
+      ref={ref}
+      className={cn('m-0 text-[10.5px] font-normal uppercase tracking-[0.2em] text-muted-soft', className)}
+      {...props}
+    />
   ),
 );
-CardFooter.displayName = 'CardFooter';
+CardLabel.displayName = 'CardLabel';
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+export { Card, CardLabel };

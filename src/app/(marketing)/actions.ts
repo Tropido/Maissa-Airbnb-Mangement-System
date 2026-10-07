@@ -32,7 +32,19 @@ export async function submitEnquiry(
   }
 
   if (Object.keys(fieldErrors).length > 0) {
-    return { status: 'error', message: 'Check the highlighted fields.', fieldErrors };
+    return {
+      status: 'error',
+      message: 'Check the highlighted fields.',
+      fieldErrors,
+      values: {
+        name,
+        email,
+        message,
+        listing: listingSlug,
+        guests: String(formData.get('guests') ?? ''),
+        arriving,
+      },
+    };
   }
 
   const db = await createServerSupabase();

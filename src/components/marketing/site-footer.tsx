@@ -1,63 +1,66 @@
 import Link from 'next/link';
 
+import { numberWord, placeName } from '@/lib/utils';
 import type { Listing } from '@/lib/data/types';
 
 export function SiteFooter({ listings }: { listings: Listing[] }) {
   const year = new Date().getFullYear();
+  const places = listings.map((l) => placeName(l.title));
+  const summary = listings.length
+    ? `${numberWord(listings.length)} design-forward ${listings.length === 1 ? 'home' : 'homes'} — ${places.join(' and ')}.`
+    : 'Design-forward homes in Tunisia.';
 
   return (
-    <footer className="border-t border-muted/40 bg-ink text-ink-foreground">
-      <div className="shell grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:py-20">
+    <footer className="theme-dark bg-ink text-ink-foreground">
+      <div className="mx-auto grid max-w-site grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-[clamp(30px,4vw,56px)] px-gutter py-[clamp(50px,6vw,88px)]">
         <div>
-          <p className="font-display text-3xl font-normal leading-none">Maissa</p>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-bg/60">
-            Four design-forward homes across Djerba, Hammamet, Sidi Bou Said and Tabarka. Booked on
-            Airbnb, managed by one team on the ground.
+          <p className="m-0 text-[26px] tracking-[-0.04em] text-ink-foreground">Maissa</p>
+          <p className="mb-0 mt-4 max-w-[30ch] text-[13px] leading-[1.7] text-ink-foreground/60">
+            {summary} Booked on Airbnb, managed by one team on the ground.
           </p>
         </div>
-
         <nav aria-label="Homes">
-          <h2 className="text-xs uppercase tracking-[0.16em] text-bg/50">The homes</h2>
-          <ul className="mt-5 space-y-3">
+          <p className="m-0 text-[11px] uppercase tracking-[0.18em] text-ink-foreground/55">The homes</p>
+          <ul className="mb-0 mt-[18px] flex list-none flex-col gap-[11px] p-0">
             {listings.map((listing) => (
               <li key={listing.id}>
-                <Link
-                  href={`/listings/${listing.slug}`}
-                  className="text-sm transition-colors hover:text-primary-hover"
-                >
+                <Link href={`/listings/${listing.slug}`} className="text-[13.5px] text-ink-foreground/85 hover:text-accent">
                   {listing.title}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/listings" className="text-[13.5px] text-ink-foreground/85 hover:text-accent">
+                All homes
+              </Link>
+            </li>
           </ul>
         </nav>
-
         <nav aria-label="Elsewhere">
-          <h2 className="text-xs uppercase tracking-[0.16em] text-bg/50">Elsewhere</h2>
-          <ul className="mt-5 space-y-3 text-sm">
+          <p className="m-0 text-[11px] uppercase tracking-[0.18em] text-ink-foreground/55">Elsewhere</p>
+          <ul className="mb-0 mt-[18px] flex list-none flex-col gap-[11px] p-0">
             <li>
-              <Link href="/#contact" className="transition-colors hover:text-primary-hover">
+              <a href="#contact" data-scroll-link className="text-[13.5px] text-ink-foreground/85 hover:text-accent">
                 Enquire about a stay
-              </Link>
+              </a>
             </li>
             <li>
-              <Link href="/#host" className="transition-colors hover:text-primary-hover">
+              <a href="#host" data-scroll-link className="text-[13.5px] text-ink-foreground/85 hover:text-accent">
                 About the host
-              </Link>
+              </a>
             </li>
             <li>
-              <Link href="/dashboard" className="transition-colors hover:text-primary-hover">
+              <Link href="/dashboard" className="text-[13.5px] text-ink-foreground/85 hover:text-accent">
                 Operator dashboard
               </Link>
             </li>
           </ul>
         </nav>
       </div>
-
-      <div className="border-t border-bg/10">
-        <div className="shell flex flex-col gap-2 py-6 text-xs text-bg/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {year} Maissa. All rights reserved.</p>
-          <p>Bookings are completed on Airbnb. Enquiries answered within an hour.</p>
+      <div className="border-t border-ink-foreground/[.14]">
+        <div className="mx-auto flex max-w-site flex-wrap justify-between gap-3 px-gutter py-[22px] text-[11.5px] text-ink-foreground/55">
+          <p className="m-0">&copy; {year} Maissa. All rights reserved.</p>
+          <p className="m-0">Bookings are completed on Airbnb. Enquiries answered within an hour.</p>
         </div>
       </div>
     </footer>

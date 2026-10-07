@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { TopNav } from '@/components/dashboard/top-nav';
+import { IntroCurtain } from '@/components/motion/intro-curtain';
 import { unreadCount } from '@/lib/data/inbox';
 import { getHost } from '@/lib/data/queries';
 
@@ -10,24 +11,29 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Days remaining on the workspace trial, shown in the nav pill. */
-const TRIAL_DAYS_LEFT = 12;
-
+/**
+ * Operator shell. Native scrolling throughout (the calendar needs it). Page
+ * motion lives in template.tsx so it hydrates with each page; the branded
+ * entrance only plays if the dashboard is where this browser session started.
+ */
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const host = await getHost();
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg">
-      <a
-        href="#dashboard-main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:border-2 focus:border-ink focus:bg-primary focus:px-4 focus:py-2 focus:font-bold focus:text-primary-foreground"
-      >
-        Skip to content
-      </a>
-      <TopNav host={host} unreadCount={unreadCount()} trialDaysLeft={TRIAL_DAYS_LEFT} />
-      <main id="dashboard-main" className="flex-1">
-        {children}
-      </main>
-    </div>
+    <>
+      <IntroCurtain mark="Maissa" note="Operator console" />
+      <div className="flex min-h-screen flex-col bg-bg">
+        <a
+          href="#dashboard-main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-ink-foreground"
+        >
+          Skip to content
+        </a>
+        <TopNav host={host} unreadCount={unreadCount()} />
+        <main id="dashboard-main" className="flex-1">
+          {children}
+        </main>
+      </div>
+    </>
   );
 }

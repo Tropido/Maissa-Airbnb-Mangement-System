@@ -1,25 +1,64 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
+import { ListingImage, StudyNote } from '@/components/marketing/listing-image';
 import { cn } from '@/lib/utils';
 
+function Tile({
+  src,
+  index,
+  title,
+  total,
+  onOpen,
+  className,
+  sizes,
+  priority = false,
+}: {
+  src: string;
+  index: number;
+  title: string;
+  total: number;
+  onOpen: (index: number) => void;
+  className?: string;
+  sizes: string;
+  priority?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(index)}
+      aria-label={`Open ${title}, image ${index + 1} of ${total}`}
+      className={cn('group relative block min-w-0 overflow-hidden bg-bg-deep', className)}
+    >
+      <ListingImage
+        src={src}
+        alt=""
+        sizes={sizes}
+        priority={priority}
+        className="transition-transform duration-700 ease-quiet group-hover:scale-[1.03]"
+      />
+    </button>
+  );
+}
+
 /**
- * Listing gallery: a hero frame plus a thumbnail rail, with a full-screen
- * lightbox. Arrow keys page through the lightbox; Escape closes it (Radix).
+ * Detail gallery in the reference arrangement — a large 16:10 frame, two
+ * stacked images beside it and a row of 3:2 thumbnails — with the existing
+ * full-screen lightbox behind every tile: arrow keys and on-screen arrows page
+ * through, a horizontal swipe does the same on touch, Escape closes and focus
+ * returns to the tile (Radix Dialog).
  */
 export function ListingGallery({ images, title }: { images: string[]; title: string }) {
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
+  const swipe = useRef<number | null>(null);
+  const opener = useRef<HTMLElement | null>(null);
 
   const total = images.length;
-  const go = useCallback(
-    (delta: number) => setIndex((i) => (((i + delta) % total) + total) % total),
-    [total],
-  );
+  const go = useCallback((delta: number) => setIndex((i) => (((i + delta) % total) + total) % total), [total]);
 
   useEffect(() => {
     if (!open) return;
@@ -33,83 +72,121 @@ export function ListingGallery({ images, title }: { images: string[]; title: str
 
   if (!total) return null;
 
+  const openAt = (i: number) => {
+    // Tiles are not Radix triggers, so remember which one to hand focus back to.
+    opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setIndex(i);
+    setOpen(true);
+  };
+
+  const [hero, ...rest] = images;
+  const stacked = rest.slice(0, 2);
+  const thumbs = rest.slice(2, 6);
+
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <div className="grid gap-3 lg:grid-cols-[1.9fr_1fr]">
-        <Dialog.Trigger asChild>
-          <button
-            type="button"
-            className="group relative aspect-[4/3] w-full overflow-hidden bg-bg-sunken focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 lg:aspect-auto lg:h-[32rem]"
-            aria-label={`Open gallery for ${title}, image ${index + 1} of ${total}`}
-          >
-            <Image
-              src={images[index]}
-              alt={`${title}, view ${index + 1}`}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 62vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
-            <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-bg/90 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-ink">
-              <Expand className="size-3" aria-hidden />
-              {index + 1} / {total}
-            </span>
-          </button>
-        </Dialog.Trigger>
-
-        <ul className="no-scrollbar grid grid-cols-3 gap-3 lg:max-h-[32rem] lg:grid-cols-2 lg:content-start lg:overflow-y-auto">
-          {images.map((src, i) => (
-            <li key={src}>
-              <button
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Show view ${i + 1}`}
-                aria-current={i === index}
-                className={cn(
-                  'relative aspect-[4/3] w-full overflow-hidden transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2',
-                  i === index ? 'opacity-100 ring-2 ring-primary' : 'opacity-70 hover:opacity-100',
-                )}
-              >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 1024px) 30vw, 18vw"
-                  className="object-cover"
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
+      <div
+        data-reveal
+        className="mt-[clamp(24px,3vw,40px)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-3"
+      >
+        <div className={cn('relative min-w-0', stacked.length ? 'min-[560px]:col-span-2' : 'col-span-full')}>
+          <Tile
+            src={hero}
+            index={0}
+            title={title}
+            total={total}
+            onOpen={openAt}
+            priority
+            sizes="(max-width: 900px) 100vw, 66vw"
+            className="aspect-[16/10] w-full rounded-[22px]"
+          />
+          <StudyNote src={hero} className="bottom-4 left-4" />
+        </div>
+        {stacked.length ? (
+          <div className="grid min-w-0 grid-rows-2 gap-3">
+            {stacked.map((src, i) => (
+              <Tile
+                key={src}
+                src={src}
+                index={i + 1}
+                title={title}
+                total={total}
+                onOpen={openAt}
+                sizes="(max-width: 900px) 100vw, 33vw"
+                className="h-full min-h-[120px] w-full rounded-[22px]"
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
+      {thumbs.length ? (
+        <div
+          data-reveal
+          className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-3"
+        >
+          {thumbs.map((src, i) => (
+            <Tile
+              key={src}
+              src={src}
+              index={i + 3}
+              title={title}
+              total={total}
+              onOpen={openAt}
+              sizes="(max-width: 700px) 50vw, 25vw"
+              className="aspect-[3/2] w-full rounded-2xl"
+            />
+          ))}
+        </div>
+      ) : null}
 
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/90 data-[state=open]:animate-in data-[state=open]:fade-in-0" />
-        <Dialog.Content className="fixed inset-0 z-50 flex flex-col p-4 focus:outline-none sm:p-8">
+        <Dialog.Overlay className="fixed inset-0 z-[150] bg-ink/[.92] backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <Dialog.Content
+          onCloseAutoFocus={(event) => {
+            if (!opener.current) return;
+            event.preventDefault();
+            opener.current.focus();
+          }}
+          className="theme-dark fixed inset-0 z-[151] flex flex-col p-4 duration-300 data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 sm:p-8">
           <Dialog.Title className="sr-only">{title} gallery</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Image {index + 1} of {total}. Use the left and right arrow keys to move between images.
+            Image {index + 1} of {total}. Use the arrow keys or swipe to move between images.
           </Dialog.Description>
 
-          <div className="flex items-center justify-between">
-            <p className="rounded-full bg-bg/90 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-ink">
+          <div className="flex items-center justify-between gap-4">
+            <p className="m-0 rounded-full bg-ink-foreground/10 px-3.5 py-2 text-[10.5px] uppercase tracking-[0.16em] text-ink-foreground/85">
               {title} — {index + 1} / {total}
             </p>
             <Dialog.Close
               aria-label="Close gallery"
-              className="flex size-11 items-center justify-center rounded-full bg-bg/90 text-ink transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bg"
+              className="flex size-11 items-center justify-center rounded-full bg-ink-foreground text-ink transition-opacity duration-300 hover:opacity-85"
             >
               <X className="size-5" aria-hidden />
             </Dialog.Close>
           </div>
 
-          <div className="relative mt-4 flex-1">
-            <Image
+          <div
+            className="relative mt-4 flex-1 touch-pan-y"
+            onPointerDown={(e) => {
+              swipe.current = e.clientX;
+            }}
+            onPointerUp={(e) => {
+              if (swipe.current === null) return;
+              const dx = e.clientX - swipe.current;
+              swipe.current = null;
+              if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+            }}
+            onPointerCancel={() => {
+              swipe.current = null;
+            }}
+          >
+            <ListingImage
+              key={images[index]}
               src={images[index]}
-              alt={`${title}, view ${index + 1}`}
-              fill
+              alt={`${title}, view ${index + 1} of ${total}`}
               sizes="100vw"
-              className="object-contain"
+              className="select-none object-contain"
+              draggable={false}
             />
           </div>
 
@@ -118,7 +195,7 @@ export function ListingGallery({ images, title }: { images: string[]; title: str
               type="button"
               onClick={() => go(-1)}
               aria-label="Previous image"
-              className="flex size-11 items-center justify-center rounded-full bg-bg/90 text-ink transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bg"
+              className="flex size-11 items-center justify-center rounded-full border border-ink-foreground/30 text-ink-foreground transition-colors duration-300 hover:bg-ink-foreground hover:text-ink"
             >
               <ChevronLeft className="size-5" aria-hidden />
             </button>
@@ -126,7 +203,7 @@ export function ListingGallery({ images, title }: { images: string[]; title: str
               type="button"
               onClick={() => go(1)}
               aria-label="Next image"
-              className="flex size-11 items-center justify-center rounded-full bg-bg/90 text-ink transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bg"
+              className="flex size-11 items-center justify-center rounded-full border border-ink-foreground/30 text-ink-foreground transition-colors duration-300 hover:bg-ink-foreground hover:text-ink"
             >
               <ChevronRight className="size-5" aria-hidden />
             </button>

@@ -1,109 +1,82 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  BarChart3,
-  CalendarDays,
-  CheckSquare,
-  Home,
-  Mail,
-  Menu,
-  MessageSquare,
-  Radio,
-  Search,
-} from 'lucide-react';
+import { Mail } from 'lucide-react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useHideOnScroll } from '@/components/motion/use-hide-on-scroll';
 import { cn, initials } from '@/lib/utils';
 import type { Host } from '@/lib/data/types';
 
 const NAV = [
-  { href: '/dashboard/calendar', label: 'Calendar', icon: CalendarDays },
-  { href: '/dashboard/channels', label: 'Channels', icon: Radio },
-  { href: '/dashboard/messaging', label: 'Messaging', icon: MessageSquare },
-  { href: '/dashboard/analytics', label: 'Analytics', icon: BarChart3 },
-  { href: '/dashboard/tasks', label: 'Tasks', icon: CheckSquare },
+  { href: '/dashboard', label: 'Overview', planned: false },
+  { href: '/dashboard/calendar', label: 'Calendar', planned: false },
+  { href: '/dashboard/messaging', label: 'Messaging', planned: false },
+  { href: '/dashboard/channels', label: 'Channels', planned: true },
+  { href: '/dashboard/analytics', label: 'Analytics', planned: true },
+  { href: '/dashboard/tasks', label: 'Tasks', planned: true },
 ];
 
-export function TopNav({
-  host,
-  unreadCount,
-  trialDaysLeft,
-}: {
-  host: Host;
-  unreadCount: number;
-  trialDaysLeft: number;
-}) {
+/**
+ * Operator navigation from the dashboard references: monogram, pill links,
+ * search, inbox and avatar. Sections that are scoped out of this build stay
+ * reachable (each explains what is planned) but read as planned — a hollow
+ * marker and a spoken "planned" — rather than as working features.
+ *
+ * On narrow screens the links move to their own scrollable row instead of
+ * hiding behind a menu, so every section stays one tap away.
+ */
+export function TopNav({ host, unreadCount }: { host: Host; unreadCount: number }) {
   const pathname = usePathname();
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const bar = useRef<HTMLElement>(null);
+  useHideOnScroll(bar);
+  const isActive = (href: string) =>
+    href === '/dashboard' ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-ink bg-bg-raised">
-      <div className="mx-auto flex h-16 max-w-shell items-center gap-3 px-4 sm:px-6">
-        <Link
-          href="/dashboard"
-          aria-label="Dashboard home"
-          aria-current={pathname === '/dashboard' ? 'page' : undefined}
-          className={cn(
-            'flex size-10 shrink-0 items-center justify-center border-2 border-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2',
-            pathname === '/dashboard' ? 'bg-ink text-ink-foreground' : 'bg-bg hover:bg-accent',
-          )}
-        >
-          <Home className="size-4" aria-hidden />
+    <header
+      ref={bar}
+      className="sticky top-0 z-30 border-b border-ink/[.08] bg-bg/[.86] backdrop-blur-[16px]"
+    >
+      <div className="mx-auto flex max-w-console flex-wrap items-center gap-x-3.5 gap-y-2 px-gutter-console py-3">
+        <Link href="/dashboard" className="flex items-center gap-2.5 text-base font-medium tracking-[-0.03em] text-ink hover:text-ink">
+          <span aria-hidden className="flex size-8 items-center justify-center rounded-full bg-ink text-[13px] text-ink-foreground">
+            M
+          </span>
+          <span>Maissa</span>
         </Link>
 
-        <Link
-          href="/dashboard/messaging"
-          aria-label={`Inbox, ${unreadCount} unread`}
-          className="relative flex size-10 shrink-0 items-center justify-center border-2 border-ink bg-bg transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+        <nav
+          aria-label="Dashboard"
+          className="no-scrollbar relative order-last -mx-1 flex w-full items-center gap-0.5 overflow-x-auto px-1 lg:order-none lg:ml-3 lg:w-auto"
         >
-          <Mail className="size-4" aria-hidden />
-          {unreadCount > 0 ? (
-            <span className="absolute -right-2 -top-2 flex min-w-5 items-center justify-center border-2 border-ink bg-danger px-1 text-[10px] font-bold leading-4 text-danger-foreground">
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </span>
-          ) : null}
-        </Link>
-
-        <nav aria-label="Dashboard" className="hidden items-center gap-1 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              className={cn(
-                'relative px-3 py-2 text-sm font-semibold tracking-tight transition-colors',
-                isActive(item.href) ? 'text-ink' : 'text-muted-fg hover:text-ink',
-              )}
-            >
-              {item.label}
-              {isActive(item.href) ? (
-                <span aria-hidden className="absolute inset-x-2 -bottom-[9px] h-1 bg-accent" />
-              ) : null}
-            </Link>
-          ))}
-          <button
-            type="button"
-            className="px-3 py-2 text-sm font-semibold tracking-tight text-muted-fg transition-colors hover:text-ink"
-          >
-            More
-          </button>
+          {NAV.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? 'page' : undefined}
+                className={cn(
+                  'flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-[15px] py-2 text-[13.5px] transition-colors duration-300',
+                  active ? 'bg-ink/[.07] text-ink' : 'text-muted-soft hover:bg-ink/5 hover:text-ink',
+                )}
+              >
+                {item.label}
+                {item.planned ? (
+                  <>
+                    <span aria-hidden className="block size-[5px] rounded-full border border-current opacity-70" />
+                    <span className="sr-only"> (planned)</span>
+                  </>
+                ) : null}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3">
-          <Badge variant="warning" className="hidden sm:inline-flex">
-            Trial · {trialDaysLeft} days left
-          </Badge>
-
-          <div className="relative hidden md:block">
-            <Search
-              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-fg"
-              aria-hidden
-            />
+        <div className="ml-auto flex items-center gap-2.5">
+          <div className="hidden md:block">
             <label htmlFor="dashboard-search" className="sr-only">
               Search bookings, guests and listings
             </label>
@@ -111,56 +84,31 @@ export function TopNav({
               id="dashboard-search"
               type="search"
               placeholder="Search"
-              className="h-10 w-44 border-2 border-ink bg-bg pl-9 pr-3 text-sm placeholder:text-muted-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 xl:w-64"
+              className="h-[38px] w-[clamp(110px,16vw,220px)] rounded-full border border-ink/[.12] bg-bg-card px-[15px] text-[13px] text-ink placeholder:text-muted-soft"
             />
           </div>
-
-          <Avatar className="size-10">
-            {host.avatar_url ? <AvatarImage src={host.avatar_url} alt="" /> : null}
-            <AvatarFallback>{initials(host.display_name)}</AvatarFallback>
-          </Avatar>
+          <Link
+            href="/dashboard/messaging"
+            aria-label={`Inbox, ${unreadCount} unread`}
+            className="relative flex size-[38px] items-center justify-center rounded-full border border-ink/[.12] bg-bg-card text-ink hover:text-ink"
+          >
+            <Mail className="size-4" aria-hidden />
+            {unreadCount > 0 ? (
+              <span
+                aria-hidden
+                className="absolute -right-[3px] -top-[3px] flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-danger px-1 text-[10px] text-danger-foreground"
+              >
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </span>
+            ) : null}
+          </Link>
+          <span
+            aria-hidden
+            className="flex size-[38px] shrink-0 items-center justify-center rounded-full bg-ink text-[13px] tracking-[0.02em] text-ink-foreground"
+          >
+            {initials(host.display_name).slice(0, 1)}
+          </span>
           <span className="sr-only">Signed in as {host.display_name}</span>
-
-          <Sheet>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="outline" size="icon" aria-label="Open dashboard menu">
-                <Menu className="size-5" aria-hidden />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetTitle className="font-display text-2xl font-extrabold uppercase tracking-[-0.03em]">
-                Dashboard
-              </SheetTitle>
-              <nav aria-label="Dashboard mobile" className="mt-8 flex flex-col">
-                <SheetClose asChild>
-                  <Link
-                    href="/dashboard"
-                    className="flex items-center gap-3 border-b-2 border-ink py-4 text-lg font-bold"
-                  >
-                    <Home className="size-5" aria-hidden />
-                    Overview
-                  </Link>
-                </SheetClose>
-                {NAV.map((item) => (
-                  <SheetClose asChild key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-3 border-b-2 border-ink py-4 text-lg font-bold"
-                    >
-                      <item.icon className="size-5" aria-hidden />
-                      {item.label}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </nav>
-              <div className="mt-auto pt-8">
-                <Badge variant="warning">Trial · {trialDaysLeft} days left</Badge>
-                <Button asChild variant="outline" size="lg" className="mt-4 w-full">
-                  <Link href="/">Back to the site</Link>
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>

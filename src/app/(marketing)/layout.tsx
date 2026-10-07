@@ -1,28 +1,18 @@
-import { SiteFooter } from '@/components/marketing/site-footer';
-import { SiteHeader } from '@/components/marketing/site-header';
-import { MotionProvider } from '@/components/motion/motion-provider';
-import { SmoothScroll } from '@/components/motion/smooth-scroll';
-import { getPublicListings } from '@/lib/data/queries';
-
-export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
-  const listings = await getPublicListings();
-
+/**
+ * Marketing shell. Each page composes its own header (the home hero carries
+ * its navigation inside the hero card; listings and detail use the sticky
+ * blush bar), so the shell only provides the skip link.
+ */
+export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <MotionProvider>
-      <SmoothScroll />
+    <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-ink-foreground"
       >
         Skip to content
       </a>
-      <div className="flex min-h-screen flex-col overflow-x-clip">
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter listings={listings} />
-      </div>
-    </MotionProvider>
+      <div className="min-h-screen overflow-x-clip">{children}</div>
+    </>
   );
 }

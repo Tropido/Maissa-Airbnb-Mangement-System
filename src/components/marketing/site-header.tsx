@@ -1,115 +1,129 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowRight, Menu } from 'lucide-react';
+import { ArrowLeft, Menu } from 'lucide-react';
 
-import { LiveClock } from '@/components/marketing/live-clock';
-import { Button } from '@/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 const NAV = [
+  { href: '/', label: 'Home' },
   { href: '/listings', label: 'The homes' },
   { href: '/#host', label: 'The host' },
-  { href: '/#map', label: 'Where' },
-  { href: '/#contact', label: 'Enquire' },
 ];
 
-export function SiteHeader() {
+/**
+ * Sticky blush header for the inner marketing pages.
+ *
+ *   listings  brand · pill nav · Enquire (menu sheet on phones)
+ *   detail    brand · "← Both homes"
+ *
+ * It retreats on scroll-down and returns on scroll-up (PageMotion's
+ * Observer), and comes back whenever it receives keyboard focus.
+ */
+export function SiteHeader({
+  variant = 'listings',
+  backLabel = 'All homes',
+}: {
+  variant?: 'listings' | 'detail';
+  backLabel?: string;
+}) {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => setOpen(false), [pathname]);
-
-  const isActive = (href: string) =>
-    href.startsWith('/#') ? false : pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : !href.includes('#') && pathname.startsWith(href));
 
   return (
     <header
-      className={cn(
-        'sticky top-0 z-40 w-full transition-[background-color,border-color] duration-300',
-        scrolled ? 'border-b border-muted/40 bg-bg/95 backdrop-blur' : 'border-b border-transparent',
-      )}
+      data-hide-on-scroll
+      className="sticky top-0 z-20 border-b border-ink/10 bg-bg/[.86] backdrop-blur-[14px]"
     >
-      <div className="shell flex h-20 items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            className="font-display text-xl font-normal tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-bg"
-          >
-            Maissa
+      <div
+        className={cn(
+          'mx-auto flex max-w-site items-center justify-between gap-5 px-gutter',
+          variant === 'detail' ? 'py-[15px]' : 'py-4',
+        )}
+      >
+        <Link href="/" className="text-[19px] font-medium tracking-[-0.035em] text-ink">
+          Maissa
+        </Link>
+
+        {variant === 'detail' ? (
+          <Link href="/listings" className="inline-flex items-center gap-1.5 text-[13px] text-muted-fg">
+            <ArrowLeft className="size-3.5" aria-hidden />
+            {backLabel}
           </Link>
-          <LiveClock />
-        </div>
-
-        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'relative px-3 py-2 text-sm tracking-tight transition-colors hover:text-ink',
-                isActive(item.href) ? 'text-ink' : 'text-muted-fg',
-              )}
+        ) : (
+          <>
+            <nav
+              aria-label="Main"
+              className="hidden items-center gap-0.5 rounded-full border border-ink/[.08] bg-bg-raised p-1.5 min-[640px]:flex"
             >
-              {item.label}
-              {isActive(item.href) ? (
-                <span aria-hidden className="absolute inset-x-3 -bottom-0.5 h-px bg-primary" />
-              ) : null}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <Button asChild variant="link" size="sm" className="hidden sm:inline-flex">
-            <Link href="/#contact">
-              Check availability <ArrowRight className="size-3.5" aria-hidden />
-            </Link>
-          </Button>
-
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" aria-label="Open menu">
-                <Menu className="size-5" aria-hidden />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetTitle className="font-display text-2xl font-normal">Menu</SheetTitle>
-              <nav aria-label="Mobile" className="mt-10 flex flex-col">
-                {NAV.map((item) => (
-                  <SheetClose asChild key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="border-b border-muted/40 py-5 font-display text-2xl font-normal transition-colors hover:text-primary"
-                    >
-                      {item.label}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </nav>
-              <div className="mt-auto flex flex-col gap-3 pt-8">
-                <SheetClose asChild>
-                  <Button asChild size="lg">
-                    <Link href="/#contact">Check availability</Link>
-                  </Button>
-                </SheetClose>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/dashboard">Operator dashboard</Link>
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={cn(
+                    'rounded-full px-4 py-2 text-[13.5px] transition-colors duration-300',
+                    isActive(item.href) ? 'bg-ink/[.07] text-ink' : 'text-muted-soft hover:bg-ink/5 hover:text-ink',
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/#contact"
+                className="inline-flex h-[42px] items-center whitespace-nowrap rounded-full bg-ink px-[22px] text-[13px] text-ink-foreground transition-colors duration-300 hover:bg-ink-raised hover:text-ink-foreground"
+              >
+                Enquire
+              </Link>
+              <Sheet>
+                <SheetTrigger
+                  aria-label="Open menu"
+                  className="flex size-[42px] items-center justify-center rounded-full border border-ink/15 text-ink min-[640px]:hidden"
+                >
+                  <Menu className="size-4" aria-hidden />
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <SheetTitle className="text-[22px] font-normal tracking-[-0.03em]">Maissa</SheetTitle>
+                  <nav aria-label="Mobile" className="mt-8 flex flex-col">
+                    {NAV.map((item) => (
+                      <SheetClose asChild key={item.href}>
+                        <Link
+                          href={item.href}
+                          aria-current={isActive(item.href) ? 'page' : undefined}
+                          className="border-b border-ink/10 py-4 text-[22px] tracking-[-0.03em] text-ink hover:text-primary"
+                        >
+                          {item.label}
+                        </Link>
+                      </SheetClose>
+                    ))}
+                  </nav>
+                  <div className="mt-auto flex flex-col gap-2.5 pt-8">
+                    <SheetClose asChild>
+                      <Link
+                        href="/#contact"
+                        className="flex h-14 items-center justify-center rounded-2xl bg-ink text-[15px] text-ink-foreground hover:text-ink-foreground"
+                      >
+                        Enquire
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/login"
+                        className="flex h-12 items-center justify-center rounded-2xl border border-ink/20 text-[13.5px] text-ink"
+                      >
+                        Operator sign-in
+                      </Link>
+                    </SheetClose>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </>
+        )}
       </div>
     </header>
   );

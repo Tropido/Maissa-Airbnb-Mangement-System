@@ -1,33 +1,26 @@
-import { AlertTriangle, Ban, CheckCircle2, Clock, CreditCard, HelpCircle } from 'lucide-react';
-
-import { Badge } from '@/components/ui/badge';
+import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { BOOKING_STATUS_LABEL, type BookingStatus } from '@/lib/data/types';
 
 /**
- * Booking status chip.
- *
- * Every status ships an icon alongside its label, so state is never carried by
- * colour alone — a colour-blind operator and a greyscale print read the same
- * thing. Variants map to the AA-clearing foreground pairs in tailwind.config.
+ * Booking status chip, as on the dashboard and calendar references. Every
+ * status leads with its own glyph as well as its label, so state is never
+ * carried by colour alone.
  */
-const STATUS = {
-  confirmed: { variant: 'success', icon: CheckCircle2 },
-  awaiting_payment: { variant: 'danger', icon: CreditCard },
-  not_confirmed: { variant: 'warning', icon: HelpCircle },
-  early_check_in: { variant: 'accent', icon: Clock },
-  cancelled: { variant: 'outline', icon: AlertTriangle },
-  blocked: { variant: 'ink', icon: Ban },
-} as const satisfies Record<
-  BookingStatus,
-  { variant: React.ComponentProps<typeof Badge>['variant']; icon: typeof CheckCircle2 }
->;
+const STATUS: Record<BookingStatus, { variant: BadgeProps['variant']; glyph: string; label?: string }> = {
+  confirmed: { variant: 'confirmed', glyph: '✓' },
+  awaiting_payment: { variant: 'awaiting', glyph: '▲' },
+  not_confirmed: { variant: 'unconfirmed', glyph: '!' },
+  early_check_in: { variant: 'early', glyph: '→' },
+  cancelled: { variant: 'outline', glyph: '✕' },
+  blocked: { variant: 'blocked', glyph: '⊘', label: 'Owner block' },
+};
 
 export function StatusChip({ status, className }: { status: BookingStatus; className?: string }) {
-  const { variant, icon: Icon } = STATUS[status];
+  const { variant, glyph, label } = STATUS[status];
   return (
     <Badge variant={variant} className={className}>
-      <Icon aria-hidden />
-      {BOOKING_STATUS_LABEL[status]}
+      <span aria-hidden>{glyph}</span>
+      {label ?? BOOKING_STATUS_LABEL[status]}
     </Badge>
   );
 }

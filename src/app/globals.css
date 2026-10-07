@@ -4,11 +4,8 @@
 
 @layer base {
   :root {
-    --shell-gutter: clamp(1rem, 4vw, 3.5rem);
-  }
-
-  * {
-    @apply border-ink;
+    /* Focus ring colour; dark grounds switch it to the rose accent. */
+    --focus: theme('colors.primary.DEFAULT');
   }
 
   html {
@@ -16,31 +13,32 @@
   }
 
   body {
-    @apply bg-bg text-ink font-sans antialiased;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+    @apply bg-bg font-sans text-ink antialiased;
+    font-synthesis-weight: none;
   }
 
-  /* Lenis is mounted on the marketing shell only. */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
+  a {
+    text-decoration: none;
   }
 
   ::selection {
-    @apply bg-primary text-primary-foreground;
+    @apply bg-ink text-ink-foreground;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-ink ring-offset-2 ring-offset-bg;
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
   }
 
-  /* Respect reduced-motion for every decorative animation in the product. */
+  summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Respect reduced motion for every CSS animation and transition. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -54,43 +52,78 @@
 }
 
 @layer components {
-  .shell {
-    width: 100%;
-    max-width: theme('maxWidth.shell');
-    margin-inline: auto;
-    padding-inline: var(--shell-gutter);
+  .theme-dark {
+    --focus: theme('colors.accent.DEFAULT');
   }
 
-  /* Diagonal hatching for blocked / unavailable calendar cells (dashboard only). */
-  .hatch-blocked {
-    background-image: repeating-linear-gradient(
-      45deg,
-      theme('colors.muted.DEFAULT') 0,
-      theme('colors.muted.DEFAULT') 1px,
-      transparent 1px,
-      transparent 7px
-    );
+  /*
+   * The branded entrance. Rendered on the server so it covers the first paint,
+   * hidden outright when the intro gate (root layout) says it has played or
+   * motion is reduced, and hidden by a CSS fail-safe if the animation never
+   * gets to run — nobody can be stranded behind it.
+   */
+  [data-intro-curtain] {
+    animation: curtain-failsafe 0s linear 3.4s forwards;
+  }
+  html[data-intro='seen'] [data-intro-curtain] {
+    display: none;
   }
 
-  .hatch-dense {
+  /* Past nights on the calendar board. */
+  .hatch-past {
     background-image: repeating-linear-gradient(
       45deg,
-      theme('colors.ink.DEFAULT') 0,
-      theme('colors.ink.DEFAULT') 1px,
-      transparent 1px,
-      transparent 5px
-    );
-  }
-
-  /* Hatching for an ink-filled bar, where the dense ink hatch is invisible. */
-  .hatch-light {
-    background-image: repeating-linear-gradient(
-      45deg,
-      theme('colors.bg.DEFAULT') 0,
-      theme('colors.bg.DEFAULT') 1px,
+      rgb(26 10 15 / 0.14) 0,
+      rgb(26 10 15 / 0.14) 1px,
       transparent 1px,
       transparent 6px
     );
+  }
+
+  /* Owner blocks: ink bar with blush hatching — "nobody can book this". */
+  .hatch-block {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgb(246 230 234 / 0.9) 0,
+      rgb(246 230 234 / 0.9) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  }
+
+  .hatch-block-legend {
+    background: repeating-linear-gradient(
+      45deg,
+      theme('colors.ink.DEFAULT') 0,
+      theme('colors.ink.DEFAULT') 2px,
+      theme('colors.bg.DEFAULT') 2px,
+      theme('colors.bg.DEFAULT') 5px
+    );
+  }
+
+  .hatch-past-legend {
+    background: repeating-linear-gradient(
+      45deg,
+      rgb(26 10 15 / 0.22) 0,
+      rgb(26 10 15 / 0.22) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  }
+
+  .cal-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(26 10 15 / 0.18) transparent;
+  }
+  .cal-scroll::-webkit-scrollbar {
+    height: 10px;
+  }
+  .cal-scroll::-webkit-scrollbar-thumb {
+    background: rgb(26 10 15 / 0.18);
+    border-radius: 999px;
+  }
+  .cal-scroll::-webkit-scrollbar-track {
+    background: transparent;
   }
 
   .no-scrollbar {
@@ -99,5 +132,13 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@keyframes curtain-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 }

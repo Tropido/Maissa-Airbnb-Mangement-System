@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/styles.css">
+<script src="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#F6E6EA; }
+  body { font-family:'Archivo', system-ui, sans-serif; color:#1A0A0F; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#1A0A0F; text-decoration:none; }
+  a:hover { color:#8E4257; }
+  ::selection { background:#1A0A0F; color:#F6E6EA; }
+  :focus-visible { outline:2px solid #8E4257; outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div>
+
+<div data-loader="1" style="position:fixed;inset:0;z-index:200;background:#1A0A0F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+  <p data-loader-mark="1" style="margin:0;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.045em;color:#F6E6EA">Guest inbox</p>
+  <svg width="180" height="2" viewBox="0 0 180 2" aria-hidden="true" style="display:block;overflow:visible">
+    <line data-loader-line="1" x1="0" y1="1" x2="180" y2="1" stroke="#C98FA0" stroke-width="2"></line>
+  </svg>
+  <p data-loader-note="1" style="margin:0;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,230,234,.5)">5 unread</p>
+</div>
+
+<div style="min-height:100vh;background:#F6E6EA">
+
+  <header data-hide-on-scroll="1" style="position:sticky;top:0;z-index:30;background:rgba(246,230,234,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,10,15,.1)">
+    <div style="max-width:1400px;margin:0 auto;padding:12px clamp(16px,3vw,36px);display:flex;align-items:center;gap:14px">
+      <a href="Maissa Dashboard.dc.html" style="display:flex;align-items:center;gap:10px;font-size:16px;font-weight:500;letter-spacing:-.03em">
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#1A0A0F;color:#F6E6EA;font-size:13px">M</span>
+        <span>Maissa</span>
+      </a>
+      <nav aria-label="Dashboard" style="display:flex;align-items:center;gap:2px;margin-left:12px;overflow-x:auto">
+        <a href="Maissa Dashboard.dc.html" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#7A5A63" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">Overview</a>
+        <a href="Maissa Calendar.dc.html" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#7A5A63" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">Calendar</a>
+        <a href="Maissa Messaging.dc.html" aria-current="page" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;background:rgba(26,10,15,.08);color:#1A0A0F">Messaging</a>
+        <a href="Maissa Dashboard.dc.html#stubs" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#B9959F">Channels</a>
+        <a href="Maissa Dashboard.dc.html#stubs" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#B9959F">Analytics</a>
+      </nav>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:50%;background:#1A0A0F;color:#F6E6EA;font-size:13px;letter-spacing:.02em">M</span>
+      </div>
+    </div>
+  </header>
+
+  <main data-screen-label="Messaging" style="max-width:1000px;margin:0 auto;padding:clamp(22px,3vw,40px) clamp(16px,3vw,36px) clamp(50px,6vw,90px)">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div data-intro="1">
+        <p style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8A6A74"><span data-scramble="1">Read-only &#183; 5 unread</span></p>
+        <h1 style="margin:14px 0 0;font-size:clamp(26px,3.4vw,42px);line-height:1.02;letter-spacing:-.045em;font-weight:400">Guest inbox</h1>
+      </div>
+      <p data-intro="1" style="margin:0;max-width:38ch;font-size:12.5px;line-height:1.65;color:#6E4E58">Replies still go out on the channel the guest wrote from — Airbnb or Booking.com. This is visibility, not a second inbox to keep.</p>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:clamp(22px,3vw,32px)">
+      <button type="button" onClick="{{ filterAll }}" style="{{ allStyle }}">Everything</button>
+      <button type="button" onClick="{{ filterUnread }}" style="{{ unreadStyle }}">Unread only</button>
+      <button type="button" onClick="{{ filterDjerba }}" style="{{ djerbaStyle }}">Djerba Villa</button>
+      <button type="button" onClick="{{ filterEzzahra }}" style="{{ ezzahraStyle }}">Ezzahra Loft</button>
+    </div>
+
+    <ul data-flip-list="1" style="list-style:none;margin:18px 0 0;padding:0;background:#FFFBFC;border:1px solid rgba(26,10,15,.1);border-radius:20px;overflow:hidden">
+      <sc-for list="{{ threads }}" as="t" hint-placeholder-count="7">
+        <li data-flip-item="1" style="{{ t.rowStyle }}">
+          <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;flex:none;border-radius:50%;background:#1A0A0F;color:#F6E6EA;font-size:13.5px;letter-spacing:.02em">{{ t.initials }}</span>
+          <div style="min-width:0;flex:1">
+            <p style="{{ t.nameStyle }}">{{ t.name }}
+              <span style="{{ t.chanStyle }}">{{ t.channel }}</span>
+              <span style="{{ t.unreadStyle }}">Unread</span>
+            </p>
+            <p style="{{ t.bodyStyle }}">{{ t.body }}</p>
+            <p style="{{ t.homeStyle }}">{{ t.home }}</p>
+          </div>
+          <p style="{{ t.agoStyle }}">{{ t.ago }}</p>
+        </li>
+      </sc-for>
+    </ul>
+
+    <p style="margin:22px 0 0;font-size:12px;color:#8A6A74">Threads are seeded from <span style="color:#1A0A0F">src/lib/data/inbox.ts</span> — static by design, not Supabase-backed.</p>
+  </main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const CHAN = {
+  airbnb:      { label: 'Airbnb',      bg: 'rgba(163,74,96,.16)',  fg: '#8E4257' },
+  booking_com: { label: 'Booking.com', bg: 'rgba(110,88,120,.18)', fg: '#5E4869' },
+  direct:      { label: 'Direct',      bg: 'rgba(122,90,70,.18)',  fg: '#6B4A38' },
+};
+
+const THREADS = [
+  { name: 'Lukas Weber', initials: 'LW', ch: 'booking_com', home: 'Djerba Villa', key: 'djerba',
+    body: 'The payment link expired before I could use it. Could you resend it?', ago: '14 min', unread: true },
+  { name: 'Nadia Cherif', initials: 'NC', ch: 'direct', home: 'Ezzahra Apartment Loft', key: 'ezzahra',
+    body: 'We land at 11:20 — is an early check-in still possible?', ago: '42 min', unread: true },
+  { name: 'Claire Dubois', initials: 'CD', ch: 'booking_com', home: 'Ezzahra Apartment Loft', key: 'ezzahra',
+    body: 'Does the terrace get the sun in the morning or the evening?', ago: '1 h', unread: true },
+  { name: 'Rami Haddad', initials: 'RH', ch: 'booking_com', home: 'Djerba Villa', key: 'djerba',
+    body: 'Can we bring a dog? He is small and well behaved.', ago: '3 h', unread: true },
+  { name: 'Yuki Tanaka', initials: 'YT', ch: 'airbnb', home: 'Ezzahra Apartment Loft', key: 'ezzahra',
+    body: 'Thank you for the terrace photos, they settled it. Booking now.', ago: '4 h', unread: true },
+  { name: 'Amira Ben Salah', initials: 'AB', ch: 'airbnb', home: 'Djerba Villa', key: 'djerba',
+    body: 'Arrived safely, the courtyard is even better in person.', ago: '7 h', unread: false },
+  { name: 'Mehdi Gharbi', initials: 'MG', ch: 'airbnb', home: 'Djerba Villa', key: 'djerba',
+    body: 'Where do we collect the keys if we arrive after dark?', ago: '12 h', unread: false },
+];
+
+class Component extends DCLogic {
+  state = { filter: 'all' };
+
+  componentDidMount() {
+    import('./maissa-motion.js')
+      .then((m) => { this.m = m; this.motion = m.initPageMotion({ smooth: false }); })
+      .catch(() => {
+        document.querySelectorAll('[data-reveal],[data-split-lines]').forEach((el) => { el.style.opacity = '1'; });
+        const l = document.querySelector('[data-loader]');
+        if (l) l.style.display = 'none';
+      });
+  }
+
+  componentWillUnmount() { if (this.motion) this.motion.kill(); }
+
+  setFilter(f) {
+    if (this.m && this.m.flipLayout) {
+      this.m.flipLayout('[data-flip-item]', () => this.setState({ filter: f }));
+    } else {
+      this.setState({ filter: f });
+    }
+  }
+
+  renderVals() {
+    const f = this.state.filter;
+    const pill = (on) =>
+      'height:38px;padding:0 18px;border-radius:999px;font-family:inherit;font-size:12.5px;letter-spacing:-.01em;cursor:pointer;white-space:nowrap;transition:background .3s ease,color .3s ease;' +
+      (on ? 'background:#1A0A0F;color:#F6E6EA;border:1px solid #1A0A0F;'
+          : 'background:transparent;color:#6E4E58;border:1px solid rgba(26,10,15,.2);');
+
+    const rows = THREADS.filter((t) =>
+      f === 'all' ? true : f === 'unread' ? t.unread : t.key === f);
+
+    return {
+      allStyle: pill(f === 'all'),
+      unreadStyle: pill(f === 'unread'),
+      djerbaStyle: pill(f === 'djerba'),
+      ezzahraStyle: pill(f === 'ezzahra'),
+      filterAll: () => this.setFilter('all'),
+      filterUnread: () => this.setFilter('unread'),
+      filterDjerba: () => this.setFilter('djerba'),
+      filterEzzahra: () => this.setFilter('ezzahra'),
+      threads: rows.map((t, i) => {
+        const c = CHAN[t.ch];
+        const chip = 'padding:4px 9px;border-radius:999px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;';
+        return {
+          slotId: 'msg-' + t.initials.toLowerCase(),
+          initials: t.initials,
+          name: t.name,
+          body: t.body,
+          home: t.home,
+          ago: t.ago,
+          channel: c.label,
+          rowStyle: 'display:flex;gap:16px;padding:22px clamp(18px,2.4vw,26px);' +
+            (i < rows.length - 1 ? 'border-bottom:1px solid rgba(26,10,15,.08);' : '') +
+            (t.unread ? 'background:#FDF4F6;' : ''),
+          nameStyle: 'margin:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14.5px;letter-spacing:-.02em;color:' + (t.unread ? '#1A0A0F' : '#6E4E58') + ';',
+          chanStyle: chip + 'background:' + c.bg + ';color:' + c.fg + ';',
+          unreadStyle: t.unread ? chip + 'background:#1A0A0F;color:#F6E6EA;' : 'display:none;',
+          bodyStyle: 'margin:8px 0 0;font-size:13.5px;line-height:1.6;color:' + (t.unread ? '#46232F' : '#6E4E58') + ';',
+          homeStyle: 'margin:8px 0 0;font-size:11.5px;color:' + (t.unread ? '#8A6A74' : '#A98A94') + ';',
+          agoStyle: 'margin:0;flex:none;font-size:11.5px;white-space:nowrap;color:' + (t.unread ? '#8A6A74' : '#A98A94') + ';',
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

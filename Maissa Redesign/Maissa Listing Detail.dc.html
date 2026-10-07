@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/styles.css">
+<script src="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#F6E6EA; }
+  body { font-family:'Archivo', system-ui, sans-serif; color:#1A0A0F; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#1A0A0F; text-decoration:none; }
+  a:hover { color:#8E4257; }
+  ::selection { background:#1A0A0F; color:#F6E6EA; }
+  :focus-visible { outline:2px solid #8E4257; outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div>
+
+<div data-loader="1" style="position:fixed;inset:0;z-index:200;background:#1A0A0F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+  <p data-loader-mark="1" style="margin:0;font-size:clamp(26px,4vw,48px);letter-spacing:-.05em;color:#F6E6EA">Djerba Villa</p>
+  <svg width="200" height="2" viewBox="0 0 200 2" aria-hidden="true" style="display:block;overflow:visible">
+    <line data-loader-line="1" x1="0" y1="1" x2="200" y2="1" stroke="#C98FA0" stroke-width="2"></line>
+  </svg>
+  <p data-loader-note="1" style="margin:0;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,230,234,.5)">Houmt Souk &#183; 320 TND</p>
+</div>
+
+<div style="position:relative;min-height:100vh;background:#F6E6EA">
+
+  <header data-hide-on-scroll="1" style="position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(246,230,234,.86);border-bottom:1px solid rgba(26,10,15,.1)">
+    <div style="max-width:1240px;margin:0 auto;padding:15px clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <a href="Maissa Home.dc.html" style="font-size:19px;font-weight:500;letter-spacing:-.035em">Maissa</a>
+      <a href="Maissa Listings.dc.html" style="font-size:13px;color:#6E4E58">&#8592; Both homes</a>
+    </div>
+  </header>
+
+  <section data-screen-label="Gallery" style="max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(20px,4vw,56px) 0">
+    <p data-intro="1" style="margin:0;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A6A74">Featured &#183; Houmt Souk, Djerba</p>
+    <div data-intro="1" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-top:20px">
+      <h1 style="margin:0;max-width:20ch;font-size:clamp(32px,5.4vw,74px);line-height:.98;letter-spacing:-.05em;font-weight:400">Djerba Villa</h1>
+      <p style="margin:0;text-align:right">
+        <span style="font-size:clamp(24px,2.6vw,34px);letter-spacing:-.035em">320 TND</span>
+        <span style="display:block;margin-top:5px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">per night &#183; 4.9 &#183; 128 reviews</span>
+      </p>
+    </div>
+
+    <div data-reveal="1" style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:clamp(24px,3vw,40px)">
+      <div style="position:relative;grid-column:span 2;min-width:0;aspect-ratio:16/10;border-radius:22px;overflow:hidden;background:#E7D2D8">
+        <image-slot id="md-hero" shape="rect" fit="cover" placeholder="Courtyard at dusk"></image-slot>
+      </div>
+      <div style="display:grid;gap:12px;grid-template-rows:1fr 1fr;min-width:0">
+        <div style="position:relative;min-height:120px;border-radius:22px;overflow:hidden;background:#E7D2D8">
+          <image-slot id="md-g1" shape="rect" fit="cover" placeholder="Vaulted living room"></image-slot>
+        </div>
+        <div style="position:relative;min-height:120px;border-radius:22px;overflow:hidden;background:#E7D2D8">
+          <image-slot id="md-g2" shape="rect" fit="cover" placeholder="Fig tree &amp; table"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div data-reveal="1" style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));margin-top:12px">
+      <div style="position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;background:#E7D2D8"><image-slot id="md-g3" shape="rect" fit="cover" placeholder="Bedroom"></image-slot></div>
+      <div style="position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;background:#E7D2D8"><image-slot id="md-g4" shape="rect" fit="cover" placeholder="Kitchen"></image-slot></div>
+      <div style="position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;background:#E7D2D8"><image-slot id="md-g5" shape="rect" fit="cover" placeholder="Roof terrace"></image-slot></div>
+      <div style="position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;background:#E7D2D8"><image-slot id="md-g6" shape="rect" fit="cover" placeholder="Street door"></image-slot></div>
+    </div>
+  </section>
+
+  <div style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,90px) clamp(20px,4vw,56px) clamp(60px,8vw,120px);display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start">
+
+    <div style="min-width:0">
+      <section data-screen-label="The house">
+        <h2 style="margin:0;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A6A74">The house</h2>
+        <p data-split-lines="1" style="margin:22px 0 0;font-size:15.5px;line-height:1.8;color:#46232F;text-wrap:pretty">Four streets back from the Houmt Souk fish market, the villa is built around a courtyard that the original vaulted rooms open onto. The street door gives nothing away.</p>
+        <p data-reveal="1" style="margin:20px 0 0;font-size:15.5px;line-height:1.8;color:#46232F;text-wrap:pretty">Thick walls and shuttered windows keep the rooms cool through the summer without air conditioning, though there is air conditioning in both bedrooms for August. Breakfast happens under the fig tree.</p>
+        <p data-reveal="1" style="margin:20px 0 0;font-size:15.5px;line-height:1.8;color:#46232F;text-wrap:pretty">The market, the ferry terminal and the old town are all within a fifteen-minute walk. The east-coast beaches are a ten-minute drive.</p>
+      </section>
+
+      <dl data-reveal="1" style="margin:clamp(38px,5vw,64px) 0 0;display:grid;gap:1px;background:rgba(26,10,15,.12);border-radius:18px;overflow:hidden;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+        <div style="background:#FFFBFC;padding:22px">
+          <dt style="font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74">Sleeps</dt>
+          <dd style="margin:10px 0 0;font-size:26px;letter-spacing:-.035em">6</dd>
+        </div>
+        <div style="background:#FFFBFC;padding:22px">
+          <dt style="font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74">Bedrooms</dt>
+          <dd style="margin:10px 0 0;font-size:26px;letter-spacing:-.035em">3</dd>
+        </div>
+        <div style="background:#FFFBFC;padding:22px">
+          <dt style="font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74">Beds</dt>
+          <dd style="margin:10px 0 0;font-size:26px;letter-spacing:-.035em">4</dd>
+        </div>
+        <div style="background:#FFFBFC;padding:22px">
+          <dt style="font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74">Bathrooms</dt>
+          <dd style="margin:10px 0 0;font-size:26px;letter-spacing:-.035em">2</dd>
+        </div>
+      </dl>
+
+      <section data-screen-label="Amenities" style="margin-top:clamp(38px,5vw,64px)">
+        <h2 style="margin:0;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A6A74">What is here</h2>
+        <ul style="list-style:none;margin:22px 0 0;padding:0;display:grid;gap:14px 28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+          <li data-reveal="1" style="display:flex;align-items:center;gap:12px;font-size:14px;color:#46232F"><span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:#8E4257"></span>Private courtyard with fig tree</li>
+          <li data-reveal="1" style="display:flex;align-items:center;gap:12px;font-size:14px;color:#46232F"><span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:#8E4257"></span>Roof terrace</li>
+          <li data-reveal="1" style="display:flex;align-items:center;gap:12px;font-size:14px;color:#46232F"><span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:#8E4257"></span>Air conditioning in both bedrooms</li>
+          <li data-reveal="1" style="display:flex;align-items:center;gap:12px;font-size:14px;color:#46232F"><span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:#8E4257"></span>Wi-Fi, 80 Mbps</li>
+          <li data-reveal="1" style="display:flex;align-items:center;gap:12px;font-size:14px;color:#46232F"><span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:#8E4257"></span>Full kitchen</li>
+          <li data-reveal="1" style="display:flex;align-items:center;gap:12px;font-size:14px;color:#46232F"><span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:#8E4257"></span>Washing machine</li>
+        </ul>
+      </section>
+
+      <section data-screen-label="Spin viewer" style="margin-top:clamp(38px,5vw,64px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <h2 style="margin:0;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A6A74">Walk around the courtyard</h2>
+          <p style="margin:0;font-size:11.5px;color:#8A6A74">Drag or use &#8592; &#8594; &#183; frame <span style="color:#1A0A0F">{{ frameLabel }}</span> of 24</p>
+        </div>
+        <div ref="{{ spinRef }}" onPointerDown="{{ onSpinDown }}" role="img" aria-label="360-degree photo sequence of the Djerba Villa courtyard" style="position:relative;margin-top:18px;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#1A0A0F;cursor:grab;touch-action:pan-y">
+          <image-slot id="md-spin" shape="rect" fit="cover" placeholder="24-frame spin sequence"></image-slot>
+          <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(26,10,15,.55));pointer-events:none"></div>
+          <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;pointer-events:none">
+            <span style="{{ spinDial }}"></span>
+          </div>
+        </div>
+      </section>
+
+      <section data-screen-label="Video tour" style="margin-top:clamp(38px,5vw,64px)">
+        <h2 style="margin:0;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A6A74">Video tour</h2>
+        <div data-reveal="1" style="margin-top:18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:26px;border:1px dashed rgba(26,10,15,.22);border-radius:20px;background:#FFFBFC">
+          <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(26,10,15,.07);font-size:12px;padding-left:2px">&#9654;</span>
+          <p style="margin:0;max-width:46ch;font-size:13.5px;line-height:1.65;color:#6E4E58">No tour filmed for this house yet. When one exists it plays here — nothing fake stands in for it in the meantime.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside style="min-width:0;position:sticky;top:88px;display:flex;flex-direction:column;gap:16px">
+      <div style="background:#FFFBFC;border-radius:24px;padding:clamp(22px,2.6vw,32px);box-shadow:0 30px 70px -46px rgba(26,10,15,.5)">
+        <p style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8A6A74">From</p>
+        <p style="margin:12px 0 0;font-size:34px;letter-spacing:-.04em">320 <span style="font-size:13px;letter-spacing:0;color:#8A6A74">TND / night</span></p>
+        <dl style="margin:24px 0 0;display:flex;flex-direction:column;gap:12px;font-size:13.5px">
+          <div style="display:flex;justify-content:space-between;gap:12px"><dt style="color:#6E4E58">Three nights</dt><dd style="margin:0">960 TND</dd></div>
+          <div style="display:flex;justify-content:space-between;gap:12px"><dt style="color:#6E4E58">A week</dt><dd style="margin:0">2,240 TND</dd></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid rgba(26,10,15,.12)"><dt style="color:#6E4E58">Maximum guests</dt><dd style="margin:0">6</dd></div>
+        </dl>
+        <a href="Maissa Home.dc.html#contact" style="display:flex;align-items:center;justify-content:center;margin-top:24px;height:52px;border-radius:999px;background:#1A0A0F;color:#F6E6EA;font-size:14px;transition:background .35s ease" style-hover="background:#3A1520">Check availability</a>
+        <p style="margin:14px 0 0;font-size:11.5px;line-height:1.6;color:#8A6A74">Bookings are completed on Airbnb. Enquiries answered within an hour.</p>
+      </div>
+
+      <div style="background:#FFFBFC;border-radius:24px;padding:clamp(20px,2.4vw,28px);border:1px solid rgba(26,10,15,.1);display:flex;gap:16px;align-items:center">
+        <div style="position:relative;width:56px;height:56px;flex:none;border-radius:50%;overflow:hidden;background:#E7D2D8">
+          <image-slot id="md-host" shape="circle" fit="cover" placeholder="Maissa"></image-slot>
+        </div>
+        <div style="min-width:0">
+          <p style="margin:0;font-size:15px;letter-spacing:-.02em">Hosted by Maissa</p>
+          <p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:#8A6A74">Superhost since 2022 &#183; replies within an hour</p>
+        </div>
+      </div>
+
+      <div style="position:relative;padding:18px;border-radius:24px;background:#EFDCE1;border:1px solid rgba(26,10,15,.1)">
+        <svg viewBox="-30 -30 389 765" role="img" aria-label="Map of Tunisia showing the Djerba Villa" style="display:block;width:100%;max-height:300px;margin:0 auto">
+          <path data-path="1" data-draw="1" d="M162.3 704.2 L126.9 524.7 L75.8 484.4 L75.1 460.2 L7.3 400.6 L0 325.3 L51.1 269.5 L70.6 187 L57.5 91.7 L74.3 40.4 L164.6 0 L222.7 12 L220.2 62.6 L290.5 25.8 L296.4 45 L254.9 94 L254.4 140.3 L283.1 165.1 L272.2 251.6 L217.6 301.9 L233.3 356.4 L276.2 358.1 L297.1 405.7 L328.6 421.3 L323.9 498.1 L283.5 526.8 L258 558.9 L201.1 597.4 L209.9 638.8 L202.7 681.1 Z" fill="rgba(142,66,87,.1)" stroke="#1A0A0F" stroke-width="3" stroke-linejoin="round"></path>
+          <circle data-mote="1" r="6" fill="#8E4257" opacity="0"></circle>
+          <circle cx="276.4" cy="347.4" r="11" fill="#8E4257"></circle>
+          <circle cx="276.4" cy="347.4" r="22" fill="none" stroke="rgba(142,66,87,.45)" stroke-width="3"></circle>
+        </svg>
+        <p style="margin:14px 0 0;text-align:center;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A6A74">33.876, 10.858</p>
+      </div>
+    </aside>
+  </div>
+
+  <section data-screen-label="Other home" style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px) clamp(60px,8vw,110px)">
+    <a href="Maissa Listing Detail.dc.html" data-reveal="1" style="display:grid;gap:clamp(20px,3vw,44px);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:center;padding-top:clamp(30px,4vw,50px);border-top:1px solid rgba(26,10,15,.14)">
+      <div style="position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;background:#E7D2D8">
+        <image-slot id="md-other" shape="rect" fit="cover" placeholder="Ezzahra Apartment Loft"></image-slot>
+      </div>
+      <div>
+        <p style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8A6A74">The other home &#183; Ezzahra</p>
+        <h2 style="margin:14px 0 0;font-size:clamp(22px,2.8vw,36px);line-height:1.06;letter-spacing:-.035em;font-weight:400">Ezzahra Apartment Loft</h2>
+        <p style="margin:14px 0 0;max-width:44ch;font-size:14px;line-height:1.7;color:#6E4E58;text-wrap:pretty">A terrace facing north-east across the Gulf of Tunis. 280 TND a night, sleeps 3.</p>
+      </div>
+    </a>
+  </section>
+
+  <section data-screen-label="Closing" style="background:#1A0A0F;color:#F6E6EA;border-radius:clamp(20px,2.4vw,34px) clamp(20px,2.4vw,34px) 0 0">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,110px) clamp(20px,4vw,56px);display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <h2 data-split-lines="1" style="margin:0;max-width:22ch;font-size:clamp(26px,4vw,52px);line-height:1.03;letter-spacing:-.045em;font-weight:400">Come and see it before you decide anything from a photo.</h2>
+      <a href="Maissa Home.dc.html#contact" style="display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:999px;background:#F6E6EA;color:#1A0A0F;font-size:14px;white-space:nowrap">Enquire about these dates</a>
+    </div>
+  </section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { frame: 0 };
+
+  constructor(props) {
+    super(props);
+    this.spinRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.onKey = (e) => {
+      if (e.key === 'ArrowRight') this.step(1);
+      else if (e.key === 'ArrowLeft') this.step(-1);
+    };
+    window.addEventListener('keydown', this.onKey);
+    import('./maissa-motion.js')
+      .then((m) => { this.motion = m.initPageMotion({ smooth: false, moteDuration: 26 }); })
+      .catch(() => {
+        document.querySelectorAll('[data-reveal],[data-split-lines]').forEach((el) => { el.style.opacity = '1'; });
+        const l = document.querySelector('[data-loader]');
+        if (l) l.style.display = 'none';
+      });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKey);
+    if (this.motion) this.motion.kill();
+    this.detach();
+  }
+
+  step(n) { this.setState((s) => ({ frame: (s.frame + n + 24) % 24 })); }
+
+  detach() {
+    if (this._move) window.removeEventListener('pointermove', this._move);
+    if (this._up) window.removeEventListener('pointerup', this._up);
+    this._move = null; this._up = null;
+  }
+
+  renderVals() {
+    const f = this.state.frame;
+    const pct = (f / 23 * 100).toFixed(1);
+    return {
+      spinRef: this.spinRef,
+      frameLabel: String(f + 1).padStart(2, '0'),
+      spinDial: 'display:block;width:140px;height:3px;border-radius:999px;background:linear-gradient(90deg,#F6E6EA 0,#F6E6EA ' +
+        pct + '%,rgba(246,230,234,.28) ' + pct + '%,rgba(246,230,234,.28) 100%);',
+      onSpinDown: (e) => {
+        const startX = e.clientX;
+        const startF = this.state.frame;
+        const el = this.spinRef.current;
+        if (el) el.style.cursor = 'grabbing';
+        this.detach();
+        this._move = (ev) => {
+          const dx = ev.clientX - startX;
+          this.setState({ frame: ((startF + Math.round(dx / 18)) % 24 + 24) % 24 });
+        };
+        this._up = () => { if (el) el.style.cursor = 'grab'; this.detach(); };
+        window.addEventListener('pointermove', this._move, { passive: true });
+        window.addEventListener('pointerup', this._up);
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

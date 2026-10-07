@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/styles.css">
+<script src="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#F6E6EA; }
+  body { font-family:'Archivo', system-ui, sans-serif; color:#1A0A0F; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#1A0A0F; text-decoration:none; }
+  a:hover { color:#8E4257; }
+  ::selection { background:#1A0A0F; color:#F6E6EA; }
+  :focus-visible { outline:2px solid #1A0A0F; outline-offset:3px; }
+  .cal-scroll::-webkit-scrollbar { height:10px; }
+  .cal-scroll::-webkit-scrollbar-thumb { background:rgba(26,10,15,.18); border-radius:999px; }
+  .cal-scroll::-webkit-scrollbar-track { background:transparent; }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F6E6EA">
+
+  <header data-hide-on-scroll="1" style="position:sticky;top:0;z-index:30;background:rgba(246,230,234,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,10,15,.08)">
+    <div style="max-width:1400px;margin:0 auto;padding:12px clamp(16px,3vw,36px);display:flex;align-items:center;gap:14px">
+      <a href="Maissa Dashboard.dc.html" style="display:flex;align-items:center;gap:10px;font-size:16px;font-weight:500;letter-spacing:-.03em">
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#1A0A0F;color:#F6E6EA;font-size:13px">M</span>
+        <span>Maissa</span>
+      </a>
+      <nav aria-label="Dashboard" style="display:flex;align-items:center;gap:2px;margin-left:12px;overflow-x:auto">
+        <a href="Maissa Dashboard.dc.html" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#7A5A63" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">Overview</a>
+        <a href="Maissa Calendar.dc.html" aria-current="page" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;background:rgba(26,10,15,.07);color:#1A0A0F">Calendar</a>
+        <a href="Maissa Messaging.dc.html" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#7A5A63" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">Messaging</a>
+        <a href="Maissa Dashboard.dc.html#stubs" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#B9959F">Channels</a>
+        <a href="Maissa Dashboard.dc.html#stubs" style="white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:13.5px;color:#B9959F">Analytics</a>
+      </nav>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="Maissa Messaging.dc.html" aria-label="Inbox, 5 unread" style="position:relative;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#FFFFFF;border:1px solid rgba(26,10,15,.12);font-size:13px">&#9993;
+          <span style="position:absolute;top:-3px;right:-3px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#A8412F;color:#FFFFFF;font-size:10px;display:flex;align-items:center;justify-content:center">5</span>
+        </a>
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:50%;background:#1A0A0F;color:#F6E6EA;font-size:13px;letter-spacing:.02em">M</span>
+      </div>
+    </div>
+  </header>
+
+
+  <div data-loader="1" style="position:fixed;inset:0;z-index:200;background:#1A0A0F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+    <p data-loader-mark="1" style="margin:0;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.045em;color:#F6E6EA">Calendar</p>
+    <svg width="180" height="2" viewBox="0 0 180 2" aria-hidden="true" style="display:block;overflow:visible">
+      <line data-loader-line="1" x1="0" y1="1" x2="180" y2="1" stroke="#C98FA0" stroke-width="2"></line>
+    </svg>
+    <p data-loader-note="1" style="margin:0;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,230,234,.5)">60 nights &#183; two homes</p>
+  </div>
+
+  <main data-screen-label="Calendar" style="max-width:1400px;margin:0 auto;padding:clamp(22px,3vw,40px) clamp(16px,3vw,36px) clamp(50px,6vw,90px)">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div>
+        <p data-intro="1" style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8A6A74"><span data-scramble="1">Availability &#183; 60 nights</span></p>
+        <h1 data-intro="1" style="margin:14px 0 0;font-size:clamp(26px,3.4vw,42px);line-height:1.02;letter-spacing:-.045em;font-weight:400">Calendar</h1>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#6E4E58">
+          <span style="letter-spacing:.08em;text-transform:uppercase;font-size:10.5px;color:#8A6A74">Show</span>
+          <select onChange="{{ onFilter }}" style="height:40px;padding:0 12px;border:1px solid rgba(26,10,15,.14);border-radius:999px;background:#FFFFFF;font-family:inherit;font-size:13px;color:#1A0A0F">
+            <option value="all">Both homes</option>
+            <option value="0">Djerba Villa</option>
+            <option value="1">Ezzahra Apartment Loft</option>
+          </select>
+        </label>
+        <button type="button" onClick="{{ prevWeek }}" aria-label="Previous week" style="width:40px;height:40px;border:1px solid rgba(26,10,15,.14);border-radius:50%;background:#FFFFFF;font-family:inherit;font-size:13px;cursor:pointer">&#8249;</button>
+        <button type="button" onClick="{{ nextWeek }}" aria-label="Next week" style="width:40px;height:40px;border:1px solid rgba(26,10,15,.14);border-radius:50%;background:#FFFFFF;font-family:inherit;font-size:13px;cursor:pointer">&#8250;</button>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));margin-top:clamp(20px,2.6vw,32px)">
+      <div style="background:#FFFFFF;border:1px solid rgba(26,10,15,.08);border-radius:16px;padding:18px">
+        <p style="margin:0;display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74"><span aria-hidden="true" style="display:block;width:9px;height:9px;border-radius:2px;background:#A34A60"></span>Airbnb</p>
+        <p style="margin:12px 0 0;font-size:26px;letter-spacing:-.035em">38 <span style="font-size:12px;letter-spacing:0;color:#8A6A74">nights</span></p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(26,10,15,.08);border-radius:16px;padding:18px">
+        <p style="margin:0;display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74"><span aria-hidden="true" style="display:block;width:9px;height:9px;border-radius:2px;background:#6E5878"></span>Booking.com</p>
+        <p style="margin:12px 0 0;font-size:26px;letter-spacing:-.035em">38 <span style="font-size:12px;letter-spacing:0;color:#8A6A74">nights</span></p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(26,10,15,.08);border-radius:16px;padding:18px">
+        <p style="margin:0;display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74"><span aria-hidden="true" style="display:block;width:9px;height:9px;border-radius:2px;background:#7A5A46"></span>Direct</p>
+        <p style="margin:12px 0 0;font-size:26px;letter-spacing:-.035em">11 <span style="font-size:12px;letter-spacing:0;color:#8A6A74">nights</span></p>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(26,10,15,.08);border-radius:16px;padding:18px">
+        <p style="margin:0;display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74"><span aria-hidden="true" style="display:block;width:9px;height:9px;border-radius:2px;background:#1A0A0F"></span>Owner block</p>
+        <p style="margin:12px 0 0;font-size:26px;letter-spacing:-.035em">6 <span style="font-size:12px;letter-spacing:0;color:#8A6A74">nights</span></p>
+      </div>
+      <div style="background:#1A0A0F;color:#F6E6EA;border-radius:16px;padding:18px">
+        <p style="margin:0;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.55)">Gross booked</p>
+        <p style="margin:12px 0 0;font-size:26px;letter-spacing:-.035em">21,480 <span style="font-size:12px;letter-spacing:0;color:rgba(246,230,234,.55)">TND</span></p>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="margin-top:14px;background:#FFFFFF;border:1px solid rgba(26,10,15,.08);border-radius:20px;overflow:hidden">
+      <div ref="{{ scrollRef }}" class="cal-scroll" style="overflow-x:auto;overflow-y:hidden">
+        <div style="{{ trackWidth }}">
+
+          <div style="display:flex;position:sticky;top:0;z-index:6;background:#FFFFFF;border-bottom:1px solid rgba(26,10,15,.1)">
+            <div style="{{ labelHeadStyle }}">
+              <p style="margin:0;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74">Home</p>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex">
+                <sc-for list="{{ months }}" as="m" hint-placeholder-count="3">
+                  <div style="{{ m.style }}">{{ m.label }}</div>
+                </sc-for>
+              </div>
+              <div style="display:flex">
+                <sc-for list="{{ days }}" as="d" hint-placeholder-count="60">
+                  <div style="{{ d.headStyle }}">
+                    <span style="display:block;font-size:9.5px;letter-spacing:.08em;color:#A98A94">{{ d.dow }}</span>
+                    <span style="display:block;margin-top:3px;font-size:12.5px">{{ d.num }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <sc-for list="{{ rows }}" as="row" hint-placeholder-count="4">
+            <div style="{{ row.rowStyle }}">
+              <div style="{{ row.labelStyle }}">
+                <p style="margin:0;font-size:13.5px;letter-spacing:-.02em;line-height:1.25">{{ row.title }}</p>
+                <p style="margin:5px 0 0;font-size:10.5px;color:#8A6A74">{{ row.meta }}</p>
+              </div>
+              <div style="position:relative;flex:1;min-width:0">
+                <div style="display:flex;position:absolute;inset:0">
+                  <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="60">
+                    <div style="{{ c.style }}"></div>
+                  </sc-for>
+                </div>
+                <sc-for list="{{ row.bars }}" as="b" hint-placeholder-count="2">
+                  <button type="button" onClick="{{ b.select }}" title="{{ b.title }}" style="{{ b.style }}">
+                    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.label }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="{{ detailStyle }}">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <span style="{{ detailSwatch }}"></span>
+          <p style="margin:0;font-size:15px;letter-spacing:-.02em">{{ detailGuest }}</p>
+          <p style="margin:0;font-size:12.5px;color:#6E4E58">{{ detailMeta }}</p>
+          <span style="{{ detailChip }}">{{ detailStatus }}</span>
+          <button type="button" onClick="{{ clearSel }}" style="margin-left:auto;height:36px;padding:0 18px;border:1px solid rgba(26,10,15,.16);border-radius:999px;background:transparent;font-family:inherit;font-size:12.5px;cursor:pointer">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <ul style="list-style:none;margin:20px 0 0;padding:0;display:flex;gap:22px;flex-wrap:wrap;font-size:12px;color:#6E4E58">
+      <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:block;width:22px;height:9px;border-radius:3px;background:#A34A60"></span>Airbnb</li>
+      <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:block;width:22px;height:9px;border-radius:3px;background:#6E5878"></span>Booking.com</li>
+      <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:block;width:22px;height:9px;border-radius:3px;background:#7A5A46"></span>Direct</li>
+      <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:block;width:22px;height:9px;border-radius:3px;background:repeating-linear-gradient(45deg,#1A0A0F 0,#1A0A0F 2px,#F6E6EA 2px,#F6E6EA 5px)"></span>Owner block &#183; nobody can book this</li>
+      <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:block;width:22px;height:9px;border-radius:3px;background:repeating-linear-gradient(45deg,rgba(26,10,15,.22) 0,rgba(26,10,15,.22) 1px,transparent 1px,transparent 6px)"></span>Already happened</li>
+      <li style="color:#8A6A74">Bars are coloured by channel, never by status. Status shows as a chip when a bar is selected.</li>
+    </ul>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const COL = 64, LABEL = 216, ROW = 74;
+const COMPACT = { col: 50, label: 128, row: 66 };
+const DAYS = 60;
+const DOW = ['S','M','T','W','T','F','S'];
+const MONTH = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const CHANNELS = {
+  airbnb:      { fill: '#A34A60', ink: '#FFFFFF', label: 'Airbnb' },
+  booking_com: { fill: '#6E5878', ink: '#FFFFFF', label: 'Booking.com' },
+  direct:      { fill: '#7A5A46', ink: '#FFFFFF', label: 'Direct' },
+  owner_block: { fill: '#1A0A0F', ink: '#F6E6EA', label: 'Owner block' },
+};
+
+const STATUS = {
+  confirmed:        { label: '\u2713 Confirmed',        bg: 'rgba(122,90,70,.16)',  fg: '#6B4A38' },
+  awaiting_payment: { label: '\u25B2 Awaiting payment', bg: 'rgba(176,129,60,.22)',  fg: '#7A5528' },
+  not_confirmed:    { label: '! Not confirmed',         bg: 'rgba(168,65,47,.16)',   fg: '#8A3F2C' },
+  early_check_in:   { label: '\u2192 Early check-in',   bg: 'rgba(110,88,120,.18)',  fg: '#5E4869' },
+  blocked:          { label: '\u2298 Owner block',      bg: 'rgba(26,10,15,.08)',    fg: '#46232F' },
+};
+
+const LISTINGS = [
+  { title: 'Djerba Villa', meta: 'Houmt Souk \u00b7 320 TND' },
+  { title: 'Ezzahra Apartment Loft', meta: 'Ben Arous \u00b7 280 TND' },
+];
+
+// offset = nights from the grid start (today sits at index 2)
+const BOOKINGS = [
+  { l: 0, from: 0,  n: 5,  guest: 'Amira Ben Salah', ch: 'airbnb',      st: 'confirmed',        g: 4, price: 320 },
+  { l: 0, from: 6,  n: 4,  guest: 'Lukas Weber',     ch: 'booking_com', st: 'not_confirmed',    g: 2, price: 320 },
+  { l: 0, from: 12, n: 3,  guest: 'Mehdi Gharbi',    ch: 'airbnb',      st: 'early_check_in',   g: 3, price: 320 },
+  { l: 0, from: 18, n: 7,  guest: 'Sofia Marchetti', ch: 'airbnb',      st: 'confirmed',        g: 6, price: 340 },
+  { l: 0, from: 27, n: 5,  guest: 'Ines Ferchichi',  ch: 'direct',      st: 'confirmed',        g: 5, price: 330 },
+  { l: 0, from: 34, n: 6,  guest: 'Owner',           ch: 'owner_block', st: 'blocked',          g: 0, price: 0 },
+  { l: 0, from: 44, n: 6,  guest: 'Hanna Vogt',      ch: 'airbnb',      st: 'confirmed',        g: 5, price: 320 },
+  { l: 1, from: 0,  n: 3,  guest: 'Rami Haddad',     ch: 'booking_com', st: 'confirmed',        g: 2, price: 280 },
+  { l: 1, from: 3,  n: 7,  guest: 'Nadia Cherif',    ch: 'direct',      st: 'awaiting_payment', g: 3, price: 280 },
+  { l: 1, from: 12, n: 5,  guest: 'Claire Dubois',   ch: 'booking_com', st: 'confirmed',        g: 3, price: 280 },
+  { l: 1, from: 24, n: 4,  guest: 'Jonas Lind',      ch: 'airbnb',      st: 'confirmed',        g: 2, price: 290 },
+  { l: 1, from: 30, n: 3,  guest: 'Owner',           ch: 'owner_block', st: 'blocked',          g: 0, price: 0 },
+  { l: 1, from: 40, n: 4,  guest: 'Yuki Tanaka',     ch: 'airbnb',      st: 'awaiting_payment', g: 2, price: 280 },
+  { l: 1, from: 48, n: 5,  guest: 'Tomas Novak',     ch: 'booking_com', st: 'confirmed',        g: 3, price: 280 },
+];
+
+class Component extends DCLogic {
+  state = { filter: 'all', selected: null, compact: false };
+
+  constructor(props) {
+    super(props);
+    this.scrollRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this._motion();
+    this.mq = window.matchMedia('(max-width: 720px)');
+    this._sync = () => this.setState({ compact: this.mq.matches });
+    this._sync();
+    this.mq.addEventListener('change', this._sync);
+    const el = this.scrollRef.current;
+    if (el) el.scrollLeft = 0;
+  }
+
+  componentWillUnmount() {
+    if (this.motion) this.motion.kill();
+    if (this.mq) this.mq.removeEventListener('change', this._sync);
+  }
+
+  scrollBy(n) {
+    const el = this.scrollRef.current;
+    const col = this.state.compact ? COMPACT.col : COL;
+    if (el) el.scrollBy({ left: n * col * 7, behavior: 'smooth' });
+  }
+
+
+  _motion() {
+    import('./maissa-motion.js')
+      .then((m) => { this.m = m; this.motion = m.initPageMotion({ smooth: false }); })
+      .catch(() => {
+        document.querySelectorAll('[data-reveal],[data-split-lines]').forEach((el) => { el.style.opacity = '1'; });
+        const l = document.querySelector('[data-loader]');
+        if (l) l.style.display = 'none';
+      });
+  }
+
+  renderVals() {
+    const c = this.state.compact;
+    const col = c ? COMPACT.col : COL;
+    const label = c ? COMPACT.label : LABEL;
+    const rowH = c ? COMPACT.row : ROW;
+
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() - 2);
+
+    const days = [];
+    for (let i = 0; i < DAYS; i++) {
+      const d = new Date(start);
+      d.setDate(d.getDate() + i);
+      const past = i < 2;
+      const today = i === 2;
+      days.push({
+        i, num: d.getDate(), dow: DOW[d.getDay()], month: d.getMonth(), past, today,
+        headStyle: 'width:' + col + 'px;flex:none;padding:9px 0 10px;text-align:center;color:' +
+          (today ? '#1A0A0F' : past ? '#B9959F' : '#46232F') +
+          ';border-left:1px solid rgba(26,10,15,.06);' +
+          (today ? 'background:rgba(201,143,160,.18);' : ''),
+      });
+    }
+
+    const months = [];
+    days.forEach((d) => {
+      const last = months[months.length - 1];
+      if (last && last.m === d.month) last.count += 1;
+      else months.push({ m: d.month, count: 1 });
+    });
+
+    const filter = this.state.filter;
+    const all = LISTINGS.map((_, i) => i);
+    const shown = (filter === 'all' ? all : [Number(filter)]).filter((i) => LISTINGS[i]);
+
+    const rows = shown.map((li) => {
+      const L = LISTINGS[li];
+      return {
+        title: L.title,
+        meta: L.meta,
+        rowStyle: 'display:flex;height:' + rowH + 'px;border-bottom:1px solid rgba(26,10,15,.07);',
+        labelStyle: 'position:sticky;left:0;z-index:4;width:' + label + 'px;flex:none;padding:0 14px;display:flex;flex-direction:column;justify-content:center;background:#FFFFFF;border-right:1px solid rgba(26,10,15,.1);',
+        cells: days.map((d) => ({
+          style: 'width:' + col + 'px;flex:none;border-left:1px solid rgba(26,10,15,.05);' +
+            (d.today ? 'background:rgba(201,143,160,.13);' :
+             d.past ? 'background-image:repeating-linear-gradient(45deg,rgba(26,10,15,.14) 0,rgba(26,10,15,.14) 1px,transparent 1px,transparent 6px);' : ''),
+        })),
+        bars: BOOKINGS.filter((b) => b.l === li).map((b, bi) => {
+          const ch = CHANNELS[b.ch];
+          const sel = this.state.selected && this.state.selected.key === li + '-' + bi;
+          const hatch = b.ch === 'owner_block'
+            ? 'background-image:repeating-linear-gradient(45deg,rgba(246,230,234,.9) 0,rgba(246,230,234,.9) 1px,transparent 1px,transparent 6px);' : '';
+          return {
+            label: c ? b.guest.split(' ')[0] : b.guest,
+            title: b.guest + ' \u00b7 ' + ch.label + ' \u00b7 ' + b.n + ' nights',
+            style: 'position:absolute;top:' + (rowH * 0.18) + 'px;height:' + (rowH * 0.64) + 'px;left:' + (b.from * col + 3) + 'px;width:' +
+              (b.n * col - 6) + 'px;display:flex;align-items:center;padding:0 11px;border:none;border-radius:9px;cursor:pointer;font-family:inherit;font-size:12px;letter-spacing:-.01em;text-align:left;background-color:' +
+              ch.fill + ';color:' + ch.ink + ';' + hatch +
+              'box-shadow:' + (sel ? '0 0 0 2px #1A0A0F, 0 12px 24px -14px rgba(26,10,15,.6)' : '0 4px 10px -8px rgba(26,10,15,.5)') +
+              ';transition:box-shadow .25s ease,transform .25s ease;' + (sel ? 'transform:translateY(-1px);' : ''),
+            select: () => this.setState({ selected: { key: li + '-' + bi, b, listing: L.title } }),
+          };
+        }),
+      };
+    });
+
+    const sel = this.state.selected;
+    const selCh = sel ? CHANNELS[sel.b.ch] : null;
+    const selSt = sel ? STATUS[sel.b.st] : null;
+
+    return {
+      scrollRef: this.scrollRef,
+      trackWidth: 'min-width:' + (label + DAYS * col) + 'px;',
+      labelHeadStyle: 'position:sticky;left:0;z-index:7;width:' + label + 'px;flex:none;padding:0 14px;display:flex;align-items:flex-end;padding-bottom:12px;background:#FFFFFF;border-right:1px solid rgba(26,10,15,.1);',
+      months: months.map((m) => ({
+        label: MONTH[m.m],
+        style: 'width:' + (m.count * col) + 'px;flex:none;padding:9px 12px 7px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#8A6A74;border-left:1px solid rgba(26,10,15,.08);border-bottom:1px solid rgba(26,10,15,.06);overflow:hidden;white-space:nowrap;',
+      })),
+      days,
+      rows,
+      detailStyle: sel
+        ? 'padding:18px clamp(16px,2.4vw,26px);border-top:1px solid rgba(26,10,15,.1);background:#FDF4F6;'
+        : 'display:none;',
+      detailSwatch: sel ? 'display:block;width:26px;height:11px;border-radius:3px;background:' + selCh.fill + ';' : 'display:none;',
+      detailGuest: sel ? sel.b.guest : '',
+      detailMeta: sel
+        ? sel.listing + ' \u00b7 ' + selCh.label + ' \u00b7 ' + sel.b.n + ' nights \u00b7 ' +
+          (sel.b.g ? sel.b.g + ' guests \u00b7 ' : '') +
+          (sel.b.price ? (sel.b.price * sel.b.n).toLocaleString('en-US') + ' TND' : 'no revenue')
+        : '',
+      detailStatus: sel ? selSt.label : '',
+      detailChip: sel
+        ? 'padding:6px 12px;border-radius:999px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:' + selSt.bg + ';color:' + selSt.fg + ';'
+        : 'display:none;',
+      clearSel: () => this.setState({ selected: null }),
+      onFilter: (e) => this.setState({ filter: e.target.value, selected: null }),
+      prevWeek: () => this.scrollBy(-1),
+      nextWeek: () => this.scrollBy(1),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/styles.css">
+<script src="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#1A0A0F; }
+  body { font-family:'Archivo', system-ui, sans-serif; color:#1A0A0F; -webkit-font-smoothing:antialiased; font-synthesis-weight:none; }
+  * { box-sizing:border-box; }
+  a { color:#1A0A0F; text-decoration:none; }
+  a:hover { color:#8E4257; }
+  summary::-webkit-details-marker { display:none; }
+  summary { list-style:none; cursor:pointer; }
+  ::selection { background:#1A0A0F; color:#F6E6EA; }
+  :focus-visible { outline:2px solid #8E4257; outline-offset:3px; }
+  @keyframes mDrift1 { 0%,100% { transform:translate3d(-8%,-6%,0) scale(1); } 50% { transform:translate3d(6%,5%,0) scale(1.18); } }
+  @keyframes mDrift2 { 0%,100% { transform:translate3d(7%,6%,0) scale(1.12); } 50% { transform:translate3d(-7%,-8%,0) scale(1); } }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div>
+
+<div data-loader="1" style="position:fixed;inset:0;z-index:200;background:#1A0A0F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px">
+  <p data-loader-mark="1" style="margin:0;font-size:clamp(30px,5vw,58px);letter-spacing:-.05em;font-weight:400;color:#F6E6EA">Maissa</p>
+  <svg width="220" height="2" viewBox="0 0 220 2" aria-hidden="true" style="display:block;overflow:visible">
+    <line data-loader-line="1" x1="0" y1="1" x2="220" y2="1" stroke="#C98FA0" stroke-width="2"></line>
+  </svg>
+  <p data-loader-note="1" style="margin:0;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;text-align:center;white-space:nowrap;color:rgba(246,230,234,.5)">Two homes &#183; Tunisia</p>
+</div>
+
+<div data-smooth-wrapper="1">
+<div data-smooth-content="1" style="position:relative;background:#1A0A0F">
+
+<section data-screen-label="Hero" style="position:relative;min-height:100vh;padding:clamp(10px,2.2vw,26px);overflow:hidden">
+
+  <div style="position:absolute;inset:0;overflow:hidden">
+    <div style="position:absolute;inset:-6%;filter:blur(3px) saturate(.8) brightness(.6)">
+      <image-slot id="maissa-hero-bg" shape="rect" fit="cover" placeholder="Ambient backdrop"></image-slot>
+    </div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,10,15,.55),rgba(26,10,15,.28) 40%,rgba(26,10,15,.7))"></div>
+    <div aria-hidden="true" style="{{ glowA }}"></div>
+    <div aria-hidden="true" style="{{ glowB }}"></div>
+    <div aria-hidden="true" data-warmth="1" style="position:absolute;top:0;left:0;width:44vmax;height:44vmax;margin:-22vmax 0 0 -22vmax;border-radius:50%;background:radial-gradient(circle,rgba(201,143,160,.2),transparent 62%);pointer-events:none;opacity:0;will-change:transform"></div>
+  </div>
+
+  <div data-hero-desktop="1" style="{{ heroDesktopStyle }}">
+  <div data-hero-card="1" style="position:relative;width:100%;height:calc(100vh - clamp(20px,4.4vw,52px));min-height:640px;background:#F6E6EA;border-radius:clamp(20px,2.2vw,30px);overflow:hidden;box-shadow:0 40px 120px -40px rgba(0,0,0,.7)">
+
+    <div style="position:absolute;top:0;left:0;right:0;height:66%;overflow:hidden">
+      <image-slot id="maissa-hero-photo" shape="rect" fit="cover" placeholder="Hero photograph — Djerba Villa"></image-slot>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,10,15,.4),rgba(26,10,15,0) 34%,rgba(26,10,15,.06));pointer-events:none"></div>
+    </div>
+
+    <header data-nav="1" style="position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px clamp(18px,2vw,28px)">
+      <a href="#top" style="font-size:20px;font-weight:500;letter-spacing:-.035em;color:#F6E6EA">Maissa</a>
+
+      <nav aria-label="Main" style="display:flex;align-items:center;gap:2px;background:#F6E6EA;border-radius:999px;padding:7px;box-shadow:0 10px 30px -14px rgba(0,0,0,.5)">
+        <a href="#top" data-scroll-link="1" style="display:block;padding:9px 18px;border-radius:999px;font-size:14px;letter-spacing:-.01em;color:#1A0A0F;background:rgba(26,10,15,.07)">Home</a>
+        <a href="#homes" data-scroll-link="1" style="display:block;padding:9px 18px;border-radius:999px;font-size:14px;letter-spacing:-.01em;color:#7A5A63;transition:color .3s ease,background .3s ease" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">The homes</a>
+        <a href="#host" data-scroll-link="1" style="display:block;padding:9px 18px;border-radius:999px;font-size:14px;letter-spacing:-.01em;color:#7A5A63;transition:color .3s ease,background .3s ease" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">The host</a>
+        <a href="#where" data-scroll-link="1" style="display:block;padding:9px 18px;border-radius:999px;font-size:14px;letter-spacing:-.01em;color:#7A5A63;transition:color .3s ease,background .3s ease" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">Where</a>
+        <a href="#contact" data-scroll-link="1" style="display:block;padding:9px 18px;border-radius:999px;font-size:14px;letter-spacing:-.01em;color:#7A5A63;transition:color .3s ease,background .3s ease" style-hover="color:#1A0A0F;background:rgba(26,10,15,.05)">Enquire</a>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:8px">
+        <a href="Maissa Login.dc.html" style="display:block;padding:11px 20px;border-radius:999px;font-size:13.5px;letter-spacing:-.01em;color:#F6E6EA;border:1px solid rgba(246,230,234,.5);transition:background .3s ease,color .3s ease" style-hover="background:#F6E6EA;color:#1A0A0F">Operator</a>
+        <a href="#contact" data-scroll-link="1" style="display:block;padding:11px 22px;border-radius:999px;font-size:13.5px;letter-spacing:-.01em;color:#1A0A0F;background:#F6E6EA;transition:opacity .3s ease" style-hover="opacity:.82">Enquire</a>
+      </div>
+    </header>
+
+    <div style="position:absolute;top:96px;right:clamp(18px,2vw,28px);z-index:4;display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+      <button type="button" onClick="{{ toggleSound }}" aria-label="Ambient sound" style="display:flex;align-items:center;gap:8px;height:38px;padding:0 14px;border:1px solid rgba(246,230,234,.42);border-radius:999px;background:rgba(26,10,15,.36);backdrop-filter:blur(8px);color:#F6E6EA;font-family:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .3s ease" style-hover="background:rgba(26,10,15,.56)">
+        <span aria-hidden="true" style="display:block;width:6px;height:6px;border-radius:50%;background:{{ soundDot }}"></span>
+        <span>{{ soundLabel }}</span>
+      </button>
+      <p style="margin:0;padding:0 14px;height:38px;display:flex;align-items:center;border-radius:999px;background:rgba(26,10,15,.36);backdrop-filter:blur(8px);color:rgba(246,230,234,.85);font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span data-phase="1">{{ phaseLabel }}</span></p>
+    </div>
+
+    <div style="position:absolute;left:0;bottom:0;z-index:2;width:min(57%,760px);background:#F6E6EA;border-top-right-radius:clamp(20px,2.2vw,30px);padding:clamp(28px,3vw,44px) clamp(30px,3.4vw,52px) clamp(28px,3vw,42px) clamp(24px,2.6vw,40px)">
+      <h1 data-hero-title="1" style="margin:0;font-size:clamp(34px,5.1vw,74px);line-height:.96;letter-spacing:-.05em;font-weight:400;color:#1A0A0F;text-wrap:balance">Where the Light<br>Stays Longer.</h1>
+      <div style="display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);margin-top:clamp(22px,2.6vw,36px);flex-wrap:wrap">
+        <p style="margin:0;font-size:13px;line-height:1.35;letter-spacing:-.01em;color:#1A0A0F">Two<br>homes</p>
+        <span aria-hidden="true" style="display:block;width:1px;height:34px;background:rgba(26,10,15,.18)"></span>
+        <p style="margin:0;max-width:340px;font-size:12.5px;line-height:1.55;color:#6E4E58;text-wrap:pretty">A courtyard villa in Djerba and a terrace loft in Ezzahra — renovated and hosted by Maissa. Photographed at the hour they actually look like that.</p>
+        <a href="#contact" data-scroll-link="1" style="display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 26px;border-radius:999px;background:#1A0A0F;color:#F6E6EA;font-size:13.5px;letter-spacing:-.01em;white-space:nowrap;transition:background .35s ease" style-hover="background:#3A1520">Check availability</a>
+      </div>
+    </div>
+
+    <figure data-drag-card="1" style="position:absolute;right:clamp(18px,2vw,28px);bottom:clamp(18px,2vw,28px);z-index:3;width:clamp(250px,22vw,306px);margin:0;background:#F6E6EA;border-radius:18px;padding:11px 11px 15px;box-shadow:0 24px 60px -28px rgba(0,0,0,.5);cursor:grab;touch-action:none">
+      <div style="position:relative;height:132px;border-radius:11px;overflow:hidden;background:#1A0A0F">
+        <image-slot id="maissa-hero-tour" shape="rect" fit="cover" placeholder="Tour still"></image-slot>
+        <span aria-hidden="true" style="position:absolute;right:9px;bottom:9px;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#F6E6EA;color:#1A0A0F;font-size:10px;padding-left:2px">&#9654;</span>
+      </div>
+      <figcaption>
+        <p style="display:flex;align-items:center;gap:7px;margin:13px 0 0;font-size:14.5px;letter-spacing:-.02em;color:#1A0A0F">Djerba Villa
+          <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#1A0A0F;color:#F6E6EA;font-size:9.5px;font-weight:500">i</span>
+        </p>
+        <p style="margin:9px 0 0;font-size:11px;line-height:1.5;color:#8A6A74">A whitewashed courtyard four streets back from the Houmt Souk fish market. 320 TND a night. Drag me.</p>
+      </figcaption>
+    </figure>
+  </div>
+  </div>
+
+  <div data-hero-mobile="1" style="{{ heroMobileStyle }}">
+  <div style="position:relative;width:100%;min-height:calc(100vh - 20px);background:#1A0A0F;border-radius:26px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px -34px rgba(0,0,0,.7)">
+    <div style="position:absolute;inset:0">
+      <image-slot id="maissa-hero-mobile" shape="rect" fit="cover" placeholder="Mobile hero photograph"></image-slot>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,10,15,.34),rgba(26,10,15,.14) 38%,rgba(26,10,15,.8));pointer-events:none"></div>
+    </div>
+
+    <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:20px 20px 0">
+      <span style="font-size:17px;font-weight:500;letter-spacing:-.03em;color:#F6E6EA">Maissa</span>
+      <button type="button" onClick="{{ toggleSound }}" aria-label="Ambient sound" style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border:1px solid rgba(246,230,234,.42);border-radius:999px;background:rgba(26,10,15,.34);color:#F6E6EA;font-family:inherit;font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">
+        <span aria-hidden="true" style="display:block;width:5px;height:5px;border-radius:50%;background:{{ soundDot }}"></span>
+        <span>{{ soundLabel }}</span>
+      </button>
+    </div>
+
+    <div style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 30px">
+      <p style="margin:0;font-size:21px;font-weight:300;letter-spacing:-.02em;color:rgba(246,230,234,.92)">Come and stay where</p>
+      <h1 style="margin:2px 0 0;font-size:clamp(38px,12vw,52px);line-height:1;letter-spacing:-.045em;font-weight:500;color:#F6E6EA">the light stays</h1>
+      <p style="margin:20px 0 0;max-width:250px;font-size:13.5px;line-height:1.6;color:rgba(246,230,234,.72)">Two design-forward homes in Tunisia, honestly photographed and answered within the hour.</p>
+    </div>
+
+    <div style="position:relative;z-index:2;padding:0 18px 18px;display:flex;flex-direction:column;gap:10px">
+      <a href="#homes" data-scroll-link="1" style="display:flex;align-items:center;justify-content:center;height:56px;border-radius:16px;background:#F6E6EA;color:#1A0A0F;font-size:15px;letter-spacing:-.01em">Explore the homes</a>
+      <a href="#contact" data-scroll-link="1" style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:16px;background:rgba(246,230,234,.14);border:1px solid rgba(246,230,234,.3);color:#F6E6EA;font-size:13.5px;letter-spacing:-.01em">Enquire</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+<main style="position:relative;background:#F6E6EA;border-radius:clamp(20px,2.4vw,34px) clamp(20px,2.4vw,34px) 0 0;margin-top:-14px;z-index:5;overflow:hidden">
+
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="display:block;width:100%;height:44px">
+    <path data-morph-from="1" d="M0 60 C240 10 480 54 720 26 C960 -2 1200 46 1440 14 L1440 60 Z" fill="#1A0A0F" opacity="0.06"></path>
+    <path data-morph-to="1" d="M0 60 C240 46 480 6 720 40 C960 58 1200 8 1440 44 L1440 60 Z" fill="none" style="visibility:hidden"></path>
+  </svg>
+
+  <section id="promise" data-screen-label="Promise" style="max-width:1240px;margin:0 auto;padding:clamp(50px,7vw,110px) clamp(20px,4vw,56px) clamp(50px,6vw,90px)">
+    <p data-reveal="1" style="margin:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8A6A74">Honest by default</p>
+    <h2 data-split-lines="1" style="margin:26px 0 0;max-width:20ch;font-size:clamp(30px,4.4vw,62px);line-height:1.02;letter-spacing:-.045em;font-weight:400;color:#1A0A0F;text-wrap:balance">What you see is what you walk into.</h2>
+    <ul style="list-style:none;margin:clamp(48px,6vw,88px) 0 0;padding:0;display:grid;gap:clamp(28px,4vw,56px);grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))">
+      <li data-reveal="1" style="padding-top:22px;border-top:1px solid rgba(26,10,15,.14)">
+        <p style="margin:0;font-size:11px;letter-spacing:.2em;color:#8E4257">01</p>
+        <h3 style="margin:16px 0 0;font-size:21px;line-height:1.2;letter-spacing:-.025em;font-weight:400;color:#1A0A0F">Photographed honestly</h3>
+        <p style="margin:12px 0 0;font-size:13.5px;line-height:1.65;color:#6E4E58;text-wrap:pretty">Every room, at the hour it actually looks like that. No wide-angle tricks, no borrowed sunsets.</p>
+      </li>
+      <li data-reveal="1" style="padding-top:22px;border-top:1px solid rgba(26,10,15,.14)">
+        <p style="margin:0;font-size:11px;letter-spacing:.2em;color:#8E4257">02</p>
+        <h3 style="margin:16px 0 0;font-size:21px;line-height:1.2;letter-spacing:-.025em;font-weight:400;color:#1A0A0F">One team on the ground</h3>
+        <p style="margin:12px 0 0;font-size:13.5px;line-height:1.65;color:#6E4E58;text-wrap:pretty">The same people prepare, clean and check both houses. Nothing is subcontracted to a rota of strangers.</p>
+      </li>
+      <li data-reveal="1" style="padding-top:22px;border-top:1px solid rgba(26,10,15,.14)">
+        <p style="margin:0;font-size:11px;letter-spacing:.2em;color:#8E4257">03</p>
+        <h3 style="margin:16px 0 0;font-size:21px;line-height:1.2;letter-spacing:-.025em;font-weight:400;color:#1A0A0F">Answered within the hour</h3>
+        <p style="margin:12px 0 0;font-size:13.5px;line-height:1.65;color:#6E4E58;text-wrap:pretty">Before you book and while you are there. Hosting since 2022, and that has not slipped.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="homes" data-screen-label="The homes" style="max-width:1240px;margin:0 auto;padding:clamp(30px,4vw,60px) clamp(20px,4vw,56px) clamp(70px,9vw,130px)">
+    <div data-reveal="1" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid rgba(26,10,15,.16)">
+      <h2 style="margin:0;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.04em;font-weight:400;color:#1A0A0F">Both homes</h2>
+      <button type="button" onClick="{{ toggleLayout }}" style="height:42px;padding:0 20px;border:1px solid rgba(26,10,15,.2);border-radius:999px;background:transparent;font-family:inherit;font-size:12.5px;letter-spacing:-.01em;color:#1A0A0F;cursor:pointer;white-space:nowrap;transition:background .3s ease" style-hover="background:rgba(26,10,15,.05)">{{ layoutLabel }}</button>
+    </div>
+
+    <div data-flip-container="1" style="{{ homesGrid }}">
+      <article data-flip-item="djerba" style="min-width:0;display:grid;gap:clamp(20px,2.6vw,40px);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:center">
+        <div style="position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:#E7D2D8">
+          <image-slot id="maissa-home-djerba" shape="rect" fit="cover" placeholder="Djerba Villa"></image-slot>
+        </div>
+        <div>
+          <p style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8E4257">Featured &#183; Houmt Souk, Djerba</p>
+          <h3 style="margin:16px 0 0;font-size:clamp(24px,2.8vw,38px);line-height:1.06;letter-spacing:-.035em;font-weight:400;color:#1A0A0F">Djerba Villa</h3>
+          <p style="margin:16px 0 0;max-width:44ch;font-size:14px;line-height:1.7;color:#6E4E58;text-wrap:pretty">A whitewashed courtyard house four streets back from the fish market, rebuilt around its original vaulted rooms. Breakfast happens under the fig tree.</p>
+          <p style="margin:22px 0 0;display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:12.5px;color:#8A6A74">
+            <span style="color:#1A0A0F;font-size:15px">320 <span style="color:#8A6A74;font-size:12px">TND / night</span></span>
+            <span aria-hidden="true" style="display:block;width:1px;height:16px;background:rgba(26,10,15,.18)"></span>
+            <span>Sleeps 6</span>
+            <span aria-hidden="true" style="display:block;width:1px;height:16px;background:rgba(26,10,15,.18)"></span>
+            <span>4.9 &#183; 128 reviews</span>
+          </p>
+          <a href="Maissa Listing Detail.dc.html" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;height:46px;padding:0 24px;border-radius:999px;background:#1A0A0F;color:#F6E6EA;font-size:13px;letter-spacing:-.01em;white-space:nowrap;transition:background .35s ease" style-hover="background:#3A1520">See the home</a>
+        </div>
+      </article>
+
+      <article data-flip-item="ezzahra" style="min-width:0;display:grid;gap:clamp(20px,2.6vw,40px);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:center">
+        <div style="position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:#E7D2D8">
+          <image-slot id="maissa-home-ezzahra" shape="rect" fit="cover" placeholder="Ezzahra Apartment Loft"></image-slot>
+        </div>
+        <div>
+          <p style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8A6A74">Ezzahra, Ben Arous</p>
+          <h3 style="margin:16px 0 0;font-size:clamp(24px,2.8vw,38px);line-height:1.06;letter-spacing:-.035em;font-weight:400;color:#1A0A0F">Ezzahra Apartment Loft</h3>
+          <p style="margin:16px 0 0;max-width:44ch;font-size:14px;line-height:1.7;color:#6E4E58;text-wrap:pretty">A top-floor loft on the quiet side of the hill, with a private terrace facing north-east across the Gulf of Tunis toward Carthage.</p>
+          <p style="margin:22px 0 0;display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:12.5px;color:#8A6A74">
+            <span style="color:#1A0A0F;font-size:15px">280 <span style="color:#8A6A74;font-size:12px">TND / night</span></span>
+            <span aria-hidden="true" style="display:block;width:1px;height:16px;background:rgba(26,10,15,.18)"></span>
+            <span>Sleeps 3</span>
+            <span aria-hidden="true" style="display:block;width:1px;height:16px;background:rgba(26,10,15,.18)"></span>
+            <span>4.85 &#183; 41 reviews</span>
+          </p>
+          <a href="Maissa Listing Detail.dc.html" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;height:46px;padding:0 24px;border-radius:999px;border:1px solid rgba(26,10,15,.22);color:#1A0A0F;font-size:13px;letter-spacing:-.01em;white-space:nowrap;transition:background .35s ease" style-hover="background:rgba(26,10,15,.05)">See the home</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="host" data-screen-label="The host" style="position:relative;background:#1A0A0F;color:#F6E6EA;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;top:-20%;left:-10%;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(201,143,160,.22),transparent 62%);animation:mDrift1 34s ease-in-out infinite;pointer-events:none"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-25%;right:-8%;width:52vw;height:52vw;border-radius:50%;background:radial-gradient(circle,rgba(142,66,87,.28),transparent 64%);animation:mDrift2 42s ease-in-out infinite;pointer-events:none"></div>
+
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(70px,9vw,140px) clamp(20px,4vw,56px);display:grid;gap:clamp(34px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center">
+      <div data-reveal="1">
+        <div style="position:relative;width:clamp(160px,20vw,240px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:#3A1520">
+          <image-slot id="maissa-host-portrait" shape="circle" fit="cover" placeholder="Maissa"></image-slot>
+        </div>
+        <p style="margin:28px 0 0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,230,234,.55)">Superhost &#183; Djerba &amp; Ezzahra</p>
+        <h2 style="margin:16px 0 0;font-size:clamp(28px,3.8vw,52px);line-height:1.02;letter-spacing:-.045em;font-weight:400;color:#F6E6EA">Hosted by Maissa</h2>
+      </div>
+      <div data-reveal="1">
+        <p style="margin:0;font-size:15px;line-height:1.75;color:rgba(246,230,234,.75);max-width:52ch;text-wrap:pretty">I look after two design-forward homes — a courtyard villa in Djerba and a terrace loft in Ezzahra — each one personally renovated and photographed to give guests an honest sense of the space before they book. Both are prepared, cleaned and checked by the same team. If something is not right, I answer within the hour.</p>
+        <dl style="margin:clamp(30px,4vw,50px) 0 0;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+          <div style="padding-top:16px;border-top:1px solid rgba(246,230,234,.2)">
+            <dt style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.55)">Homes</dt>
+            <dd data-count="2" style="margin:10px 0 0;font-size:28px;letter-spacing:-.035em;color:#F6E6EA">2</dd>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid rgba(246,230,234,.2)">
+            <dt style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.55)">Rating</dt>
+            <dd style="margin:10px 0 0;font-size:28px;letter-spacing:-.035em;color:#F6E6EA">4.9</dd>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid rgba(246,230,234,.2)">
+            <dt style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.55)">Replies</dt>
+            <dd style="margin:10px 0 0;font-size:28px;letter-spacing:-.035em;color:#F6E6EA">&lt; 1h</dd>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid rgba(246,230,234,.2)">
+            <dt style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.55)">Hosting since</dt>
+            <dd style="margin:10px 0 0;font-size:28px;letter-spacing:-.035em;color:#F6E6EA">2022</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="where" data-screen-label="Where" style="max-width:1240px;margin:0 auto;padding:clamp(70px,9vw,130px) clamp(20px,4vw,56px)">
+    <p data-reveal="1" style="margin:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8A6A74">Where</p>
+    <h2 data-split-lines="1" style="margin:24px 0 0;max-width:18ch;font-size:clamp(28px,3.8vw,52px);line-height:1.03;letter-spacing:-.045em;font-weight:400;color:#1A0A0F">One island, one hillside above the gulf.</h2>
+
+    <div data-reveal="1" style="display:grid;gap:clamp(22px,3vw,44px);grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:clamp(38px,5vw,64px);align-items:center">
+      <div style="position:relative;padding:clamp(18px,2.4vw,32px);border-radius:22px;background:#EFDCE1;border:1px solid rgba(26,10,15,.1)">
+        <svg viewBox="-30 -30 389 765" role="img" aria-label="Map of Tunisia showing Djerba Villa and Ezzahra Apartment Loft" style="display:block;width:100%;max-height:520px;margin:0 auto">
+          <path data-tunisia="1" d="M162.3 704.2 L126.9 524.7 L75.8 484.4 L75.1 460.2 L7.3 400.6 L0 325.3 L51.1 269.5 L70.6 187 L57.5 91.7 L74.3 40.4 L164.6 0 L222.7 12 L220.2 62.6 L290.5 25.8 L296.4 45 L254.9 94 L254.4 140.3 L283.1 165.1 L272.2 251.6 L217.6 301.9 L233.3 356.4 L276.2 358.1 L297.1 405.7 L328.6 421.3 L323.9 498.1 L283.5 526.8 L258 558.9 L201.1 597.4 L209.9 638.8 L202.7 681.1 Z" fill="rgba(142,66,87,.1)" stroke="#1A0A0F" stroke-width="2.4" stroke-linejoin="round"></path>
+          <circle data-mote="1" r="5" fill="#8E4257" opacity="0"></circle>
+          <g>
+            <circle cx="230.9" cy="60.8" r="8" fill="#8E4257"></circle>
+            <circle cx="230.9" cy="60.8" r="17" fill="none" stroke="rgba(142,66,87,.45)" stroke-width="2"></circle>
+            <text x="248" y="58" font-size="18" font-family="Archivo, sans-serif" fill="#1A0A0F">Ezzahra</text>
+            <text x="248" y="78" font-size="13" font-family="Archivo, sans-serif" fill="#8A6A74">36.742, 10.310</text>
+          </g>
+          <g>
+            <circle cx="276.4" cy="347.4" r="8" fill="#1A0A0F"></circle>
+            <circle cx="276.4" cy="347.4" r="17" fill="none" stroke="rgba(26,10,15,.35)" stroke-width="2"></circle>
+            <text x="293" y="345" font-size="18" font-family="Archivo, sans-serif" fill="#1A0A0F">Djerba</text>
+            <text x="293" y="365" font-size="13" font-family="Archivo, sans-serif" fill="#8A6A74">33.876, 10.858</text>
+          </g>
+          <text x="0" y="730" font-size="12" font-family="Archivo, sans-serif" fill="#8A6A74" letter-spacing="1.6">TUNISIA &#183; NATURAL EARTH OUTLINE</text>
+        </svg>
+      </div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+        <li style="padding:22px 0;border-bottom:1px solid rgba(26,10,15,.14)">
+          <p style="margin:0;display:flex;align-items:baseline;justify-content:space-between;gap:18px"><span style="font-size:18px;letter-spacing:-.025em;color:#1A0A0F">Djerba Villa</span><span style="font-size:12px;color:#8A6A74;white-space:nowrap">320 TND</span></p>
+          <p style="margin:8px 0 0;font-size:12.5px;line-height:1.6;color:#6E4E58">Houmt Souk, Djerba &#183; 33.876, 10.858. Fifteen minutes on foot to the fish market and the ferry terminal.</p>
+        </li>
+        <li style="padding:22px 0;border-bottom:1px solid rgba(26,10,15,.14)">
+          <p style="margin:0;display:flex;align-items:baseline;justify-content:space-between;gap:18px"><span style="font-size:18px;letter-spacing:-.025em;color:#1A0A0F">Ezzahra Apartment Loft</span><span style="font-size:12px;color:#8A6A74;white-space:nowrap">280 TND</span></p>
+          <p style="margin:8px 0 0;font-size:12.5px;line-height:1.6;color:#6E4E58">Ezzahra, Ben Arous &#183; 36.742, 10.310. Twenty minutes down the coast road into Tunis, ten to the Carthage headland.</p>
+        </li>
+        <li style="padding:22px 0">
+          <p style="margin:0;font-size:12.5px;line-height:1.7;color:#8A6A74">The outline is the real Natural Earth boundary of Tunisia and both pins are plotted from the coordinates in the listings table — not an illustration.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq" data-screen-label="FAQ" style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px) clamp(70px,9vw,130px)">
+    <h2 data-split-lines="1" style="margin:0 0 clamp(28px,4vw,48px);font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.04em;font-weight:400;color:#1A0A0F">Questions, answered plainly</h2>
+    <details data-reveal="1" style="border-top:1px solid rgba(26,10,15,.16)">
+      <summary style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;font-size:clamp(16px,1.8vw,20px);letter-spacing:-.02em;color:#1A0A0F">How do I actually book?<span aria-hidden="true" style="color:#8A6A74">+</span></summary>
+      <p style="margin:0 0 26px;max-width:62ch;font-size:14px;line-height:1.7;color:#6E4E58">Bookings are completed on Airbnb. Enquire here and I will send you the direct link with your dates held for 24 hours.</p>
+    </details>
+    <details data-reveal="1" style="border-top:1px solid rgba(26,10,15,.16)">
+      <summary style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;font-size:clamp(16px,1.8vw,20px);letter-spacing:-.02em;color:#1A0A0F">Are the photographs current?<span aria-hidden="true" style="color:#8A6A74">+</span></summary>
+      <p style="margin:0 0 26px;max-width:62ch;font-size:14px;line-height:1.7;color:#6E4E58">Yes. Each house is reshot after any renovation, in natural light, at the hour the room actually looks like that.</p>
+    </details>
+    <details data-reveal="1" style="border-top:1px solid rgba(26,10,15,.16)">
+      <summary style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;font-size:clamp(16px,1.8vw,20px);letter-spacing:-.02em;color:#1A0A0F">Who looks after the house while I am there?<span aria-hidden="true" style="color:#8A6A74">+</span></summary>
+      <p style="margin:0 0 26px;max-width:62ch;font-size:14px;line-height:1.7;color:#6E4E58">The same team that prepared it. One number, answered within the hour, for the whole stay.</p>
+    </details>
+    <details data-reveal="1" style="border-top:1px solid rgba(26,10,15,.16);border-bottom:1px solid rgba(26,10,15,.16)">
+      <summary style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;font-size:clamp(16px,1.8vw,20px);letter-spacing:-.02em;color:#1A0A0F">What is the cancellation policy?<span aria-hidden="true" style="color:#8A6A74">+</span></summary>
+      <p style="margin:0 0 26px;max-width:62ch;font-size:14px;line-height:1.7;color:#6E4E58">Whatever the Airbnb listing states at the moment you book — the policy is set there, not here, so it cannot drift.</p>
+    </details>
+  </section>
+
+  <section id="contact" data-screen-label="Enquire" style="background:#EFDCE1">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(70px,9vw,130px) clamp(20px,4vw,56px);display:grid;gap:clamp(34px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start">
+      <div data-reveal="1">
+        <p style="margin:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8A6A74">Enquire</p>
+        <h2 style="margin:24px 0 0;max-width:16ch;font-size:clamp(30px,4.2vw,58px);line-height:1.02;letter-spacing:-.045em;font-weight:400;color:#1A0A0F">Come and see it before you decide anything from a photo.</h2>
+        <p style="margin:22px 0 0;max-width:44ch;font-size:14px;line-height:1.7;color:#6E4E58;text-wrap:pretty">Tell me roughly when and how many, and I will come back within the hour with what is free and what it costs.</p>
+      </div>
+
+      <form data-reveal="1" onSubmit="{{ onSubmit }}" style="background:#FFFBFC;border-radius:24px;padding:clamp(24px,3vw,40px);box-shadow:0 30px 70px -46px rgba(26,10,15,.5)">
+        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))">
+          <label style="display:block">
+            <span style="display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">Name</span>
+            <input name="name" type="text" required="true" placeholder="Your name" style="width:100%;margin-top:9px;height:48px;padding:0 15px;border:1px solid rgba(26,10,15,.18);border-radius:12px;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1A0A0F"></input>
+          </label>
+          <label style="display:block">
+            <span style="display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">Email</span>
+            <input name="email" type="email" required="true" placeholder="you@example.com" style="width:100%;margin-top:9px;height:48px;padding:0 15px;border:1px solid rgba(26,10,15,.18);border-radius:12px;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1A0A0F"></input>
+          </label>
+        </div>
+        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));margin-top:18px">
+          <label style="display:block">
+            <span style="display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">Which home</span>
+            <select name="listing" style="width:100%;margin-top:9px;height:48px;padding:0 12px;border:1px solid rgba(26,10,15,.18);border-radius:12px;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1A0A0F">
+              <option value="">No preference yet</option>
+              <option value="djerba-villa">Djerba Villa</option>
+              <option value="ezzahra-apartment-loft">Ezzahra Apartment Loft</option>
+            </select>
+          </label>
+          <label style="display:block">
+            <span style="display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">Arrival</span>
+            <input name="arrival" type="date" style="width:100%;margin-top:9px;height:48px;padding:0 15px;border:1px solid rgba(26,10,15,.18);border-radius:12px;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1A0A0F"></input>
+          </label>
+          <label style="display:block">
+            <span style="display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">Guests</span>
+            <input name="guests" type="number" min="1" max="6" value="2" style="width:100%;margin-top:9px;height:48px;padding:0 15px;border:1px solid rgba(26,10,15,.18);border-radius:12px;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1A0A0F"></input>
+          </label>
+        </div>
+        <label style="display:block;margin-top:18px">
+          <span style="display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8A6A74">Message</span>
+          <textarea name="message" rows="4" required="true" placeholder="Dates, how many of you, anything you need to know." style="width:100%;margin-top:9px;padding:14px 15px;border:1px solid rgba(26,10,15,.18);border-radius:12px;background:#FFFFFF;font-family:inherit;font-size:14px;line-height:1.6;color:#1A0A0F;resize:vertical"></textarea>
+        </label>
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:24px">
+          <button type="submit" style="display:inline-flex;align-items:center;height:50px;padding:0 28px;border:none;border-radius:999px;background:#1A0A0F;color:#F6E6EA;font-family:inherit;font-size:14px;letter-spacing:-.01em;white-space:nowrap;cursor:pointer;transition:background .35s ease" style-hover="background:#3A1520">Send enquiry</button>
+          <p aria-live="polite" style="margin:0;font-size:12.5px;line-height:1.5;color:#6E4E58">{{ formNote }}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer data-screen-label="Footer" style="background:#1A0A0F;color:#F6E6EA">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(50px,6vw,88px) clamp(20px,4vw,56px);display:grid;gap:clamp(30px,4vw,56px);grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
+      <div>
+        <p style="margin:0;font-size:26px;letter-spacing:-.04em;color:#F6E6EA">Maissa</p>
+        <p style="margin:16px 0 0;max-width:30ch;font-size:13px;line-height:1.7;color:rgba(246,230,234,.6)">Two design-forward homes — Djerba and Ezzahra. Booked on Airbnb, managed by one team on the ground.</p>
+      </div>
+      <nav aria-label="Homes">
+        <p style="margin:0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.5)">The homes</p>
+        <ul style="list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:11px">
+          <li><a href="Maissa Listing Detail.dc.html" style="font-size:13.5px;color:rgba(246,230,234,.85)">Djerba Villa</a></li>
+          <li><a href="Maissa Listing Detail.dc.html" style="font-size:13.5px;color:rgba(246,230,234,.85)">Ezzahra Apartment Loft</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Elsewhere">
+        <p style="margin:0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.5)">Elsewhere</p>
+        <ul style="list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:11px">
+          <li><a href="#contact" data-scroll-link="1" style="font-size:13.5px;color:rgba(246,230,234,.85)">Enquire about a stay</a></li>
+          <li><a href="#host" data-scroll-link="1" style="font-size:13.5px;color:rgba(246,230,234,.85)">About the host</a></li>
+          <li><a href="Maissa Dashboard.dc.html" style="font-size:13.5px;color:rgba(246,230,234,.85)">Operator dashboard</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div style="border-top:1px solid rgba(246,230,234,.14)">
+      <div style="max-width:1240px;margin:0 auto;padding:22px clamp(20px,4vw,56px);display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:11.5px;color:rgba(246,230,234,.5)">
+        <p style="margin:0">&copy; 2026 Maissa. All rights reserved.</p>
+        <p style="margin:0">Bookings are completed on Airbnb. Enquiries answered within an hour.</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;timeOfDay&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;dawn&quot;,&quot;day&quot;,&quot;dusk&quot;,&quot;night&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'dawn'|'day'|'dusk'|'night'&quot;,&quot;section&quot;:&quot;Ambient&quot;},&quot;ambientIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:1.6,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Ambient&quot;}}">
+const PHASES = {
+  dawn:  { label: 'Dawn light',  a: 'rgba(201,143,160,.34)', b: 'rgba(120,96,130,.24)' },
+  day:   { label: 'Midday',      a: 'rgba(246,230,234,.24)', b: 'rgba(180,120,140,.18)' },
+  dusk:  { label: 'Golden hour', a: 'rgba(198,96,110,.34)',  b: 'rgba(90,40,60,.30)' },
+  night: { label: 'After dark',  a: 'rgba(120,80,110,.28)',  b: 'rgba(50,24,40,.34)' },
+};
+
+class Component extends DCLogic {
+  state = { sound: false, phase: 'dusk', formNote: '', stacked: false, isMobile: false };
+
+  constructor(props) {
+    super(props);
+    this.state.phase = this.autoPhase();
+  }
+
+  autoPhase() {
+    const h = new Date().getHours();
+    if (h < 8) return 'dawn';
+    if (h < 16) return 'day';
+    if (h < 20) return 'dusk';
+    return 'night';
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Viewport ownership stays in React state — an imperative style.display write
+    // goes stale as soon as a re-render happens or the resize event is missed.
+    this.mq = window.matchMedia('(max-width: 760px)');
+    this._sync = () => {
+      const m = this.mq.matches;
+      if (m !== this.state.isMobile) this.setState({ isMobile: m });
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    };
+    this._sync();
+    this.mq.addEventListener('change', this._sync);
+    window.addEventListener('resize', this._sync);
+
+    this.onMove = (e) => {
+      const el = document.querySelector('[data-warmth]');
+      if (!el) return;
+      if (window.gsap) window.gsap.to(el, { x: e.clientX, y: e.clientY, opacity: 1, duration: 1.1, ease: 'power3.out', overwrite: 'auto' });
+    };
+    window.addEventListener('pointermove', this.onMove, { passive: true });
+
+    this.armWatchdog();
+    this.waitForGsap(0);
+  }
+
+  waitForGsap(tries) {
+    if (window.gsap && window.ScrollTrigger && window.SplitText) { this.initMotion(); return; }
+    if (tries > 60) { this.revealAll(); return; }
+    this._t = setTimeout(() => this.waitForGsap(tries + 1), 100);
+  }
+
+  // Fail-open: the design must be visible whether or not GSAP ever ticks
+  // (background tabs, low-power mode, throttled rAF in embedded contexts).
+  revealAll() {
+    if (this._revealed) return;
+    this._revealed = true;
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.style.visibility = 'visible'; };
+    document.querySelectorAll('[data-reveal],[data-split-lines],[data-hero-card],[data-loader-mark],[data-loader-note],.ln,[data-tunisia],[data-nav]').forEach(show);
+    document.querySelectorAll('[data-split-lines] div, [data-hero-title] div').forEach(show);
+    const line = document.querySelector('[data-loader-line]');
+    if (line) { line.style.strokeDasharray = 'none'; line.style.strokeDashoffset = '0'; }
+    const l = document.querySelector('[data-loader]');
+    if (l) { l.style.display = 'none'; l.style.transform = 'none'; }
+    const mote = document.querySelector('[data-mote]');
+    if (mote) mote.style.opacity = '1';
+    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+  }
+
+  // Force-completes the intro and unconditionally un-hides everything.
+  armWatchdog() {
+    clearTimeout(this._wd);
+    this._wd = setTimeout(() => {
+      try { if (this.intro) this.intro.progress(1, true); } catch (e) {}
+      this.revealAll();
+    }, 2500);
+  }
+
+  initMotion() {
+    if (this._motionRan) return;
+    this._motionRan = true;
+    const g = window.gsap;
+    // If rAF is throttled (background tab, low-power, embedded preview) GSAP will
+    // never advance a frame — reveal the design and skip the scroll hijack.
+    let ticked = false;
+    requestAnimationFrame(() => { ticked = true; });
+    setTimeout(() => { if (!ticked) this.revealAll(); }, 600);
+    try {
+    const P = [window.ScrollTrigger, window.ScrollSmoother, window.ScrollToPlugin, window.Observer,
+      window.SplitText, window.ScrambleTextPlugin, window.Flip, window.Draggable, window.InertiaPlugin,
+      window.MorphSVGPlugin, window.DrawSVGPlugin, window.MotionPathPlugin].filter(Boolean);
+    g.registerPlugin.apply(g, P);
+    const ST = window.ScrollTrigger;
+
+    // ScrollSmoother — inertial scroll on the marketing shell.
+    // Only hand scrolling to ScrollSmoother once a real frame has ticked —
+    // otherwise it would take over scroll and never advance it.
+    if (window.ScrollSmoother && !this.reduced) {
+      requestAnimationFrame(() => {
+        try {
+          if (window.ScrollSmoother.get()) return;
+          this.smoother = window.ScrollSmoother.create({
+            wrapper: '[data-smooth-wrapper]', content: '[data-smooth-content]',
+            smooth: 1.2, effects: false, normalizeScroll: false,
+          });
+        } catch (e) {}
+      });
+    }
+
+    // Loader — DrawSVG the rule, then lift the curtain. set() + to() rather than
+    // from(), so a stalled ticker can never leave anything in a hidden start-state.
+    const intro = g.timeline({ onComplete: () => this.revealAll() });
+    this.intro = intro;
+    g.set('[data-loader-mark]', { yPercent: 40, opacity: 0 });
+    g.set('[data-loader-note]', { opacity: 0 });
+    g.set('[data-hero-card]', { scale: .94, opacity: 0 });
+    intro.to('[data-loader-mark]', { yPercent: 0, opacity: 1, duration: .9, ease: 'power3.out' })
+      .fromTo('[data-loader-line]', { drawSVG: '50% 50%' }, { drawSVG: '0% 100%', duration: 1.1, ease: 'power2.inOut' }, .1)
+      .to('[data-loader-note]', { opacity: 1, duration: .7 }, .5)
+      .to('[data-loader]', { yPercent: -100, duration: 1, ease: 'expo.inOut' }, '+=.35')
+      .set('[data-loader]', { display: 'none' })
+      .to('[data-hero-card]', { scale: 1, opacity: 1, duration: 1.2, ease: 'expo.out' }, '-=.7');
+
+    // SplitText — measured only once Archivo is actually loaded, otherwise the
+    // line breaks are computed against the fallback face.
+    this.splits = [];
+    const doSplits = () => {
+      const title = document.querySelector('[data-hero-title]');
+      if (title && !this.heroSplit) {
+        this.heroSplit = new window.SplitText(title, { type: 'lines,chars', linesClass: 'ln' });
+        g.fromTo(this.heroSplit.chars,
+          { yPercent: 110, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: .9, stagger: .014, ease: 'power4.out', delay: .2 });
+      }
+      document.querySelectorAll('[data-split-lines]').forEach((el) => {
+        const s = new window.SplitText(el, { type: 'lines' });
+        this.splits.push(s);
+        g.fromTo(s.lines,
+          { yPercent: 60, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 1, stagger: .09, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 85%' } });
+      });
+      ST.refresh();
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(doSplits);
+    else doSplits();
+
+    // ScrollTrigger — section reveals. immediateRender:false so an untriggered
+    // element is never pinned at opacity 0.
+    g.utils.toArray('[data-reveal]').forEach((el) => {
+      g.from(el, {
+        y: 34, opacity: 0, duration: 1.1, ease: 'power3.out', immediateRender: false,
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+      });
+    });
+
+    // MorphSVG — the divider shape shifts as you pass it.
+    const from = document.querySelector('[data-morph-from]');
+    const to = document.querySelector('[data-morph-to]');
+    if (from && to && window.MorphSVGPlugin) {
+      g.to(from, {
+        morphSVG: to, ease: 'none',
+        scrollTrigger: { trigger: from, start: 'top bottom', end: 'bottom top', scrub: 1 },
+      });
+    }
+
+    // DrawSVG + MotionPath — the Tunisia outline draws in, a mote runs the border.
+    const tun = document.querySelector('[data-tunisia]');
+    const mote = document.querySelector('[data-mote]');
+    if (tun && window.DrawSVGPlugin) {
+      g.from(tun, {
+        drawSVG: '0%', duration: 2.4, ease: 'power2.inOut', immediateRender: false,
+        scrollTrigger: { trigger: tun, start: 'top 80%' },
+      });
+    }
+    if (tun && mote && window.MotionPathPlugin) {
+      g.to(mote, {
+        opacity: 1, duration: .6,
+        scrollTrigger: { trigger: tun, start: 'top 70%' },
+      });
+      g.to(mote, {
+        duration: 22, repeat: -1, ease: 'none',
+        motionPath: { path: tun, align: tun, alignOrigin: [0.5, 0.5] },
+      });
+    }
+
+    // Observer — the pill nav retreats on scroll-down, returns on scroll-up.
+    if (window.Observer) {
+      this.obs = window.Observer.create({
+        target: window, type: 'wheel,touch,scroll', tolerance: 14,
+        onDown: () => g.to('[data-nav]', { yPercent: -140, opacity: 0, duration: .5, ease: 'power2.out' }),
+        onUp: () => g.to('[data-nav]', { yPercent: 0, opacity: 1, duration: .5, ease: 'power2.out' }),
+      });
+    }
+
+    // ScrollTo — anchor links glide instead of jumping.
+    this.onLink = (e) => {
+      const a = e.target.closest('[data-scroll-link]');
+      if (!a) return;
+      const id = a.getAttribute('href');
+      if (!id || id.charAt(0) !== '#') return;
+      e.preventDefault();
+      const target = id === '#top' ? 0 : document.querySelector(id);
+      if (!target && target !== 0) return;
+      if (this.smoother) this.smoother.scrollTo(target, true, 'top 0px');
+      else g.to(window, { duration: 1.2, ease: 'power3.inOut', scrollTo: target === 0 ? 0 : { y: target, offsetY: 0 } });
+    };
+    document.addEventListener('click', this.onLink);
+
+    // Draggable + Inertia — the tour card can be thrown around inside the hero.
+    const card = document.querySelector('[data-drag-card]');
+    if (card && window.Draggable) {
+      this.drag = window.Draggable.create(card, {
+        type: 'x,y', bounds: '[data-hero-card]', inertia: !!window.InertiaPlugin,
+        edgeResistance: .72,
+        onPress() { g.to(this.target, { scale: 1.03, duration: .3 }); },
+        onRelease() { g.to(this.target, { scale: 1, duration: .4, ease: 'power2.out' }); },
+      });
+    }
+
+    // ScrambleText — the time-of-day chip settles into its label.
+    const phase = document.querySelector('[data-phase]');
+    if (phase && window.ScrambleTextPlugin) {
+      this.scramble = (text) => g.to(phase, {
+        duration: 1.1, scrambleText: { text, chars: 'upperCase', speed: .5, revealDelay: .2 },
+      });
+      this.scramble(PHASES[this.state.phase].label);
+    }
+
+    ST.refresh();
+    } catch (e) {
+      // One dead plugin must never cost the user the whole page.
+      this.revealAll();
+    }
+    // Belt and braces: if no triggers exist a beat later, the init did not land.
+    clearTimeout(this._retry);
+    this._retry = setTimeout(() => {
+      if (window.ScrollTrigger && window.ScrollTrigger.getAll().length === 0) {
+        this._motionRan = false;
+        this.initMotion();
+      }
+    }, 1400);
+  }
+
+  componentDidUpdate() {
+    // Re-assert the motion system after any re-render (hot reload, layout flip):
+    // if the triggers were torn down, rebuild them rather than leaving it dead.
+    if (window.ScrollTrigger && window.ScrollTrigger.getAll().length === 0 && this._motionRan) {
+      this._motionRan = false;
+      clearTimeout(this._retry);
+      this._retry = setTimeout(() => this.initMotion(), 60);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this._sync);
+    window.removeEventListener('resize', this._sync);
+    clearTimeout(this._retry);
+    window.removeEventListener('pointermove', this.onMove);
+    document.removeEventListener('click', this.onLink);
+    clearTimeout(this._t);
+    clearTimeout(this._wd);
+    if (this.obs) this.obs.kill();
+    if (this.drag && this.drag[0]) this.drag[0].kill();
+    if (this.smoother) this.smoother.kill();
+    if (window.ScrollTrigger) window.ScrollTrigger.getAll().forEach((t) => t.kill());
+    (this.splits || []).forEach((s) => s.revert());
+    if (this.heroSplit) this.heroSplit.revert();
+    this.stopSound();
+  }
+
+  startSound() {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const len = ctx.sampleRate * 4;
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      let last = 0;
+      for (let i = 0; i < len; i++) {
+        const w = Math.random() * 2 - 1;
+        last = (last + 0.02 * w) / 1.02;
+        d[i] = last * 3.2;
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buf; src.loop = true;
+      const lp = ctx.createBiquadFilter();
+      lp.type = 'lowpass'; lp.frequency.value = 420; lp.Q.value = 0.7;
+      const gain = ctx.createGain();
+      gain.gain.value = 0;
+      gain.gain.linearRampToValueAtTime(0.09, ctx.currentTime + 2.5);
+      const lfo = ctx.createOscillator();
+      lfo.frequency.value = 0.06;
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.value = 0.035;
+      lfo.connect(lfoGain).connect(gain.gain);
+      src.connect(lp).connect(gain).connect(ctx.destination);
+      src.start(); lfo.start();
+      this.audio = { ctx, gain };
+    } catch (e) {}
+  }
+
+  stopSound() {
+    if (!this.audio) return;
+    const { ctx, gain } = this.audio;
+    try {
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.6);
+      setTimeout(() => ctx.close(), 900);
+    } catch (e) {}
+    this.audio = null;
+  }
+
+  renderVals() {
+    const phaseKey = (this.props.timeOfDay && this.props.timeOfDay !== 'auto')
+      ? this.props.timeOfDay : this.state.phase;
+    const phase = PHASES[phaseKey] || PHASES.dusk;
+    const k = this.props.ambientIntensity ?? 1;
+    const base = 'position:absolute;border-radius:50%;pointer-events:none;filter:blur(10px);';
+    const stacked = this.state.stacked;
+
+    return {
+      heroDesktopStyle: this.state.isMobile ? 'display:none' : 'display:block',
+      heroMobileStyle: this.state.isMobile ? 'display:block' : 'display:none',
+      phaseLabel: phase.label,
+      soundLabel: this.state.sound ? 'Ambience on' : 'Ambience',
+      soundDot: this.state.sound ? '#C98FA0' : 'rgba(246,230,234,.45)',
+      glowA: base + 'top:-24%;left:-14%;width:66vw;height:66vw;background:radial-gradient(circle,' + phase.a + ',transparent 62%);opacity:' + (0.9 * k) + ';animation:mDrift1 30s ease-in-out infinite;',
+      glowB: base + 'bottom:-28%;right:-12%;width:58vw;height:58vw;background:radial-gradient(circle,' + phase.b + ',transparent 64%);opacity:' + (0.9 * k) + ';animation:mDrift2 38s ease-in-out infinite;',
+      formNote: this.state.formNote || 'Answered within the hour. Bookings are completed on Airbnb.',
+      layoutLabel: stacked ? 'Side by side' : 'Stack them',
+      homesGrid: stacked
+        ? 'display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:1fr;'
+        : 'display:grid;gap:clamp(30px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));',
+      toggleLayout: () => {
+        const items = document.querySelectorAll('[data-flip-item]');
+        if (window.Flip && items.length) {
+          const st = window.Flip.getState(items);
+          this.setState({ stacked: !this.state.stacked }, () => {
+            window.Flip.from(st, {
+              duration: .8, ease: 'power3.inOut', absolute: true, stagger: .06,
+              onComplete: () => { if (window.ScrollTrigger) window.ScrollTrigger.refresh(); },
+            });
+          });
+        } else {
+          this.setState({ stacked: !this.state.stacked });
+        }
+      },
+      toggleSound: () => {
+        const next = !this.state.sound;
+        if (next) this.startSound(); else this.stopSound();
+        this.setState({ sound: next });
+      },
+      onSubmit: (e) => {
+        e.preventDefault();
+        this.setState({ formNote: 'Thank you — nothing was sent from this preview. Wired to submitEnquiry in the app.' });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/styles.css">
+<script src="_ds/modernist-cb41776a-5dc9-4254-8230-eaf82b5c0a75/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#12070A; }
+  body { font-family:'Archivo', system-ui, sans-serif; color:#F6E6EA; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#F6E6EA; text-decoration:none; }
+  a:hover { color:#C98FA0; }
+  ::selection { background:#F6E6EA; color:#1A0A0F; }
+  :focus-visible { outline:2px solid #C98FA0; outline-offset:3px; }
+  @keyframes mDrift1 { 0%,100% { transform:translate3d(-8%,-6%,0) scale(1); } 50% { transform:translate3d(6%,5%,0) scale(1.18); } }
+  @keyframes mDrift2 { 0%,100% { transform:translate3d(7%,6%,0) scale(1.12); } 50% { transform:translate3d(-7%,-8%,0) scale(1); } }
+</style>
+</helmet>
+
+<div data-screen-label="Login" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);overflow:hidden;background:#12070A">
+
+
+  <div data-loader="1" style="position:fixed;inset:0;z-index:200;background:#1A0A0F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+    <p data-loader-mark="1" style="margin:0;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.045em;color:#F6E6EA">Maissa</p>
+    <svg width="180" height="2" viewBox="0 0 180 2" aria-hidden="true" style="display:block;overflow:visible">
+      <line data-loader-line="1" x1="0" y1="1" x2="180" y2="1" stroke="#C98FA0" stroke-width="2"></line>
+    </svg>
+    <p data-loader-note="1" style="margin:0;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,230,234,.5)">Operator sign-in</p>
+  </div>
+
+  <div style="position:absolute;inset:-8%">
+    <image-slot id="login-bg" shape="rect" fit="cover" placeholder="Ambient backdrop"></image-slot>
+  </div>
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(16,14,11,.9),rgba(16,14,11,.6) 55%,rgba(16,14,11,.88))"></div>
+  <div aria-hidden="true" style="position:absolute;top:-22%;left:-12%;width:62vw;height:62vw;border-radius:50%;background:radial-gradient(circle,rgba(201,143,160,.22),transparent 62%);animation:mDrift1 32s ease-in-out infinite;pointer-events:none"></div>
+  <div aria-hidden="true" style="position:absolute;bottom:-26%;right:-10%;width:56vw;height:56vw;border-radius:50%;background:radial-gradient(circle,rgba(120,88,130,.18),transparent 64%);animation:mDrift2 40s ease-in-out infinite;pointer-events:none"></div>
+
+  <div ref="{{ tiltRef }}" style="position:relative;z-index:2;width:100%;max-width:920px;display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));border-radius:28px;overflow:hidden;background:rgba(26,10,15,.62);backdrop-filter:blur(20px);border:1px solid rgba(246,230,234,.14);box-shadow:0 50px 120px -50px rgba(0,0,0,.8);transition:transform .5s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d">
+
+    <div style="position:relative;min-height:clamp(240px,32vw,420px);overflow:hidden">
+      <image-slot id="login-panel" shape="rect" fit="cover" placeholder="Operator panel image"></image-slot>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,14,11,.25),rgba(16,14,11,.75));pointer-events:none"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(22px,3vw,34px);pointer-events:none">
+        <p style="margin:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,230,234,.6)">Operator</p>
+        <p style="margin:14px 0 0;font-size:clamp(22px,2.6vw,32px);line-height:1.06;letter-spacing:-.04em;color:#F6E6EA">Two homes,<br>one quiet console.</p>
+      </div>
+    </div>
+
+    <div style="padding:clamp(28px,3.4vw,48px);display:flex;flex-direction:column;justify-content:center">
+      <p style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.035em;color:#F6E6EA">Maissa</p>
+      <h1 data-intro="1" style="margin:26px 0 0;font-size:clamp(26px,3vw,38px);line-height:1.04;letter-spacing:-.04em;font-weight:400;color:#F6E6EA">Sign in</h1>
+      <p style="margin:14px 0 0;max-width:36ch;font-size:13.5px;line-height:1.7;color:rgba(246,230,234,.62)">A magic link, no password. It arrives in about ten seconds and expires in fifteen minutes.</p>
+
+      <form onSubmit="{{ onSubmit }}" style="margin-top:28px">
+        <label style="display:block">
+          <span style="display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,230,234,.5)">Email</span>
+          <input name="email" type="email" required="true" placeholder="maissa@example.com" style="width:100%;margin-top:10px;height:52px;padding:0 16px;border:1px solid rgba(246,230,234,.2);border-radius:14px;background:rgba(246,230,234,.06);font-family:inherit;font-size:14.5px;color:#F6E6EA"></input>
+        </label>
+        <button type="submit" style="display:flex;align-items:center;justify-content:center;width:100%;margin-top:16px;height:52px;border:none;border-radius:14px;background:#F6E6EA;color:#1A0A0F;font-family:inherit;font-size:14.5px;letter-spacing:-.01em;cursor:pointer;transition:opacity .3s ease" style-hover="opacity:.86">Send the link</button>
+      </form>
+
+      <p aria-live="polite" style="margin:18px 0 0;font-size:12.5px;line-height:1.6;color:{{ noteColor }}">{{ note }}</p>
+
+      <div style="margin-top:26px;padding-top:22px;border-top:1px solid rgba(246,230,234,.14);display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px">
+        <a href="Maissa Dashboard.dc.html" style="color:#C98FA0;border-bottom:1px solid rgba(201,143,160,.4);padding-bottom:2px">Open it in preview mode</a>
+        <a href="Maissa Home.dc.html" style="color:rgba(246,230,234,.6)">Back to the site</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { status: 'idle' };
+
+  constructor(props) {
+    super(props);
+    this.tiltRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this._motion();
+    this.onMove = (e) => {
+      const el = this.tiltRef.current;
+      if (!el || window.matchMedia('(pointer: coarse)').matches) return;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = 'perspective(1400px) rotateY(' + (x * 5).toFixed(2) + 'deg) rotateX(' + (-y * 4).toFixed(2) + 'deg)';
+    };
+    this.onLeave = () => {
+      const el = this.tiltRef.current;
+      if (el) el.style.transform = 'perspective(1400px)';
+    };
+    window.addEventListener('pointermove', this.onMove, { passive: true });
+    window.addEventListener('pointerleave', this.onLeave);
+  }
+
+  componentWillUnmount() {
+    if (this.motion) this.motion.kill();
+    window.removeEventListener('pointermove', this.onMove);
+    window.removeEventListener('pointerleave', this.onLeave);
+  }
+
+
+  _motion() {
+    import('./maissa-motion.js')
+      .then((m) => { this.m = m; this.motion = m.initPageMotion({ smooth: false }); })
+      .catch(() => {
+        document.querySelectorAll('[data-reveal],[data-split-lines]').forEach((el) => { el.style.opacity = '1'; });
+        const l = document.querySelector('[data-loader]');
+        if (l) l.style.display = 'none';
+      });
+  }
+
+  renderVals() {
+    const s = this.state.status;
+    const notes = {
+      idle: 'Supabase is not connected in this preview, so the dashboard is open. Sign-in is shown as it behaves in production.',
+      sent: 'Link sent. Check your inbox — it expires in fifteen minutes.',
+    };
+    return {
+      tiltRef: this.tiltRef,
+      note: notes[s] || notes.idle,
+      noteColor: s === 'sent' ? '#C98FA0' : 'rgba(246,230,234,.55)',
+      onSubmit: (e) => { e.preventDefault(); this.setState({ status: 'sent' }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

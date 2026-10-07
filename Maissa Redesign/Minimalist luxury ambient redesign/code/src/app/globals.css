@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --shell-gutter: clamp(1rem, 4vw, 3.5rem);
+  }
+
+  * {
+    @apply border-ink;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+    font-synthesis-weight: none;
+  }
+
+  /*
+   * GSAP ScrollSmoother is mounted on the marketing shell only (see
+   * components/motion/gsap-provider.tsx). It requires this exact wrapper /
+   * content pair, and the wrapper must be fixed so the content can be
+   * transformed underneath it. Lenis is no longer used — remove the `lenis`
+   * dependency once no branch still imports it.
+   */
+  #smooth-wrapper {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+  }
+  #smooth-content {
+    will-change: transform;
+  }
+  /* Without JS (or with reduced motion) the shell must still scroll normally. */
+  html.no-smooth #smooth-wrapper {
+    position: static;
+    overflow: visible;
+  }
+
+  ::selection {
+    @apply bg-ink text-ink-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-bg;
+  }
+
+  /*
+   * Elements the reveal animations will move. Declared here rather than as an
+   * inline opacity:0 so that a JS failure cannot leave the page permanently
+   * blank — gsap-provider removes this class as soon as it has registered.
+   */
+  html.motion-ready [data-reveal],
+  html.motion-ready [data-split] {
+    visibility: hidden;
+  }
+
+  /* Respect reduced-motion for every decorative animation in the product. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    html.motion-ready [data-reveal],
+    html.motion-ready [data-split] {
+      visibility: visible;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: theme('maxWidth.shell');
+    margin-inline: auto;
+    padding-inline: var(--shell-gutter);
+  }
+
+  /* Diagonal hatching for blocked / unavailable calendar cells (dashboard only). */
+  .hatch-blocked {
+    background-image: repeating-linear-gradient(
+      45deg,
+      theme('colors.muted.DEFAULT') 0,
+      theme('colors.muted.DEFAULT') 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
+
+  /* Hatching for an ink-filled bar (owner blocks), where a dark hatch is invisible. */
+  .hatch-light {
+    background-image: repeating-linear-gradient(
+      45deg,
+      theme('colors.bg.DEFAULT') 0,
+      theme('colors.bg.DEFAULT') 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
